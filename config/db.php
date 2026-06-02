@@ -1,6 +1,6 @@
 <?php
 $host = 'localhost';
-$dbname = 'lvs_kabinet_319b';
+$dbname = 'lvs-kabinet-319';
 $user = 'root';
 $pass = '1234';
 
