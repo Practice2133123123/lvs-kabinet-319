@@ -7,9 +7,9 @@
 </head>
 <body>
 <nav>
-    <a href="http://localhost/lvs/public/index.php">Главная</a>
-    <a href="http://localhost/lvs/public/inventory.php">Точки</a>
-    <a href="http://localhost/lvs/public/defects.php">Дефекты</a>
-    <a href="http://localhost/lvs/public/logout.php">Выйти</a>
+    <a href="../public/index.php">Главная</a>
+    <a href="../public/inventory.php">Точки</a>
+    <a href="../public/defects.php">Дефекты</a>
+    <a href="../public/logout.php">Выйти</a>
 </nav>
 <main>
