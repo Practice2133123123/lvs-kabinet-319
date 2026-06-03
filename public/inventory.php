@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 // Подключаем конфиг БД и функции
 require_once '../config/db.php';
 require_once '../includes/functions.php';
@@ -68,3 +69,10 @@ require '../includes/header.php';
 </div>
 
 <?php require '../includes/footer.php'; ?>
+=======
+require_once '../config/db.php';
+require_once '../includes/auth.php';
+require_once '../controllers/inventory_controller.php';
+include '../views/inventory/index.php';
+?>
+>>>>>>> develop
