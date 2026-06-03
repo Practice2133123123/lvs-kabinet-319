@@ -1,5 +1,4 @@
 <?php
-<<<<<<< HEAD
 // Подключаем конфиг БД и функции
 require_once '../config/db.php';
 require_once '../includes/functions.php';
@@ -7,7 +6,7 @@ require_once '../includes/functions.php';
 // Получаем все сетевые точки
 $networkPoints = getNetworkPoints($pdo);
 
-require '../includes/header.php';
+require '../layouts/header.php';
 ?>
 
 <div class="container mt-4">
@@ -68,11 +67,4 @@ require '../includes/header.php';
     </div>
 </div>
 
-<?php require '../includes/footer.php'; ?>
-=======
-require_once '../config/db.php';
-require_once '../includes/auth.php';
-require_once '../controllers/inventory_controller.php';
-include '../views/inventory/index.php';
-?>
->>>>>>> develop
+<?php require '../layouts/footer.php'; ?>
