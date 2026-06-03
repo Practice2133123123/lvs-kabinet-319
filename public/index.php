@@ -1,7 +1,7 @@
 <?php
 require_once '../config/db.php';
 require_once '../includes/auth.php';
-include '../includes/header.php';
+include '../views/layouts/header.php';
 
 $totalPoints = $pdo->query("SELECT COUNT(*) FROM network_points")->fetchColumn();
 $openDefects = $pdo->query("SELECT COUNT(*) FROM defects WHERE status = 'open'")->fetchColumn();
@@ -14,4 +14,4 @@ $totalCable = $pdo->query("SELECT SUM(quantity) FROM material_usage WHERE materi
         <div class="card"><h3>Кабель (м)</h3><p class="number"><?= htmlspecialchars($totalCable) ?></p></div>
     </div>
 
-<?php include '../includes/footer.php'; ?>
+<?php include '../views/layouts/footer.php'; ?>
