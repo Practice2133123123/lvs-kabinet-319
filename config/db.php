@@ -2,7 +2,7 @@
 $host = 'localhost';
 $dbname = 'lvs-kabinet-319';
 $user = 'root';
-$pass = '';
+$pass = '1234';
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $user, $pass, [
