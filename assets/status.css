@@ -1,0 +1,35 @@
+/* Базовый стиль для бейджа */
+.badge {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 14px;
+    text-align: center;
+    min-width: 100px;
+}
+
+/* Статусы */
+.status-active {
+    background-color: #28a745;
+    color: white;
+}
+
+.status-defect {
+    background-color: #dc3545;
+    color: white;
+}
+
+.status-decommissioned {
+    background-color: #6c757d;
+    color: white;
+}
+
+/* Стили таблицы */
+.table th {
+    font-weight: 600;
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}

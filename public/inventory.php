@@ -1,17 +1,17 @@
 <?php
-require_once('../config/db.php');
-//Вывод всех данных из таблицы network_points
-$stmt = $pdo ->query("SELECT * FROM `network_points` ORDER BY last_check DESC ");
-$stmt -> execute();
-$networkPoints = $stmt ->fetchAll(PDO::FETCH_ASSOC);
+// Подключаем конфиг БД и функции
+require_once '../config/db.php';
+require_once '../includes/functions.php';
+
+// Получаем все сетевые точки
+$networkPoints = getNetworkPoints($pdo);
 
 require '../includes/header.php';
 ?>
 
-<div class="container">
+<div class="container mt-4">
     <h1 class="mb-4">Сетевые точки</h1>
 
-    <!-- Таблица сетевых точек -->
     <div class="table-responsive">
         <table class="table table-striped table-hover">
             <thead class="table-dark">
@@ -30,10 +30,10 @@ require '../includes/header.php';
                             <td>
                                 <?php
                                 $typeLabels = [
-                                'socket' => 'Розетка',
-                                'switch' => 'Коммутатор',
-                                'cable_run' => 'Кабель',
-                                'patch_cord' => 'Патч-корд'
+                                    'socket' => 'Розетка',
+                                    'switch' => 'Коммутатор',
+                                    'cable_run' => 'Кабель',
+                                    'patch_cord' => 'Патч-корд'
                                 ];
                                 $typeName = $typeLabels[$point['type']] ?? $point['type'];
                                 echo htmlspecialchars($typeName);
@@ -42,26 +42,19 @@ require '../includes/header.php';
                             <td><?= htmlspecialchars($point['location'] ?? '—') ?></td>
                             <td>
                                 <?php
-                                $statusColors = [
-                                'active' => 'success',
-                                'defect' => 'danger',
-                                'decommissioned' => 'secondary'
-                                ];
                                 $statusLabels = [
-                                'active' => 'Активна',
-                                'defect' => 'Дефект',
-                                'decommissioned' => 'Списана'
+                                    'active' => 'Активна',
+                                    'defect' => 'Дефект',
+                                    'decommissioned' => 'Списана'
                                 ];
-                                $color = $statusColors[$point['status']] ?? 'secondary';
                                 $label = $statusLabels[$point['status']] ?? $point['status'];
                                 ?>
-                                <span class="badge bg-<?= $color ?> px-3 py-2">
+                                <span class="badge status-<?= htmlspecialchars($point['status']) ?>">
                                     <?= htmlspecialchars($label) ?>
                                 </span>
                             </td>
                         </tr>
                     <?php endforeach; ?>
-                    //Если в таблице нет данных
                 <!-- <?php else: ?>
                     <tr>
                         <td colspan="4" class="text-center py-4 text-muted">
@@ -75,6 +68,3 @@ require '../includes/header.php';
 </div>
 
 <?php require '../includes/footer.php'; ?>
-
-    <?php '../includes/footer.php'; 
-    ?>
