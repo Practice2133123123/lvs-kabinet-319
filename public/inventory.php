@@ -6,7 +6,7 @@ require_once '../includes/functions.php';
 // Получаем все сетевые точки
 $networkPoints = getNetworkPoints($pdo);
 
-require '../layouts/header.php';
+require '../views/layouts/header.php';
 ?>
 
 <div class="container mt-4">
@@ -67,4 +67,4 @@ require '../layouts/header.php';
     </div>
 </div>
 
-<?php require '../layouts/footer.php'; ?>
+<?php require '../views/layouts/footer.php'; ?>
