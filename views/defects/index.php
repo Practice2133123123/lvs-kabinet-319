@@ -1,4 +1,7 @@
-<?php include '../views/layouts/header.php'; ?>
+<?php include '../views/layouts/header.php'; 
+
+
+?>
 
     <h2>Журнал дефектов</h2>
     <table class="table">
