@@ -10,3 +10,4 @@ if (!empty($type) || !empty($status)) {
 } else {
     $points = getAllPoints($pdo);
 }
+

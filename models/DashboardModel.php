@@ -13,4 +13,6 @@ function getTotalCable($pdo) {
     $stmt = $pdo->query("SELECT SUM(quantity) FROM material_usage WHERE material_id IN (SELECT id FROM materials WHERE type = 'cable')");
     return $stmt->fetchColumn() ?: 0;
 }
-?><?php
+
+?>
+
