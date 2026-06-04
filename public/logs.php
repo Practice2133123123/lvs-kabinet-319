@@ -8,4 +8,3 @@ if (!isAdmin()) {
 }
 
 include '../views/logs/index.php';
-?>
