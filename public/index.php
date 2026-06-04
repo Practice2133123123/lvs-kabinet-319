@@ -1,17 +1,6 @@
 <?php
-require_once '../config/db.php';
-require_once '../includes/auth.php';
-include '../includes/header.php';
-
-$totalPoints = $pdo->query("SELECT COUNT(*) FROM network_points")->fetchColumn();
-$openDefects = $pdo->query("SELECT COUNT(*) FROM defects WHERE status = 'open'")->fetchColumn();
-$totalCable = $pdo->query("SELECT SUM(quantity) FROM material_usage WHERE material_id IN (SELECT id FROM materials WHERE type = 'cable')")->fetchColumn() ?: 0;
+require_once __DIR__ . '/../config/db.php';
+require_once __DIR__ . '/../includes/auth.php';
+require_once __DIR__ . '/../controllers/index_controller.php';
+include __DIR__ . '/../views/index.php';
 ?>
-
-    <div class="dashboard">
-        <div class="card"><h3>Всего точек</h3><p class="number"><?= htmlspecialchars($totalPoints) ?></p></div>
-        <div class="card"><h3>Открытых дефектов</h3><p class="number"><?= htmlspecialchars($openDefects) ?></p></div>
-        <div class="card"><h3>Кабель (м)</h3><p class="number"><?= htmlspecialchars($totalCable) ?></p></div>
-    </div>
-
-<?php include '../includes/footer.php'; ?>

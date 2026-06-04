@@ -1,14 +1,6 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
-
-if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php');
-    exit;
-}
-require_once '../config/db.php';
-require_once '../models/UserModel.php';
+require_once __DIR__ . '/../config/db.php';
+require_once __DIR__ . '/../models/UserModel.php';
 
 $error = '';
 $success = '';
@@ -25,11 +17,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif (strlen($password) < 4) {
         $error = 'Пароль должен быть не менее 4 символов';
     } else {
-        $existing = getUserByLogin($pdo, $login);
-        if ($existing) {
+        $stmt = $pdo->prepare("SELECT id FROM users WHERE login = ?");
+        $stmt->execute([$login]);
+        if ($stmt->fetch()) {
             $error = 'Пользователь с таким логином уже существует';
         } else {
-            if (createUser($pdo, $login, $password)) {
+            $hash = password_hash($password, PASSWORD_DEFAULT);
+            $stmt = $pdo->prepare("INSERT INTO users (login, password_hash, role) VALUES (?, ?, 'operator')");
+            if ($stmt->execute([$login, $hash])) {
                 $success = 'Регистрация успешна! Теперь можно войти.';
             } else {
                 $error = 'Ошибка при регистрации';
@@ -37,4 +32,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
-?>
+
+include __DIR__ . '/../views/auth/register.php';

@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 Вот ваш исправленный SQL-скрипт с **ровным форматированием** всех INSERT-запросов:
 
 sql
+=======
+
+
+>>>>>>> develop
 CREATE DATABASE IF NOT EXISTS `lvs_kabinet_319b`;
 USE `lvs_kabinet_319b`;
 
