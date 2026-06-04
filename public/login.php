@@ -1,5 +1,6 @@
 <?php
 require_once '../config/db.php';
+<<<<<<< HEAD
 session_start();
 
 $error = '';
@@ -45,3 +46,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 </body>
 </html>
+=======
+require_once '../controllers/auth_controller.php';
+include '../views/auth/login.php';
+?>
+>>>>>>> develop
