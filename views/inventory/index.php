@@ -1,16 +1,25 @@
-<?php include '../views/layouts/header.php'; ?>
+<?php 
+include '../views/layouts/header.php'; 
+?>
 
     <div class="container mt-4">
         <h1 class="mb-4">Сетевые точки</h1>
+        <!-- Собщение об успешном обновлении для пользователя -->
+<?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
+    <p style="color: green;">Точка успешно обновлена!</p>
+<?php endif; ?>
 
         <div class="table-responsive">
             <table class="table table-striped table-hover">
                 <thead class="table-dark">
+
+                
                 <tr>
                     <th>Метка</th>
                     <th>Тип</th>
                     <th>Расположение</th>
                     <th>Статус</th>
+                    <th>Действия</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -43,6 +52,7 @@
                                 <span class="badge status-<?= htmlspecialchars($point['status']) ?>">
                                     <?= htmlspecialchars($label) ?>
                                 </span>
+                                <td> <a href="point_edit.php?id=<?= $point['id'] ?>">Изменить точку</a></td>
                             </td>
                         </tr>
                     <?php endforeach; ?>
