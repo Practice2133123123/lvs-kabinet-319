@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'quantity' => $quantity,
             'point_id' => $point_id ?: null,
             'defect_id' => $defect_id ?: null,
-            'used_by' => $_SESSION['user_id'],
+            'used_by' => $_SESSION['user_id'] ?? 1,
             'comment' => $comment
         ];
 
