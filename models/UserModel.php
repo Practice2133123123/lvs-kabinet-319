@@ -5,3 +5,10 @@ function getUserByLogin($pdo, $login) {
     return $stmt->fetch();
 }
 
+function createUser($pdo, $login, $password, $role = 'operator')
+{
+    $hash = password_hash($password, PASSWORD_DEFAULT);
+    $stmt = $pdo->prepare("INSERT INTO users (login, password_hash, role) VALUES (?, ?, ?)");
+    return $stmt->execute([$login, $hash, $role]);
+}
+

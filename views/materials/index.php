@@ -1,38 +1,38 @@
-<h1>Список расходов материалов</h1>
+<?php include '../views/layouts/header.php'; ?>
 
-<a href="/materials_add.php">+ Добавить расход</a>
+    <h1>Список расходов материалов</h1>
 
-<table border="1">
-    <thead>
+<?php if (empty($items)): ?>
+    <p>Нет данных</p>
+<?php else: ?>
+    <table border="1">
+        <thead>
         <tr>
             <th>ID</th>
             <th>Материал</th>
             <th>Количество</th>
-            <th>Точка</th>
-            <th>Дефект</th>
-            <th>Кто</th>
             <th>Дата</th>
             <th>Комментарий</th>
         </tr>
-    </thead>
-    <tbody>
-        <?php if (isset($items) && is_array($items) && count($items) > 0): ?>
-            <?php foreach ($items as $item): ?>
+        </thead>
+        <tbody>
+        <?php foreach ($items as $item): ?>
             <tr>
                 <td><?= htmlspecialchars($item['id'] ?? '') ?></td>
                 <td><?= htmlspecialchars($item['material_name'] ?? '') ?></td>
                 <td><?= htmlspecialchars($item['quantity'] ?? '') ?></td>
-                <td><?= htmlspecialchars($item['point_id'] ?? '-') ?></td>
-                <td><?= htmlspecialchars($item['defect_id'] ?? '-') ?></td>
-                <td><?= htmlspecialchars($item['user_name'] ?? '') ?></td>
                 <td><?= htmlspecialchars($item['used_at'] ?? '') ?></td>
                 <td><?= htmlspecialchars($item['comment'] ?? '') ?></td>
             </tr>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <tr>
-                <td colspan="8" style="text-align: center;">Нет данных</td>
-            </tr>
-        <?php endif; ?>
-    </tbody>
-</table>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+<?php endif; ?>
+
+    <div style="margin-top: 20px;">
+        <a href="../public/materials_add.php" class="btn btn-primary">
+            Добавить расход
+        </a>
+    </div>
+
+<?php include '../views/layouts/footer.php'; ?>

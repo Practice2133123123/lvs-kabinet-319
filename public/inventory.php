@@ -1,6 +1,6 @@
 <?php
-// Подключаем конфиг БД и функции
 require_once '../config/db.php';
+<<<<<<< HEAD
 require_once '../includes/functions.php';
 
 // Получаем все сетевые точки
@@ -68,3 +68,8 @@ require '../views/layouts/header.php';
 </div>
 
 <?php require '../views/layouts/footer.php'; ?>
+=======
+require_once '../includes/auth.php';
+require_once '../controllers/inventory_controller.php';
+include '../views/inventory/index.php';
+>>>>>>> develop
