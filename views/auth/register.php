@@ -1,4 +1,4 @@
-<?php include __DIR__ . '/../layouts/header.php'; ?>
+<?php include __DIR__ . '/../layouts/header_auth.php'; ?>
 
 <h2>Регистрация</h2>
 

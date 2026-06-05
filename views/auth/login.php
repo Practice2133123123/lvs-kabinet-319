@@ -1,4 +1,4 @@
-<?php include '../views/layouts/header.php'; ?>
+<?php include '../views/layouts/header_auth.php'; ?>
 
     <div class="wrapper">
         <?php if (!empty($error)): ?>
