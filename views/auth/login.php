@@ -18,8 +18,6 @@
         </form>
     </div>
 
-
-    <p>Нет аккаунта? <a href="../public/register.php">Зарегистрироваться</a></p>
-
+    <p>Нет аккаунта? <a href="/public/register.php">Зарегистрироваться</a></p>
 
 <?php include '../views/layouts/footer.php'; ?>

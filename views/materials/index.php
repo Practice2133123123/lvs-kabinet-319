@@ -11,7 +11,10 @@
 
         <!-- Таблица -->
         <div class="table-responsive">
+
             <?php if (empty($pagination['items'])): ?>
+
+
                 <p>Нет данных</p>
             <?php else: ?>
                 <table border="1" cellpadding="8" style="width:100%; border-collapse: collapse;">
@@ -28,7 +31,9 @@
                     </tr>
                     </thead>
                     <tbody>
+
                     <?php foreach ($pagination['items'] as $item): ?>
+
                         <tr>
                             <td><?= htmlspecialchars($item['id']) ?></td>
                             <td><?= htmlspecialchars($item['material_name']) ?></td>
@@ -49,6 +54,7 @@
             <a href="materials_add.php" class="btn btn-primary">➕ Добавить расход</a>
         </div>
     </div>
+
     <div style="margin-top: 20px;">
 <?php
 $materials = $pagination['items'];
@@ -76,3 +82,4 @@ if ($current_page < $total_pages) {
 </div>
 
 <?php include '../views/layouts/footer.php'; ?>
+

@@ -1,27 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <form method="GET">
-        <h3>Фильтр</h3>
-        <select name="type">
-            <option value=""></option>
-            <option value="socket">розетка</option>
-            <option value="switch">Коммутатор</option>
-            <option value="cable_run'">кабель</option>
-            <option value="patch_cord">патчкорд</option>
-        </select>
-        <select name="status">
-            <option value=""></option>
-            <option value="active">активна</option>
-            <option value="defect">дефект</option>
-            <option value="decommissioned'">списана</option>
-        </select>
-        <button>найти</button>
-    </form>
-</body>
-</html>
+
+<div class="filter-dropdown">
+    <button class="filter-btn" onclick="toggleFilter()"> Фильтры</button>
+    <div id="filterMenu" class="filter-menu" style="display: none;">
+        <form method="GET" action="">
+            <div class="filter-group">
+                <label>Тип точки:</label>
+                <select name="type">
+                    <option value="">Все типы</option>
+                    <option value="socket">Розетка</option>
+                    <option value="switch">Коммутатор</option>
+                    <option value="cable_run">Кабель</option>
+                    <option value="patch_cord">Патч-корд</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Статус:</label>
+                <select name="status">
+                    <option value="">Все статусы</option>
+                    <option value="active">Активна</option>
+                    <option value="defect">Дефект</option>
+                    <option value="decommissioned">Списана</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <button type="submit">Применить</button>
+                <a href="/public/inventory.php">Сбросить</a>
+            </div>
+        </form>
+    </div>
+</div>
+>>>>>>> develop

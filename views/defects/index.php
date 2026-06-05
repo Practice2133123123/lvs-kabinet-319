@@ -1,37 +1,7 @@
 <?php include '../views/layouts/header.php'; ?>
 
-    <h2>Журнал дефектов</h2>
-    <table class="table">
-
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Точка</th>
-        <th>Категория</th>
-        <th>Критичность</th>
-        <th>Статус</th>
-    </tr>
-    </thead>
-    <tbody>
-    <?php foreach ($defects as $defect): ?>
-        <tr>
-            <td><?= htmlspecialchars($defect['id']) ?></td>
-            <td><?= htmlspecialchars($defect['network_label']) ?></td>
-            <td><?= htmlspecialchars($defect['category']) ?></td>
-            <td>
-                <span class="badge badge-<?= htmlspecialchars($defect['severity']) ?>">
-                    <?= htmlspecialchars($defect['severity']) ?>
-                </span>
-            </td>
-            <td>
-                <span class="badge badge-<?= htmlspecialchars($defect['status']) ?>">
-                    <?= htmlspecialchars($defect['status']) ?>
-                </span>
-            </td>
-        </tr>
-    <?php endforeach; ?>
-    </tbody>
-
+    <div class="container">
+        <h1>Журнал дефектов</h1>
 
 
         <div class="table-responsive">
@@ -46,12 +16,16 @@
                 </tr>
                 </thead>
                 <tbody>
+
                 <?php if (empty($pagination['items'])): ?>
+
                     <tr>
                         <td colspan="5" style="text-align: center;">Нет данных</td>
                     </tr>
                 <?php else: ?>
+
                     <?php foreach ($pagination['items'] as $defect): ?>
+
                         <tr>
                             <td><?= htmlspecialchars($defect['id']) ?></td>
                             <td><?= htmlspecialchars($defect['network_label'] ?? $defect['point_label'] ?? '—') ?></td>
@@ -74,6 +48,7 @@
         </div>
     </div>
 
+<<<<<<< HEAD
 
     <div style="margin-top: 20px;">
 <?php
@@ -100,5 +75,4 @@ if ($current_page < $total_pages) {
 }
 ?>
 </div>
-
 <?php include '../views/layouts/footer.php'; ?>
