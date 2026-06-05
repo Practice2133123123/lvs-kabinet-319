@@ -16,7 +16,11 @@
             <label class="form-label">Метка *</label>
             <input type="text" name="label" class="form-control" value="<?= htmlspecialchars($point['label']) ?>" required>
         </div>
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> dc38333d443785fcc3bba21a74c498e51dd4f5fa
         <div class="mb-3">
             <label class="form-label">Тип *</label>
             <select name="type" class="form-select" required>
@@ -26,12 +30,21 @@
                 <option value="patch_cord" <?= $point['type'] == 'patch_cord' ? 'selected' : '' ?>>Патч-корд</option>
             </select>
         </div>
+<<<<<<< HEAD
 
         <div class="mb-3">
             <label class="form-label">Расположение</label>
             <input type="text" name="location" class="form-control" value="<?= htmlspecialchars($point['location'] ?? '') ?>">
         </div>
 
+=======
+        
+        <div class="mb-3">
+            <label class="form-label">Расположение</label>
+            <input type="text" name="location" class="form-control" value="<?= htmlspecialchars($point['location'] ?? '') ?>" placeholder="кабинет, стойка...">
+        </div>
+        
+>>>>>>> dc38333d443785fcc3bba21a74c498e51dd4f5fa
         <div class="mb-3">
             <label class="form-label">Статус *</label>
             <select name="status" class="form-select" required>
@@ -40,12 +53,16 @@
                 <option value="decommissioned" <?= $point['status'] == 'decommissioned' ? 'selected' : '' ?>>Списана</option>
             </select>
         </div>
+<<<<<<< HEAD
 
         <div class="mb-3">
             <label class="form-label">Дата последней проверки</label>
             <input type="date" name="last_check" class="form-control" value="<?= htmlspecialchars($point['last_check'] ?? '') ?>">
         </div>
 
+=======
+        
+>>>>>>> dc38333d443785fcc3bba21a74c498e51dd4f5fa
         <div class="mb-3">
             <button type="submit" class="btn btn-primary">Сохранить</button>
             <a href="inventory.php" class="btn btn-secondary">Отмена</a>

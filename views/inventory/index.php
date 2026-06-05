@@ -1,7 +1,13 @@
-<?php include '../views/layouts/header.php'; ?>
+<?php 
+include '../views/layouts/header.php'; 
+?>
 
  ntainer mt-4">
         <h1 class="mb-4">Сетевые точки</h1>
+        <!-- Собщение об успешном обновлении для пользователя -->
+<?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
+    <p style="color: green;">Точка успешно обновлена!</p>
+<?php endif; ?>
 
         <!-- Кнопка фильтров -->
         <div style="margin-bottom: 20px;">
@@ -39,8 +45,15 @@
 
         <!-- Таблица -->
         <div class="table-responsive">
+<<<<<<< HEAD
             <table border="1" cellpadding="8" cellspacing="0" style="width:100%; border-collapse: collapse;">
                 <thead style="background: #f0f0f0;">
+=======
+            <table class="table table-striped table-hover">
+                <thead class="table-dark">
+
+                
+>>>>>>> dc38333d443785fcc3bba21a74c498e51dd4f5fa
                 <tr>
                     <th>Метка</th>
                     <th>Тип</th>
@@ -58,9 +71,24 @@
                             <td><?= htmlspecialchars($point['location'] ?? '—') ?></td>
                             <td><?= htmlspecialchars($point['status']) ?></td>
                             <td>
+<<<<<<< HEAD
                                 <a href="point_edit.php?id=<?= $point['id'] ?>">️ Ред.</a>
                                 <a href="point_delete.php?id=<?= $point['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Удалить точку?')">Удалить</a>
 
+=======
+                                <?php
+                                $statusLabels = [
+                                        'active' => 'Активна',
+                                        'defect' => 'Дефект',
+                                        'decommissioned' => 'Списана'
+                                ];
+                                $label = $statusLabels[$point['status']] ?? $point['status'];
+                                ?>
+                                <span class="badge status-<?= htmlspecialchars($point['status']) ?>">
+                                    <?= htmlspecialchars($label) ?>
+                                </span>
+                                <td> <a href="point_edit.php?id=<?= $point['id'] ?>">Изменить точку</a></td>
+>>>>>>> dc38333d443785fcc3bba21a74c498e51dd4f5fa
                             </td>
                         </tr>
 
