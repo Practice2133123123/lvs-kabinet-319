@@ -1,6 +1,6 @@
 
-<?php include '../views/layouts/header.php';
-include '../views/inventory/filter.php';?>
+<?php include '../views/layouts/header.php'; ?>
+>>>>>>> Stashed changes
     <div class="container mt-4">
         <h1 class="mb-4">Сетевые точки</h1>
 
@@ -15,8 +15,8 @@ include '../views/inventory/filter.php';?>
                 </tr>
                 </thead>
                 <tbody>
-                <?php if (count($points) > 0): ?>
-                    <?php foreach ($points as $point): ?>
+                <?php if (count($pagination['items']) > 0): ?>
+                    <?php foreach ($pagination['items'] as $point): ?>
                         <tr>
                             <td><strong><?= htmlspecialchars($point['label']) ?></strong></td>
                             <td>
@@ -57,6 +57,46 @@ include '../views/inventory/filter.php';?>
                 </tbody>
             </table>
         </div>
+        
     </div>
 
+
+    <div style="margin-top: 20px;">
+<?php
+$networkPoints = $pagination['items'];
+$total_pages = $pagination['total_pages'];
+$current_page = $pagination['current_page'];
+if ($current_page > 1) {
+    $prev = $current_page - 1;
+    echo "<a href='?page=$prev' style='margin-right: 10px;'>&laquo; Назад</a>";
+}
+
+for ($i = 1; $i <= $total_pages; $i++) {
+    
+    if ($i == $current_page) {
+        echo "<strong style='margin-right: 10px; color: red;'>$i</strong>";
+    } else {
+        echo "<a href='?page=$i' style='margin-right: 10px;'>$i</a>";
+    }
+}
+
+if ($current_page < $total_pages) {
+    $next = $current_page + 1;
+    echo "<a href='?page=$next'>Вперед &raquo;</a>";
+}
+?>
+</div>
+
+    <script>
+        function toggleFilter() {
+            var menu = document.getElementById('filterMenu');
+            if (menu.style.display === 'none') {
+                menu.style.display = 'block';
+            } else {
+                menu.style.display = 'none';
+            }
+        }
+    </script>
+
+>>>>>>> Stashed changes
 <?php include '../views/layouts/footer.php'; ?>
