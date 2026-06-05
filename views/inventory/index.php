@@ -1,6 +1,6 @@
 <?php include '../views/layouts/header.php'; ?>
 
-    <div class="container mt-4">
+ ntainer mt-4">
         <h1 class="mb-4">Сетевые точки</h1>
 
         <!-- Кнопка фильтров -->
@@ -59,17 +59,22 @@
                             <td><?= htmlspecialchars($point['status']) ?></td>
                             <td>
                                 <a href="point_edit.php?id=<?= $point['id'] ?>">️ Ред.</a>
-                                <a href="point_delete.php?id=<?= $point['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Удалить точку?')">🗑Удалить</a>
+                                <a href="point_delete.php?id=<?= $point['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Удалить точку?')">Удалить</a>
+
                             </td>
                         </tr>
+
                     <?php endforeach; ?>
                 <?php else: ?>
                     <tr>
                         <td colspan="5" style="text-align: center;">Нет данных</td>
                     </tr>
                 <?php endif; ?>
-                </tbody>
-            </table>
+
+            </table>  
+            <a href="point_add.php?id=<?= $point['id'] ?>" class="btn btn-sm btn-secondary" >Добавить сетевую точку</a>              
+        </tbody>
+
         </div>
     </div>
 

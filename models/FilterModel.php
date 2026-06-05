@@ -61,3 +61,87 @@ function getMaterialsList($pdo)
     $stmt = $pdo->query("SELECT id, name, type, unit FROM materials ORDER BY name");
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
+// Фильтр для отчетности всех таблиц
+
+function getFilteredData($pdo, $filters) {
+    $sql = "
+        SELECT 
+            mu.id,
+            m.name as material_name,
+            mu.quantity,
+            mu.used_at,
+            mu.comment,
+            np.label as point_label,
+            d.description as defect_description,
+            u.login as user_name,
+            mu.status
+        FROM material_usage mu
+        LEFT JOIN materials m ON mu.material_id = m.id
+        LEFT JOIN network_points np ON mu.point_id = np.id
+        LEFT JOIN defects d ON mu.defect_id = d.id
+        LEFT JOIN users u ON mu.used_by = u.id
+        WHERE 1=1
+    ";
+    
+    $params = [];
+    
+    // Фильтр по дате с
+    if (!empty($filters['date_from'])) {
+        $sql .= " AND DATE(mu.used_at) >= :date_from";
+        $params[':date_from'] = $filters['date_from'];
+    }
+    
+    // Фильтр по дате по
+    if (!empty($filters['date_to'])) {
+        $sql .= " AND DATE(mu.used_at) <= :date_to";
+        $params[':date_to'] = $filters['date_to'];
+    }
+    
+    // Фильтр по типу материала
+    if (!empty($filters['material_type'])) {
+        $sql .= " AND m.type = :material_type";
+        $params[':material_type'] = $filters['material_type'];
+    }
+    
+    // Фильтр по статусу
+    if (!empty($filters['status'])) {
+        $sql .= " AND mu.status = :status";
+        $params[':status'] = $filters['status'];
+    }
+    
+    // Фильтр по разделу (точка или дефект)
+    if (!empty($filters['section'])) {
+        if ($filters['section'] == 'point') {
+            $sql .= " AND mu.point_id IS NOT NULL";
+        } elseif ($filters['section'] == 'defect') {
+            $sql .= " AND mu.defect_id IS NOT NULL";
+        }
+    }
+    
+    $sql .= " ORDER BY mu.used_at DESC";
+    
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute($params);
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function getMaterialTypes($pdo) {
+    $stmt = $pdo->query("SELECT DISTINCT type FROM materials ORDER BY type");
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function getStatuses($pdo) {
+    return [
+        ['status' => 'active', 'label' => 'Активен'],
+        ['status' => 'defect', 'label' => 'Дефект'],
+        ['status' => 'decommissioned', 'label' => 'Списан']
+    ];
+}
+
+function getSections($pdo) {
+    return [
+        ['section' => 'point', 'label' => 'Точки'],
+        ['section' => 'defect', 'label' => 'Дефекты']
+    ];
+}
