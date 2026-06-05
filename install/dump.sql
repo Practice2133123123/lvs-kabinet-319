@@ -3,7 +3,6 @@ sql
 CREATE DATABASE IF NOT EXISTS `lvs_kabinet_319b`;
 USE `lvs_kabinet_319b`;
 
-
 CREATE TABLE `users` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `login` varchar(50) NOT NULL UNIQUE,
