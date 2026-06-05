@@ -43,15 +43,26 @@ function updatePoint($pdo, $id, $data) {
     ]);
 }
 
-// Проверить, есть ли у точки связанные дефекты
 function hasDefects($pdo, $point_id) {
     $stmt = $pdo->prepare("SELECT COUNT(*) FROM defects WHERE point_id = ?");
     $stmt->execute([$point_id]);
     return $stmt->fetchColumn() > 0;
 }
 
-// Удалить точку
 function deletePoint($pdo, $point_id) {
     $stmt = $pdo->prepare("DELETE FROM network_points WHERE id = ?");
     return $stmt->execute([$point_id]);
 }
+
+function getPointsWithPagination($pdo, $limit, $offset) {
+    $stmt = $pdo->prepare("SELECT * FROM network_points ORDER BY label LIMIT :limit OFFSET :offset");
+    $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll();
+}
+
+function countAllPoints($pdo) {
+    return $pdo->query("SELECT COUNT(*) FROM network_points")->fetchColumn();
+}
+?>

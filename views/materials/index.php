@@ -3,10 +3,8 @@
     <div class="container mt-4">
         <h1 class="mb-4">Журнал расходов материалов</h1>
 
-        <!-- Сводная карточка (теперь сверху) -->
         <?php include __DIR__ . '/summary.php'; ?>
 
-        <!-- Фильтр (под сводкой) -->
         <?php include __DIR__ . '/filter.php'; ?>
 
         <!-- Таблица -->

@@ -3,27 +3,26 @@
     <div id="filterMenu" class="filter-menu" style="display: none;">
         <form method="GET" action="">
             <div class="filter-group">
-                <label>Тип точки:</label>
-                <select name="type">
-                    <option value="">Все типы</option>
-                    <option value="socket">Розетка</option>
-                    <option value="switch">Коммутатор</option>
-                    <option value="cable_run">Кабель</option>
-                    <option value="patch_cord">Патч-корд</option>
+                <label>Критичность:</label>
+                <select name="severity">
+                    <option value="">Все</option>
+                    <option value="high">Высокая</option>
+                    <option value="medium">Средняя</option>
+                    <option value="low">Низкая</option>
                 </select>
             </div>
             <div class="filter-group">
                 <label>Статус:</label>
                 <select name="status">
-                    <option value="">Все статусы</option>
-                    <option value="active">Активна</option>
-                    <option value="defect">Дефект</option>
-                    <option value="decommissioned">Списана</option>
+                    <option value="">Все</option>
+                    <option value="open">Открыт</option>
+                    <option value="in_progress">В работе</option>
+                    <option value="closed">Закрыт</option>
                 </select>
             </div>
             <div class="filter-group">
                 <button type="submit">Применить</button>
-                <a href="inventory.php">Сбросить</a>
+                <a href="defects.php">Сбросить</a>
             </div>
         </form>
     </div>
@@ -32,7 +31,7 @@
 <script>
     function toggleFilter() {
         var menu = document.getElementById('filterMenu');
-        if (menu.style.display === 'none') {
+        if (menu.style.display === 'none' || menu.style.display === '') {
             menu.style.display = 'block';
         } else {
             menu.style.display = 'none';
