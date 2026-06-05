@@ -8,6 +8,13 @@ include '../views/layouts/header.php';
 <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
     <p style="color: green;">Точка успешно обновлена!</p>
 <?php endif; ?>
+<?php if (isset($_GET['deleted']) && $_GET['deleted'] == 1): ?>
+        <p style="color: green;">Точка успешно удалена!</p>
+<?php endif; ?>
+    
+<?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
+        <p style="color: green;">Точка успешно обновлена!</p>
+<?php endif; ?>
 
         <div class="table-responsive">
             <table class="table table-striped table-hover">
@@ -52,6 +59,7 @@ include '../views/layouts/header.php';
                                 <span class="badge status-<?= htmlspecialchars($point['status']) ?>">
                                     <?= htmlspecialchars($label) ?>
                                 </span>
+                                <td><?= htmlspecialchars($point['created_by_name'] ?? '—') ?></td>
                                 <td> <a href="point_edit.php?id=<?= $point['id'] ?>">Изменить точку</a>
                             <a href="point_delete.php?id=<?= $point['id'] ?>"onclick="return confirm('Удалить точку «<?= htmlspecialchars($point['label']) ?>»');">Удалить
             </a>
@@ -71,5 +79,9 @@ include '../views/layouts/header.php';
             </table>
         </div>
     </div>
+    <div class="mt-3">
+        <a href="point_add.php" class="btn btn-primary">➕ Добавить точку</a>
+    </div>
+</div>
 
 <?php include '../views/layouts/footer.php'; ?>

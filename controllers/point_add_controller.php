@@ -1,7 +1,9 @@
-<?php
-require_once  __DIR__ . '/../models/PointModel.php';
+v<?php
+require_once __DIR__ . '/../models/PointModel.php';
+require_once __DIR__ . '/../models/LogModel.php';
 
 $errors = [];
+$data = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = [
@@ -24,8 +26,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($errors)) {
         try {
-            if (createPoint($pdo, $data)) {
-                header("Location: inventory.php");
+            $result = createPoint($pdo, $data, $_SESSION['user_id']);
+            if ($result) {
+                addLog($pdo, $_SESSION['user_id'], 'CREATE', 'network_points', $pdo->lastInsertId());
+                header("Location: inventory.php?created=1");
                 exit;
             } else {
                 $errors[] = "Ошибка при сохранении в базу данных.";
@@ -35,4 +39,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
-?><?php
+?>

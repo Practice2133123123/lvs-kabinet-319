@@ -6,7 +6,7 @@ $error = '';
 $success = '';
 
 $materials = getMaterialsList($pdo);
-$points = getPointsList($pdo);
+$points = getAllPoints($pdo);
 $defects = getDefectsList($pdo);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

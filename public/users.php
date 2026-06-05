@@ -7,6 +7,6 @@ if (!isAdmin()) {
     exit;
 }
 
-require_once '../controllers/logs_controller.php';
-include '../views/logs/index.php';
+require_once '../controllers/users_controller.php';
+include '../views/users/index.php';
 ?>
