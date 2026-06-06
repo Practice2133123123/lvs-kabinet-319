@@ -65,22 +65,21 @@ function getPointById($pdo, $id) {
 
 function addPoint($pdo, $data) {
     $stmt = $pdo->prepare("
-        INSERT INTO network_points (label, type, location, status, created_by, created_at)
-        VALUES (?, ?, ?, ?, ?, NOW())
+        INSERT INTO network_points (label, type, location, status)
+        VALUES (?, ?, ?, ?)
     ");
     return $stmt->execute([
         $data['label'],
         $data['type'],
         $data['location'] ?? null,
-        $data['status'] ?? 'active',
-        $data['created_by']
+        $data['status'] ?? 'active'
     ]);
 }
 
 function updatePoint($pdo, $id, $data) {
     $stmt = $pdo->prepare("
         UPDATE network_points 
-        SET label = ?, type = ?, location = ?, status = ?, updated_at = NOW()
+        SET label = ?, type = ?, location = ?, status = ?
         WHERE id = ?
     ");
     return $stmt->execute([

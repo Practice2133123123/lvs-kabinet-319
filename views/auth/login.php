@@ -1,4 +1,4 @@
-<?php include '../views/layouts/header.php'; ?>
+<?php include __DIR__ . '/../layouts/header.php'; ?>
 
     <div class="wrapper">
         <?php if (!empty($error)): ?>
@@ -20,4 +20,4 @@
 
     <p>Нет аккаунта? <a href="http://localhost/lvs/public/register.php">Зарегистрироваться</a></p>
 
-<?php include '../views/layouts/footer.php'; ?>
+<?php include __DIR__ . '/../layouts/footer.php'; ?>

@@ -1,16 +1,20 @@
-<?php include '../views/layouts/header.php'; ?>
+<?php include __DIR__ . '/../layouts/header.php'; ?>
 
-    <h2>Сетевые точки</h2>
+    <h1>Сетевые точки</h1>
+
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <div></div>
+        <a href="point_add.php" class="btn btn-primary">Добавить точку</a>
+    </div>
+
 <?php include 'summary.php'; ?>
-
-    <p><a href="point_add.php">+ Добавить новую сетевую точку</a></p>
 <?php include 'filter.php'; ?>
 
 <?php if (empty($points)): ?>
-    <p>Нет данных</p>
+    <div class="alert alert-info">Нет точек. <a href="point_add.php">Добавить →</a></div>
 <?php else: ?>
-    <table border="1" cellpadding="8" style="width:100%; border-collapse: collapse;">
-        <thead style="background: #f0f0f0;">
+    <table>
+        <thead>
         <tr>
             <th>Метка</th>
             <th>Тип</th>
@@ -22,13 +26,19 @@
         <tbody>
         <?php foreach ($points as $point): ?>
             <tr>
-                <td><?= htmlspecialchars($point['label']) ?></td>
+                <td><strong><?= htmlspecialchars($point['label']) ?></strong></td>
                 <td><?= htmlspecialchars($point['type']) ?></td>
-                <td><?= htmlspecialchars($point['location'] ?? '—') ?></td>
-                <td><?= htmlspecialchars($point['status']) ?></td>
+                <td><small><?= htmlspecialchars($point['location'] ?? '—') ?></small></td>
                 <td>
-                    <a href="point_edit.php?id=<?= $point['id'] ?>">✏️ Ред.</a>
-                    <a href="point_delete.php?id=<?= $point['id'] ?>" onclick="return confirm('Удалить точку?')">🗑 Удалить</a>
+                    <?php 
+                        $status = htmlspecialchars($point['status']);
+                        $statusClass = strtolower($status);
+                    ?>
+                    <span class="status-badge status-<?= $statusClass ?>"><?= $status ?></span>
+                </td>
+                <td>
+                    <a href="point_edit.php?id=<?= $point['id'] ?>" class="btn btn-secondary" style="padding: 5px 10px; font-size: 12px;">Ред.</a>
+                    <a href="point_delete.php?id=<?= $point['id'] ?>" class="btn btn-danger" style="padding: 5px 10px; font-size: 12px;" onclick="return confirm('Вы уверены?')">Удал.</a>
                 </td>
             </tr>
         <?php endforeach; ?>
@@ -38,23 +48,23 @@
 
     <!-- Пагинация -->
 <?php if ($totalPages > 1): ?>
-    <div style="margin-top: 20px; text-align: center;">
+    <div class="pagination">
         <?php if ($currentPage > 1): ?>
-            <a href="?page=<?= $currentPage - 1 ?>">◀ Назад</a>
+            <a href="?page=<?= $currentPage - 1 ?>">Назад</a>
         <?php endif; ?>
 
         <?php for ($i = 1; $i <= $totalPages; $i++): ?>
             <?php if ($i == $currentPage): ?>
-                <strong style="margin: 0 5px; color: red;"><?= $i ?></strong>
+                <span class="active"><?= $i ?></span>
             <?php else: ?>
-                <a href="?page=<?= $i ?>" style="margin: 0 5px;"><?= $i ?></a>
+                <a href="?page=<?= $i ?>"><?= $i ?></a>
             <?php endif; ?>
         <?php endfor; ?>
 
         <?php if ($currentPage < $totalPages): ?>
-            <a href="?page=<?= $currentPage + 1 ?>">Вперёд ▶</a>
+            <a href="?page=<?= $currentPage + 1 ?>">Вперёд</a>
         <?php endif; ?>
     </div>
 <?php endif; ?>
 
-<?php include '../views/layouts/footer.php'; ?>
+<?php include __DIR__ . '/../layouts/footer.php'; ?>
