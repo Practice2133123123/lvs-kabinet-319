@@ -1,4 +1,4 @@
-v<?php
+<?php
 require_once __DIR__ . '/../models/PointModel.php';
 require_once __DIR__ . '/../models/LogModel.php';
 
@@ -13,6 +13,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'status' => trim($_POST['status'] ?? ''),
         'last_check' => !empty($_POST['last_check']) ? $_POST['last_check'] : null
     ];
+
+    // Валидация метки
+    if (empty($data['label'])) {
+        $errors[] = "Метка обязательна для заполнения.";
+    } elseif (isLabelExists($pdo, $data['label'])) {
+        $errors[] = "Точка с меткой '{$data['label']}' уже существует. Используйте другую метку.";
+    }
 
     $allowedTypes = ['socket', 'switch', 'cable_run', 'patch_cord'];
     if (!in_array($data['type'], $allowedTypes)) {
@@ -32,10 +39,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 header("Location: inventory.php?created=1");
                 exit;
             } else {
-                $errors[] = "Ошибка при сохранении в базу данных.";
+                $errors[] = "Точка с такой меткой уже существует или ошибка при сохранении.";
             }
         } catch (PDOException $e) {
-            $errors[] = "Ошибка базы данных: " . $e->getMessage();
+            if ($e->getCode() == 23000 && strpos($e->getMessage(), 'Duplicate entry') !== false) {
+                $errors[] = "Точка с меткой '{$data['label']}' уже существует. Используйте другую метку.";
+            } else {
+                $errors[] = "Ошибка базы данных: " . $e->getMessage();
+            }
         }
     }
 }

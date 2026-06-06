@@ -1,12 +1,13 @@
 <?php
-require_once __DIR__ . '/../config/db.php';
-require_once  __DIR__ . '/../models/MaterialModel.php';
+require_once __DIR__ . '/../models/MaterialModel.php';
+require_once __DIR__ . '/../models/PointModel.php'; // Для getAllPointsForSelect()
+require_once __DIR__ . '/../models/LogModel.php';
 
 $error = '';
 $success = '';
 
 $materials = getMaterialsList($pdo);
-$points = getAllPoints($pdo);
+$points = getAllPointsForSelect($pdo);
 $defects = getDefectsList($pdo);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -27,6 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ];
 
         if (addMaterialUsage($pdo, $data)) {
+            $usage_id = $pdo->lastInsertId();
+            addLog($pdo, $_SESSION['user_id'], 'CREATE', 'material_usage', $usage_id);
             $success = 'Расход успешно добавлен!';
             $_POST = [];
         } else {

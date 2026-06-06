@@ -1,6 +1,7 @@
 <?php
-require_once '../config/db.php';
-require_once '../models/PointModel.php';
+require_once __DIR__ . '/../config/db.php';
+require_once __DIR__ . '/../includes/auth.php';
+require_once __DIR__ . '/../models/PointModel.php';
 
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 $errors = [];
@@ -49,7 +50,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-require_once '../views/layouts/header.php';
-require_once '../views/inventory/edit.php';
-require_once '../views/layouts/footer.php';
+include __DIR__ . '/../views/inventory/edit.php';
 ?>

@@ -1,4 +1,11 @@
 <?php
+function addLoginLog($pdo, $user_id, $action) {
+    $stmt = $pdo->prepare("
+        INSERT INTO logs (user_id, action, target_table, created_at) 
+        VALUES (?, ?, 'auth', NOW())
+    ");
+    return $stmt->execute([$user_id, $action]);
+}
 
 function addLog($pdo, $user_id, $action, $target_table, $target_id = null) {
     $stmt = $pdo->prepare("
@@ -32,4 +39,3 @@ function getLogsByUser($pdo, $user_id, $limit = 100) {
     $stmt->execute([$user_id, $limit]);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-?>

@@ -1,3 +1,5 @@
+<?php include '../views/layouts/header.php'; ?>
+
 <div class="container mt-4">
     <h1>Редактирование сетевой точки</h1>
 
@@ -15,6 +17,7 @@
         <div class="mb-3">
             <label class="form-label">Метка *</label>
             <input type="text" name="label" class="form-control" value="<?= htmlspecialchars($point['label']) ?>" required>
+            <small class="form-text text-muted">Метка должна быть уникальной. Изменяйте с осторожностью.</small>
         </div>
         
         <div class="mb-3">
@@ -47,3 +50,5 @@
         </div>
     </form>
 </div>
+
+<?php include '../views/layouts/footer.php'; ?>

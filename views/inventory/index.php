@@ -80,7 +80,7 @@ include '../views/layouts/header.php';
         </div>
     </div>
     <div class="mt-3">
-        <a href="point_add.php" class="btn btn-primary">➕ Добавить точку</a>
+        <a href="point_add.php" class="btn btn-primary">Добавить точку</a>
     </div>
 </div>
 
