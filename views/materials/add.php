@@ -37,6 +37,16 @@
         </div>
 
         <div class="form-group">
+            <label>Привязка к дефекту</label>
+            <select name="defect_id">
+                <option value="">— Не выбрано —</option>
+                <?php foreach ($defects as $d): ?>
+                    <option value="<?= $d['id'] ?>"><?= htmlspecialchars($d['description']) ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+
+        <div class="form-group">
             <label>Комментарий</label>
             <textarea name="comment" rows="3"></textarea>
         </div>
