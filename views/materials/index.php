@@ -47,5 +47,24 @@
             <a href="materials_add.php" class="btn btn-primary">➕ Добавить расход</a>
         </div>
     </div>
+    <!-- Пагинация -->
+<?php if ($totalPages > 1): ?>
+    <div style="margin-top: 20px; text-align: center;">
+        <?php if ($currentPage > 1): ?>
+            <a href="?page=<?= $currentPage - 1 ?>&date_from=<?= htmlspecialchars($date_from) ?>&date_to=<?= htmlspecialchars($date_to) ?>&material_id=<?= htmlspecialchars($material_id) ?>">◀ Назад</a>
+        <?php endif; ?>
 
+        <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+            <?php if ($i == $currentPage): ?>
+                <strong style="margin: 0 5px; color: red;"><?= $i ?></strong>
+            <?php else: ?>
+                <a href="?page=<?= $i ?>&date_from=<?= htmlspecialchars($date_from) ?>&date_to=<?= htmlspecialchars($date_to) ?>&material_id=<?= htmlspecialchars($material_id) ?>" style="margin: 0 5px;"><?= $i ?></a>
+            <?php endif; ?>
+        <?php endfor; ?>
+
+        <?php if ($currentPage < $totalPages): ?>
+            <a href="?page=<?= $currentPage + 1 ?>&date_from=<?= htmlspecialchars($date_from) ?>&date_to=<?= htmlspecialchars($date_to) ?>&material_id=<?= htmlspecialchars($material_id) ?>">Вперёд ▶</a>
+        <?php endif; ?>
+    </div>
+<?php endif; ?>
 <?php include '../views/layouts/footer.php'; ?>

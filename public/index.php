@@ -1,6 +1,13 @@
 <?php
+// Главная страница - перенаправляет на dashboard или login
 require_once '../config/db.php';
-require_once  '../includes/auth.php';
-require_once  '../controllers/index_controller.php';
-include  '../views/index.php';
 
+session_start();
+
+if (isset($_SESSION['user_id'])) {
+    header('Location: dashboard/index.php');
+} else {
+    header('Location: auth/login.php');
+}
+exit;
+?>

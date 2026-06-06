@@ -31,5 +31,25 @@
         </tbody>
     </table>
 <?php endif; ?>
+    <!-- Пагинация -->
+<?php if ($totalPages > 1): ?>
+    <div style="margin-top: 20px; text-align: center;">
+        <?php if ($currentPage > 1): ?>
+            <a href="?page=<?= $currentPage - 1 ?>&severity=<?= htmlspecialchars($severity) ?>&status=<?= htmlspecialchars($status) ?>">◀ Назад</a>
+        <?php endif; ?>
+
+        <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+            <?php if ($i == $currentPage): ?>
+                <strong style="margin: 0 5px; color: red;"><?= $i ?></strong>
+            <?php else: ?>
+                <a href="?page=<?= $i ?>&severity=<?= htmlspecialchars($severity) ?>&status=<?= htmlspecialchars($status) ?>" style="margin: 0 5px;"><?= $i ?></a>
+            <?php endif; ?>
+        <?php endfor; ?>
+
+        <?php if ($currentPage < $totalPages): ?>
+            <a href="?page=<?= $currentPage + 1 ?>&severity=<?= htmlspecialchars($severity) ?>&status=<?= htmlspecialchars($status) ?>">Вперёд ▶</a>
+        <?php endif; ?>
+    </div>
+<?php endif; ?>
 
 <?php include '../views/layouts/footer.php'; ?>

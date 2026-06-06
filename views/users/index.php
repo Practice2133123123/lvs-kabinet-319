@@ -1,1 +1,63 @@
-<?php
+<?php include '../views/layouts/header.php'; ?>
+
+    <div class="container mt-4">
+        <h1>Управление пользователями</h1>
+
+        <?php if ($error): ?>
+            <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
+        <?php endif; ?>
+
+        <?php if ($success): ?>
+            <div class="alert alert-success"><?= htmlspecialchars($success) ?></div>
+        <?php endif; ?>
+
+        <div class="table-responsive">
+            <table border="1" cellpadding="8" style="width:100%; border-collapse: collapse;">
+                <thead style="background: #f0f0f0;">
+                <tr>
+                    <th>ID</th>
+                    <th>Логин</th>
+                    <th>Роль</th>
+                    <th>Дата регистрации</th>
+                    <th>Действия</th>
+                </tr>
+                </thead>
+                <tbody>
+                <?php foreach ($users as $user): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($user['id']) ?></td>
+                        <td><?= htmlspecialchars($user['login']) ?></td>
+                        <td>
+                            <form method="POST" style="display: inline;">
+                                <input type="hidden" name="user_id" value="<?= $user['id'] ?>">
+                                <select name="role" onchange="this.form.submit()">
+                                    <option value="operator" <?= $user['role'] === 'operator' ? 'selected' : '' ?>>Оператор</option>
+                                    <option value="admin" <?= $user['role'] === 'admin' ? 'selected' : '' ?>>Администратор</option>
+                                </select>
+                                <input type="hidden" name="update_role" value="1">
+                            </form>
+                        </td>
+                        <td><?= htmlspecialchars($user['created_at'] ?? '—') ?></td>
+                        <td>
+                            <?php if ($user['id'] != $_SESSION['user_id']): ?>
+                                <form method="POST" style="display: inline;" onsubmit="return confirm('Удалить пользователя?')">
+                                    <input type="hidden" name="user_id" value="<?= $user['id'] ?>">
+                                    <input type="hidden" name="delete_user" value="1">
+                                    <button type="submit">Удалить</button>
+                                </form>
+                            <?php else: ?>
+                                <span>Текущий пользователь</span>
+                            <?php endif; ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+
+        <div style="margin-top: 20px;">
+            <a href="register.php">+ Добавить пользователя</a>
+        </div>
+    </div>
+
+<?php include '../views/layouts/footer.php'; ?>

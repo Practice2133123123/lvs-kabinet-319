@@ -16,6 +16,10 @@
             <a href="http://localhost/lvs/public/inventory.php"> Сетевые точки</a>
             <a href="http://localhost/lvs/public/defects.php">️ Дефекты</a>
             <a href="http://localhost/lvs/public/materials.php"> Материалы</a>
+            <?php if (function_exists('isAdmin') && isAdmin()): ?>
+                <a href="http://localhost/lvs/public/users.php"> Пользователи</a>
+                <a href="http://localhost/lvs/public/logs.php"> Логи</a>
+            <?php endif; ?>
             <a href="http://localhost/lvs/public/logout.php"> Выйти</a>
         </div>
     </div>
