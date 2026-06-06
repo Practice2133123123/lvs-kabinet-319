@@ -1,4 +1,4 @@
-<?php include '../views/layouts/header.php'; ?>
+<?php include __DIR__ . '/../layouts/header.php'; ?>
 
     <h2>Добавить расход материала</h2>
 
@@ -45,4 +45,4 @@
         <a href="materials.php">Отмена</a>
     </form>
 
-<?php include '../views/layouts/footer.php'; ?>
+<?php include __DIR__ . '/../layouts/footer.php'; ?>
