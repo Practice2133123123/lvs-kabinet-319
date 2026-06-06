@@ -18,6 +18,6 @@
         </form>
     </div>
 
-    <p>Нет аккаунта? <a href="http://localhost/lvs/public/register.php">Зарегистрироваться</a></p>
+    <p>Нет аккаунта? <a href="http://localhost/lvs/public/auth/register.php">Зарегистрироваться</a></p>
 
 <?php include __DIR__ . '/../layouts/footer.php'; ?>
