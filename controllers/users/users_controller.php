@@ -49,7 +49,7 @@ if (!empty($type) || !empty($status)) {
     $total = countUsers($pdo);
     $pagination = getPaginationInfo($total, $limit, $page);
     
-    $points = getUsersWithPagination($pdo, $pagination['limit'], $pagination['offset']);
+    $users = getUsersWithPagination($pdo, $pagination['limit'], $pagination['offset']);
     $currentPage = $pagination['current_page'];
     $totalPages = $pagination['total_pages'];
 }

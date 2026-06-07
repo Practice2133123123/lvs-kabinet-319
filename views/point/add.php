@@ -1,4 +1,4 @@
-<?php include '../views/layouts/header.php'; ?>
+<?php include '../../views/layouts/header.php'; ?>
 
     <div class="container" style="max-width: 600px; margin-top: 30px;">
         <h2>Добавление новой сетевой точки</h2>
@@ -53,4 +53,4 @@
         </form>
     </div>
 
-<?php include '../views/layouts/footer.php'; ?>
+<?php include '../../views/layouts/footer.php'; ?>

@@ -23,7 +23,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($points as $user): ?>
+                <?php foreach ($users as $user): ?>
                     <tr>
                         <td><?= htmlspecialchars($user['id']) ?></td>
                         <td><?= htmlspecialchars($user['login']) ?></td>

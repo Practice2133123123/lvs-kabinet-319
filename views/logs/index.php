@@ -60,12 +60,12 @@
                 </tr>
                 </thead>
                 <tbody>
-                <?php if (empty($points)): ?>
+                <?php if (empty($logs)): ?>
                     <tr>
                         <td colspan="6" style="text-align: center;">Нет записей в журнале</td>
                     </tr>
                 <?php else: ?>
-                    <?php foreach ($points as $log): ?>
+                    <?php foreach ($logs as $log): ?>
                         <tr>
                             <td><?= htmlspecialchars($log['id']) ?></td>
                             <td><?= htmlspecialchars($log['user_login'] ?? '—') ?></td>

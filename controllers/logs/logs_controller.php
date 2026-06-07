@@ -19,14 +19,14 @@ $type = $_GET['type'] ?? '';
 $status = $_GET['status'] ?? '';
 
 if (!empty($type) || !empty($status)) {
-    $points = getFilteredLogs($pdo, $user_id, $action, $date_from, $date_to);
+    $logs = getFilteredLogs($pdo, $user_id, $action, $date_from, $date_to);
     $totalPages = 1;
     $currentPage = 1;
 } else {
     $total = countAllLogs($pdo);
     $pagination = getPaginationInfo($total, $limit, $page);
     
-    $points = getlogsWithPagination($pdo, $pagination['limit'], $pagination['offset']);
+    $logs = getlogsWithPagination($pdo, $pagination['limit'], $pagination['offset']);
     $currentPage = $pagination['current_page'];
     $totalPages = $pagination['total_pages'];
 }
