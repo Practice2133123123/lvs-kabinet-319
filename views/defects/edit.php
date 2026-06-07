@@ -1,4 +1,4 @@
-<?php include __DIR__ . '/../layouts/header.php'; ?>
+<?php include __DIR__ . '/../../views/layouts/header.php'; ?>
 
 <div class="container mt-4" style="max-width: 600px;">
     <h2>Редактирование дефекта #<?= htmlspecialchars($defect['id']) ?></h2>
@@ -54,8 +54,8 @@
         </div>
         
         <button type="submit" class="btn btn-primary">Сохранить</button>
-        <a href="../defects/defects.php" class="btn btn-secondary">Отмена</a>
+        <a href="defects.php" class="btn btn-secondary">Отмена</a>
     </form>
 </div>
 
-<?php include __DIR__ . '/../layouts/footer.php'; ?>
+<?php include __DIR__ . '/../../views/layouts/footer.php'; ?>

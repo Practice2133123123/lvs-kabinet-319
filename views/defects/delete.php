@@ -1,4 +1,4 @@
-<?php include __DIR__ . '/../layouts/header.php'; ?>
+<?php include __DIR__ . '/../../views/layouts/header.php'; ?>
 
 <div class="container mt-4" style="max-width: 600px;">
     <h2>Удаление дефекта</h2>
@@ -19,9 +19,9 @@
         
         <form method="POST" class="mt-3">
             <button type="submit" class="btn btn-danger">удалить</button>
-            <a href="../defects/defects.php" class="btn btn-secondary">Отмена</a>
+            <a href="defects.php" class="btn btn-secondary">Отмена</a>
         </form>
     <?php endif; ?>
 </div>
 
-<?php include __DIR__ . '/../layouts/footer.php'; ?>
+<?php include __DIR__ . '/../../views/layouts/footer.php'; ?>

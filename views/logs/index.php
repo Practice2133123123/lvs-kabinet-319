@@ -1,4 +1,4 @@
-<?php include __DIR__ . '/../layouts/header.php'; ?>
+<?php include '../../views/layouts/header.php'; ?>
 
     <div class="container mt-4">
         <h1>Журнал действий пользователей</h1>
@@ -81,4 +81,4 @@
         </div>
     </div>
 
-<?php include __DIR__ . '/../layouts/footer.php'; ?>
+<?php include '../../views/layouts/footer.php'; ?>

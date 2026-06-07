@@ -1,4 +1,7 @@
-<?php include __DIR__ . '/../layouts/header.php'; ?>
+<?php include __DIR__ . '/../../views/layouts/header.php'; 
+
+
+?>
 
     <h1>Дефекты</h1>
 <?php include __DIR__ . '/summary.php'; ?>
@@ -45,6 +48,7 @@
                     <a href="defect_delete.php?id=<?= $defect['id'] ?>" onclick="return confirm('Удалить дефект?')">🗑 Удалить</a>
                 </td>
             </tr>
+
         <?php endforeach; ?>
         </tbody>
     </table>
@@ -71,4 +75,4 @@
     </div>
 <?php endif; ?>
 
-<?php include __DIR__ . '/../layouts/footer.php'; ?>
+<?php include __DIR__ . '/../../views/layouts/footer.php'; ?>

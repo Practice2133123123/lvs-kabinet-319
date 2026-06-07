@@ -1,14 +1,16 @@
-<?php include __DIR__ . '/../layouts/header.php'; ?>
+<?php 
+include __DIR__ . '/../../views/layouts/header.php'; 
+?>
 
-    <h1>Сетевые точки</h1>
-
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-        <div></div>
-        <a href="point_add.php" class="btn btn-primary">Добавить точку</a>
-    </div>
-
+        <!-- Собщение об успешном обновлении для пользователя -->
+<?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
+    <p style="color: green;">Точка успешно обновлена!</p>
+<?php endif; ?>
+    <h2>Сетевые точки</h2>
 <?php include 'summary.php'; ?>
 <?php include 'filter.php'; ?>
+
+        <!-- Таблица -->
 
 <?php if (empty($points)): ?>
     <div class="alert alert-info">Нет точек. <a href="point_add.php">Добавить →</a></div>
@@ -67,4 +69,8 @@
     </div>
 <?php endif; ?>
 
+<<<<<<< HEAD
 <?php include __DIR__ . '/../layouts/footer.php'; ?>
+=======
+<?php include __DIR__ . '/../../views/layouts/footer.php'; ?>
+>>>>>>> mirzhan

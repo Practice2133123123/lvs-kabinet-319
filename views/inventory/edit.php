@@ -16,7 +16,6 @@
             <label class="form-label">Метка *</label>
             <input type="text" name="label" class="form-control" value="<?= htmlspecialchars($point['label']) ?>" required>
         </div>
-
         <div class="mb-3">
             <label class="form-label">Тип *</label>
             <select name="type" class="form-select" required>
@@ -26,12 +25,12 @@
                 <option value="patch_cord" <?= $point['type'] == 'patch_cord' ? 'selected' : '' ?>>Патч-корд</option>
             </select>
         </div>
-
+        
         <div class="mb-3">
             <label class="form-label">Расположение</label>
-            <input type="text" name="location" class="form-control" value="<?= htmlspecialchars($point['location'] ?? '') ?>">
+            <input type="text" name="location" class="form-control" value="<?= htmlspecialchars($point['location'] ?? '') ?>" placeholder="кабинет, стойка...">
         </div>
-
+        
         <div class="mb-3">
             <label class="form-label">Статус *</label>
             <select name="status" class="form-select" required>

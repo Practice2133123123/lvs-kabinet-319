@@ -1,6 +1,4 @@
-<?php include __DIR__ . '/../layouts/header.php'; ?>
-
-    <h1>Материалы</h1>
+<?php include __DIR__ . '/../../views/layouts/header.php'; ?>
 
     <div class="container mt-4">
         <?php include __DIR__ . '/summary.php'; ?>
@@ -73,5 +71,4 @@
         <?php endif; ?>
     </div>
 <?php endif; ?>
-
-<?php include __DIR__ . '/../layouts/footer.php'; ?>
+<?php include __DIR__ . '/../../views/layouts/footer.php'; ?>

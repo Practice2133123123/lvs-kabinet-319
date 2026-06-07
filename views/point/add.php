@@ -1,4 +1,4 @@
-<?php include __DIR__ . '/../layouts/header.php'; ?>
+<?php include __DIR__ . '/../../views/layouts/header.php'; ?>
 
     <div class="container" style="max-width: 600px; margin-top: 30px;">
         <h2>Добавление новой сетевой точки</h2>
@@ -53,4 +53,4 @@
         </form>
     </div>
 
-<?php include __DIR__ . '/../layouts/footer.php'; ?>
+<?php include __DIR__ . '/../../views/layouts/footer.php'; ?>
