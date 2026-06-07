@@ -1,17 +1,23 @@
 <?php
+<<<<<<< HEAD:controllers/point_add_controller.php
 require_once __DIR__ . '/../models/PointModel.php';
 require_once __DIR__ . '/../models/LogModel.php';
+=======
+require_once __DIR__ . '/../../models/inventory/PointModel.php';
+require_once __DIR__ . '/../../includes/helpers.php';
+>>>>>>> a28f4b63bf104c8e4efbd284294f809a526dc7f0:controllers/points/point_add_controller.php
 
 $errors = [];
 $data = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = [
-        'label' => trim($_POST['label'] ?? ''),
-        'type' => trim($_POST['type'] ?? ''),
-        'location' => trim($_POST['location'] ?? ''),
-        'status' => trim($_POST['status'] ?? ''),
-        'last_check' => !empty($_POST['last_check']) ? $_POST['last_check'] : null
+        'label' => getPostParam('label', 'string'),
+        'type' => getPostParam('type', 'string'),
+        'location' => getPostParam('location', 'string'),
+        'status' => getPostParam('status', 'string'),
+        'last_check' => getPostParam('last_check'),
+        'created_by' => $_SESSION['user_id'] ?? 1
     ];
 
     // Валидация метки
@@ -33,10 +39,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($errors)) {
         try {
+<<<<<<< HEAD:controllers/point_add_controller.php
             $result = createPoint($pdo, $data, $_SESSION['user_id']);
             if ($result) {
                 addLog($pdo, $_SESSION['user_id'], 'CREATE', 'network_points', $pdo->lastInsertId());
                 header("Location: inventory.php?created=1");
+=======
+            if (addPoint($pdo, $data)) {
+                header("Location: ../inventory/inventory.php");
+>>>>>>> a28f4b63bf104c8e4efbd284294f809a526dc7f0:controllers/points/point_add_controller.php
                 exit;
             } else {
                 $errors[] = "Точка с такой меткой уже существует или ошибка при сохранении.";
@@ -50,4 +61,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
+<<<<<<< HEAD:controllers/point_add_controller.php
 ?>
+=======
+?>
+>>>>>>> a28f4b63bf104c8e4efbd284294f809a526dc7f0:controllers/points/point_add_controller.php

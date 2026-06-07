@@ -4,11 +4,15 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php');
+    header('Location: /public/login.php');
     exit;
 }
 
 function isAdmin() {
     return isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin';
+<<<<<<< HEAD
 }
 ?>
+=======
+}
+>>>>>>> a28f4b63bf104c8e4efbd284294f809a526dc7f0

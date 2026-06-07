@@ -1,14 +1,15 @@
 <?php
-require_once __DIR__ . '/../config/db.php';
-require_once __DIR__ . '/../models/UserModel.php';
+require_once __DIR__ . '/../../config/db.php';
+require_once __DIR__ . '/../../models/auth/UserModel.php';
+require_once __DIR__ . '/../../includes/helpers.php';
 
 $error = '';
 $success = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $login = trim($_POST['login'] ?? '');
-    $password = $_POST['password'] ?? '';
-    $confirm = $_POST['confirm_password'] ?? '';
+    $login = getPostParam('login', 'string');
+    $password = getPostParam('password', 'string');
+    $confirm = getPostParam('confirm_password', 'string');
 
     if (empty($login) || empty($password)) {
         $error = 'Заполните все поля';
@@ -17,14 +18,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif (strlen($password) < 4) {
         $error = 'Пароль должен быть не менее 4 символов';
     } else {
-        $stmt = $pdo->prepare("SELECT id FROM users WHERE login = ?");
-        $stmt->execute([$login]);
-        if ($stmt->fetch()) {
+        $existing = getUserByLogin($pdo, $login);
+        if ($existing) {
             $error = 'Пользователь с таким логином уже существует';
         } else {
-            $hash = password_hash($password, PASSWORD_DEFAULT);
-            $stmt = $pdo->prepare("INSERT INTO users (login, password_hash, role) VALUES (?, ?, 'operator')");
-            if ($stmt->execute([$login, $hash])) {
+            if (createUser($pdo, $login, $password)) {
                 $success = 'Регистрация успешна! Теперь можно войти.';
             } else {
                 $error = 'Ошибка при регистрации';
@@ -32,6 +30,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
+<<<<<<< HEAD:public/register.php
 
 include __DIR__ . '/../views/auth/register.php';
+=======
+>>>>>>> a28f4b63bf104c8e4efbd284294f809a526dc7f0:controllers/auth/register_controller.php
 ?>

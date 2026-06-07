@@ -1,4 +1,4 @@
-<?php include '../views/layouts/header.php'; ?>
+<?php include __DIR__ . '/../layouts/header.php'; ?>
 
 <div class="container mt-4" style="max-width: 600px;">
     <h2>Добавить расход материала</h2>
@@ -47,10 +47,27 @@
                 </select>
             </div>
 
+<<<<<<< HEAD
             <div class="mb-3">
                 <label class="form-label">Комментарий</label>
                 <textarea name="comment" class="form-control" rows="3"></textarea>
             </div>
+=======
+        <div class="form-group">
+            <label>Привязка к дефекту</label>
+            <select name="defect_id">
+                <option value="">— Не выбрано —</option>
+                <?php foreach ($defects as $d): ?>
+                    <option value="<?= $d['id'] ?>"><?= htmlspecialchars($d['description']) ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Комментарий</label>
+            <textarea name="comment" rows="3"></textarea>
+        </div>
+>>>>>>> a28f4b63bf104c8e4efbd284294f809a526dc7f0
 
             <button type="submit" class="btn btn-primary">Сохранить</button>
             <a href="materials.php" class="btn btn-secondary">Отмена</a>
@@ -58,4 +75,4 @@
     <?php endif; ?>
 </div>
 
-<?php include '../views/layouts/footer.php'; ?>
+<?php include __DIR__ . '/../layouts/footer.php'; ?>

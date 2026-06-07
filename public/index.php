@@ -1,6 +1,13 @@
 <?php
-require_once __DIR__ . '/../config/db.php';
-require_once __DIR__ . '/../includes/auth.php';
-require_once __DIR__ . '/../controllers/index_controller.php';
-include __DIR__ . '/../views/index.php';
+// Главная страница - перенаправляет на dashboard или login
+require_once '../config/db.php';
+
+session_start();
+
+if (isset($_SESSION['user_id'])) {
+    header('Location: dashboard/index.php');
+} else {
+    header('Location: auth/login.php');
+}
+exit;
 ?>

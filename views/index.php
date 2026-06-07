@@ -1,18 +1,18 @@
 <?php include __DIR__ . '/layouts/header.php'; ?>
 
-<div class="dashboard">
-    <div class="card">
-        <h3>Всего точек</h3>
-        <p class="number"><?= htmlspecialchars($totalPoints) ?></p>
-    </div>
-    <div class="card">
-        <h3>Открытых дефектов</h3>
-        <p class="number"><?= htmlspecialchars($openDefects) ?></p>
-    </div>
-    <div class="card">
-        <h3>Кабель (м)</h3>
-        <p class="number"><?= htmlspecialchars($totalCable) ?></p>
-    </div>
-</div>
+    <h1>Дашборд</h1>
+
+    <table border="1" cellpadding="10">
+        <tr>
+            <th>Всего точек</th>
+            <th>Открытых дефектов</th>
+            <th>Кабель (м)</th>
+        </tr>
+        <tr>
+            <td align="center"><?= htmlspecialchars($totalPoints) ?></td>
+            <td align="center"><?= htmlspecialchars($openDefects) ?></td>
+            <td align="center"><?= htmlspecialchars($totalCable) ?></td>
+        </tr>
+    </table>
 
 <?php include __DIR__ . '/layouts/footer.php'; ?>
