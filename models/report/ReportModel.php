@@ -97,3 +97,41 @@ function getDefectStatuses($pdo) {
         ['value' => 'closed', 'label' => 'Закрыт']
     ];
 }
+
+function countAllReport($pdo) {
+    return $pdo->query("SELECT COUNT(*) FROM material_usage")->fetchColumn();
+}
+
+function getReportWithPagination($pdo, $limit, $offset) {
+    $stmt = $pdo->prepare("
+        SELECT 
+            mu.id,
+            m.name as material_name,
+            mu.quantity,
+            mu.used_at,
+            mu.comment,
+            CASE 
+                WHEN mu.point_id IS NOT NULL THEN 'Точка'
+                WHEN mu.defect_id IS NOT NULL THEN 'Дефект'
+                ELSE 'Общий'
+            END as section,
+            CASE 
+                WHEN mu.point_id IS NOT NULL THEN np.label
+                WHEN mu.defect_id IS NOT NULL THEN d.description
+                ELSE '-'
+            END as section_name,
+            u.login as user_name,
+            np.status as point_status,
+            d.status as defect_status
+        FROM material_usage mu
+        LEFT JOIN materials m ON mu.material_id = m.id
+        LEFT JOIN network_points np ON mu.point_id = np.id
+        LEFT JOIN defects d ON mu.defect_id = d.id
+        LEFT JOIN users u ON mu.used_by = u.id
+        LIMIT :limit OFFSET :offset
+    ");
+    $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}

@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../../config/db.php';
 require_once __DIR__ . '/../../models/report/ReportModel.php';
+require_once __DIR__ . '/../../includes/pagination.php';
 
 $filters = [
     'date_from' => $_GET['date_from'] ?? '',
@@ -49,6 +50,25 @@ $materialTypes = getMaterialTypes($pdo);
 $sections = getSections($pdo);
 $pointStatuses = getPointStatuses($pdo);
 $defectStatuses = getDefectStatuses($pdo);
+
+$limit = 5;
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
+$type = $_GET['type'] ?? '';
+$status = $_GET['status'] ?? '';
+
+if (!empty($type) || !empty($status)) {
+    $logs = getFilteredReportData($pdo, $filters);
+    $totalPages = 1;
+    $currentPage = 1;
+} else {
+    $total = countAllReport($pdo);
+    $pagination = getPaginationInfo($total, $limit, $page);
+    
+    $data = getReportWithPagination($pdo, $pagination['limit'], $pagination['offset']);
+    $currentPage = $pagination['current_page'];
+    $totalPages = $pagination['total_pages'];
+}
 
 include __DIR__ . '/../../views/report/index.php';
 ?>
