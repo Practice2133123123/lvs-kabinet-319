@@ -26,6 +26,11 @@ function getAllMaterialsUsage($pdo) {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function getAllPointsForSelect($pdo) {
+    $stmt = $pdo->query("SELECT id, label FROM network_points ORDER BY label");
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
 // Получить конкретную запись расхода для редактирования
 function getMaterialUsageById($pdo, $id) {
     $stmt = $pdo->prepare("

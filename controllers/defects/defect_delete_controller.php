@@ -1,6 +1,7 @@
 <?php
-require_once __DIR__ . '/../models/defects/DefectModel.php';
-require_once __DIR__ . '/../models/logs/LogModel.php';
+require_once __DIR__ . '/../../config/db.php';
+require_once __DIR__ . '/../../models/defects/DefectModel.php';
+require_once __DIR__ . '/../../models/LogModel.php';
 
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 $defect = getDefectById($pdo, $id);

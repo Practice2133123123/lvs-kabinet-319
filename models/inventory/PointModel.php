@@ -1,109 +1,45 @@
 <?php
+require_once __DIR__ . '/../../config/db.php';
+require_once __DIR__ . '/../../models/materials/MaterialModel.php';
+require_once __DIR__ . '/../../models/inventory/PointModel.php';
+require_once __DIR__ . '/../../models/logs/LogModel.php';
 
-function countPointsByStatus($pdo, $status) {
-    $stmt = $pdo->prepare("SELECT COUNT(*) FROM network_points WHERE status = ?");
-    $stmt->execute([$status]);
-    return $stmt->fetchColumn();
+$id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+$item = getMaterialUsageById($pdo, $id);
+$materials = getMaterialsList($pdo);
+$points = getAllPointsForSelect($pdo);
+$defects = getDefectsList($pdo);
+$users = getAllUsersList($pdo);
+
+if (!$item) {
+    die('Расход материала не найден');
 }
 
-function getPointStatusCounts($pdo) {
-    $stmt = $pdo->query("
-        SELECT status, COUNT(*) as count 
-        FROM network_points 
-        GROUP BY status
-    ");
-    return $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
-}
+$error = '';
+$success = '';
 
-function getAllPoints($pdo) {
-    $stmt = $pdo->query("SELECT id, label, type, status FROM network_points");
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $data = [
+        'material_id' => $_POST['material_id'] ?? 0,
+        'quantity' => $_POST['quantity'] ?? 0,
+        'point_id' => $_POST['point_id'] ?? null,
+        'defect_id' => $_POST['defect_id'] ?? null,
+        'used_by' => $_POST['used_by'] ?? $_SESSION['user_id'],
+        'comment' => trim($_POST['comment'] ?? '')
+    ];
 
-function countAllPoints($pdo) {
-    return $pdo->query("SELECT COUNT(*) FROM network_points")->fetchColumn();
-}
-
-function getPointsWithPagination($pdo, $limit, $offset) {
-    $stmt = $pdo->prepare("
-        SELECT id, label, type, status 
-        FROM network_points 
-        LIMIT :limit OFFSET :offset
-    ");
-    $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
-    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
-    $stmt->execute();
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
-
-function filterPoints($pdo, $type = '', $status = '') {
-    $sql = "SELECT id, label, type, status FROM network_points WHERE 1=1";
-    $params = [];
-
-    if (!empty($type)) {
-        $sql .= " AND type = :type";
-        $params[':type'] = $type;
+    if ($data['material_id'] <= 0) {
+        $error = 'Выберите материал';
+    } elseif ($data['quantity'] <= 0) {
+        $error = 'Количество должно быть больше 0';
+    } else {
+        if (updateMaterialUsage($pdo, $id, $data)) {
+            addLog($pdo, $_SESSION['user_id'], 'UPDATE', 'material_usage', $id);
+            $success = 'Расход материала успешно обновлён!';
+            $item = getMaterialUsageById($pdo, $id);
+        } else {
+            $error = 'Ошибка при обновлении расхода';
+        }
     }
-
-    if (!empty($status)) {
-        $sql .= " AND status = :status";
-        $params[':status'] = $status;
-    }
-
-    $sql .= " ORDER BY id DESC";
-
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute($params);
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
-
-function getPointById($pdo, $id) {
-    $stmt = $pdo->prepare("SELECT * FROM network_points WHERE id = ?");
-    $stmt->execute([$id]);
-    return $stmt->fetch(PDO::FETCH_ASSOC);
-}
-
-function addPoint($pdo, $data) {
-    $stmt = $pdo->prepare("
-        INSERT INTO network_points (label, type, location, status)
-        VALUES (?, ?, ?, ?)
-    ");
-    return $stmt->execute([
-        $data['label'],
-        $data['type'],
-        $data['location'] ?? null,
-        $data['status'] ?? 'active'
-    ]);
-}
-
-function updatePoint($pdo, $id, $data) {
-    $stmt = $pdo->prepare("
-        UPDATE network_points 
-        SET label = ?, type = ?, location = ?, status = ?
-        WHERE id = ?
-    ");
-    return $stmt->execute([
-        $data['label'],
-        $data['type'],
-        $data['location'] ?? null,
-        $data['status'],
-        $id
-    ]);
-}
-
-function hasDefects($pdo, $point_id) {
-    $stmt = $pdo->prepare("SELECT COUNT(*) FROM defects WHERE point_id = ?");
-    $stmt->execute([$point_id]);
-    return $stmt->fetchColumn() > 0;
-}
-
-function deletePoint($pdo, $id) {
-    $stmt = $pdo->prepare("DELETE FROM network_points WHERE id = ?");
-    return $stmt->execute([$id]);
-}
-
-function getAllPointsForSelect($pdo) {
-    $stmt = $pdo->query("SELECT id, label FROM network_points ORDER BY label");
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 ?>

@@ -1,7 +1,8 @@
 <?php
-require_once __DIR__ . '/../models/defects/DefectModel.php';
-require_once __DIR__ . '/../models/inventory/PointModel.php'; 
-require_once __DIR__ . '/../models/logs/LogModel.php';
+require_once __DIR__ . '/../../config/db.php';
+require_once __DIR__ . '/../../models/defects/DefectModel.php';
+require_once __DIR__ . '/../../models/inventory/PointModel.php';
+require_once __DIR__ . '/../../models/LogModel.php';
 
 $error = '';
 $success = '';
@@ -15,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'description' => trim($_POST['description'] ?? ''),
         'status' => $_POST['status'] ?? 'open'
     ];
-    
+
     if ($data['point_id'] <= 0) {
         $error = 'Выберите сетевую точку';
     } elseif (empty($data['category'])) {
