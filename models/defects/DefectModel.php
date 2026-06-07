@@ -62,10 +62,40 @@ function deleteDefect($pdo, $id) {
     return $stmt->execute([$id]);
 }
 
+// Удалить дефект
+function deleteDefect($pdo, $id) {
+    $stmt = $pdo->prepare("DELETE FROM defects WHERE id = ?");
+    return $stmt->execute([$id]);
+}
+
 // Проверить, есть ли расходники у дефекта
 function hasMaterialUsage($pdo, $defect_id) {
     $stmt = $pdo->prepare("SELECT COUNT(*) FROM material_usage WHERE defect_id = ?");
     $stmt->execute([$defect_id]);
     return $stmt->fetchColumn() > 0;
+}
+
+function getDefectStatusCounts($pdo) {
+    $stmt = $pdo->query("SELECT status, COUNT(*) as count FROM defects GROUP BY status");
+    return $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
+}
+
+function countAllDefects($pdo) {
+    return $pdo->query("SELECT COUNT(*) FROM defects")->fetchColumn();
+}
+
+function getDefectsWithPagination($pdo, $limit, $offset) {
+    $stmt = $pdo->prepare("
+        SELECT d.*, np.label as point_label, u.login as created_by_name
+        FROM defects d
+        LEFT JOIN network_points np ON d.point_id = np.id
+        LEFT JOIN users u ON d.created_by = u.id
+        ORDER BY d.created_at DESC
+        LIMIT :limit OFFSET :offset
+    ");
+    $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 ?>
