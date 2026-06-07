@@ -1,3 +1,6 @@
+<?php 
+require_once __DIR__ . '/../../views/layouts/header.php'
+?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -100,3 +103,6 @@
 <?php endif; ?>
 </body>
 </html>
+<?php 
+require_once __DIR__ . '/../../views/layouts/footer.php'
+?>

@@ -26,6 +26,17 @@ function getAllDefects($pdo, $severity = '', $status = '') {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function getDefectById($pdo, $id) {
+    $stmt = $pdo->prepare("
+        SELECT d.*, np.label as point_label
+        FROM defects d
+        LEFT JOIN network_points np ON d.point_id = np.id
+        WHERE d.id = ?
+    ");
+    $stmt->execute([$id]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+}
+
 function getDefectsWithPagination($pdo, $limit, $offset) {
     $stmt = $pdo->prepare("
         SELECT defects.id, network_points.label AS network_label,
@@ -60,4 +71,50 @@ function getDefectStatusCounts($pdo) {
         GROUP BY status
     ");
     return $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
+}
+
+// Создать дефект
+function createDefect($pdo, $data, $created_by) {
+    $stmt = $pdo->prepare("
+        INSERT INTO defects (point_id, category, severity, description, status, created_by, created_at)
+        VALUES (?, ?, ?, ?, ?, ?, NOW())
+    ");
+    return $stmt->execute([
+        $data['point_id'],
+        $data['category'],
+        $data['severity'],
+        $data['description'],
+        $data['status'],
+        $created_by
+    ]);
+}
+
+// Обновить дефект
+function updateDefect($pdo, $id, $data) {
+    $stmt = $pdo->prepare("
+        UPDATE defects 
+        SET point_id = ?, category = ?, severity = ?, description = ?, status = ?
+        WHERE id = ?
+    ");
+    return $stmt->execute([
+        $data['point_id'],
+        $data['category'],
+        $data['severity'],
+        $data['description'],
+        $data['status'],
+        $id
+    ]);
+}
+
+// Удалить дефект
+function deleteDefect($pdo, $id) {
+    $stmt = $pdo->prepare("DELETE FROM defects WHERE id = ?");
+    return $stmt->execute([$id]);
+}
+
+// Проверить, есть ли расходники у дефекта
+function hasMaterialUsage($pdo, $defect_id) {
+    $stmt = $pdo->prepare("SELECT COUNT(*) FROM material_usage WHERE defect_id = ?");
+    $stmt->execute([$defect_id]);
+    return $stmt->fetchColumn() > 0;
 }

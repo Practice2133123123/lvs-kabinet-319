@@ -19,6 +19,7 @@
             <th>Категория</th>
             <th>Критичность</th>
             <th>Статус</th>
+            <th>Действия</th>
         </tr>
         </thead>
         <tbody>
@@ -29,7 +30,11 @@
                 <td><?= htmlspecialchars($defect['category'] ?? '—') ?></td>
                 <td><?= htmlspecialchars($defect['severity'] ?? '—') ?></td>
                 <td><?= htmlspecialchars($defect['status'] ?? '—') ?></td>
+            <td><a href="defect_edit.php?id=<?= $defect['id'] ?>" class="btn btn-sm btn-warning">Изменить</a>
+        <a href="defect_delete.php?id=<?= $defect['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Удалить дефект?')">Удалить</a>
+</td>
             </tr>
+
         <?php endforeach; ?>
         </tbody>
     </table>

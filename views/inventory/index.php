@@ -32,10 +32,10 @@ include __DIR__ . '/../../views/layouts/header.php';
             <tr>
                 <td><?= htmlspecialchars($point['label']) ?></td>
                 <td><?= htmlspecialchars($point['type']) ?></td>
-                <td><?= htmlspecialchars($point['location'] ?? '—') ?></td>
+                <td><?= htmlspecialchars(!empty($point['location']) ? $point['location'] : '—') ?></td>
                 <td><?= htmlspecialchars($point['status']) ?></td>
                 <td>
-                    <a href="point_edit.php?id=<?= $point['id'] ?>">✏️ Ред.</a>
+                    <a href="point_edit.php?id=<?= $point['id'] ?>"> Ред.</a>
                     <a href="point_delete.php?id=<?= $point['id'] ?>" onclick="return confirm('Удалить точку?')">🗑 Удалить</a>
                 </td>
             </tr>

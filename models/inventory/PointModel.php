@@ -16,7 +16,7 @@ function getPointStatusCounts($pdo) {
 }
 
 function getAllPoints($pdo) {
-    $stmt = $pdo->query("SELECT id, label, type, status FROM network_points");
+    $stmt = $pdo->query("SELECT id, label, type, location, status FROM network_points");
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
@@ -26,7 +26,7 @@ function countAllPoints($pdo) {
 
 function getPointsWithPagination($pdo, $limit, $offset) {
     $stmt = $pdo->prepare("
-        SELECT id, label, type, status 
+        SELECT id, label, type, location, status 
         FROM network_points 
         LIMIT :limit OFFSET :offset
     ");
@@ -37,12 +37,17 @@ function getPointsWithPagination($pdo, $limit, $offset) {
 }
 
 function filterPoints($pdo, $type = '', $status = '') {
-    $sql = "SELECT id, label, type, status FROM network_points WHERE 1=1";
+    $sql = "SELECT id, label, type, location, status FROM network_points WHERE 1=1";
     $params = [];
 
     if (!empty($type)) {
         $sql .= " AND type = :type";
         $params[':type'] = $type;
+    }
+
+    if (!empty($type)) {
+        $sql .= " AND location = :location";
+        $params[':location'] = $location;
     }
 
     if (!empty($status)) {
@@ -102,4 +107,9 @@ function deletePoint($pdo, $id) {
     $stmt = $pdo->prepare("DELETE FROM network_points WHERE id = ?");
     return $stmt->execute([$id]);
 }
-?>
+
+// Функция для получения всех точек для выпадающего списка
+function getAllPointsForSelect($pdo) {
+    $stmt = $pdo->query("SELECT id, label FROM network_points ORDER BY label");
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}

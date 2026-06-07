@@ -16,12 +16,12 @@
             <a href="/public/inventoryinventory.php"> Сетевые точки</a>
             <a href="/public/defects/defects.php">️ Дефекты</a>
             <a href="/public/materials/materials.php"> Материалы</a>
-            <a href="/public/report/report.php"> Экспорт отчета</a>
             <a href="/public/auth/logout.php"> Выйти</a> -->
 
             <a href="/public/index.php"> Дашборд</a>
             <a href="/public/inventory/inventory.php"> Сетевые точки</a>
-            <a href="/public/defects/defects.php">️ Дефекты</a>
+            <a href="/public/report/report.php"> Экспорт отчета</a>
+<a href="/public/defects/defects.php">️ Дефекты</a>
             <a href="/public/materials/materials.php"> Материалы</a>
             <?php if (function_exists('isAdmin') && isAdmin()): ?>
                 <a href="/public/users/users.php"> Пользователи</a>
