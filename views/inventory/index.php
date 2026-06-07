@@ -69,8 +69,5 @@ include __DIR__ . '/../../views/layouts/header.php';
     </div>
 <?php endif; ?>
 
-<<<<<<< HEAD
-<?php include __DIR__ . '/../layouts/footer.php'; ?>
-=======
+
 <?php include __DIR__ . '/../../views/layouts/footer.php'; ?>
->>>>>>> mirzhan

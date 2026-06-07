@@ -60,4 +60,25 @@
         </div>
     </div>
 
+                            <!-- Пагинация -->
+    <?php if ($totalPages > 1): ?>
+    <div style="margin-top: 20px; text-align: center;">
+        <?php if ($currentPage > 1): ?>
+            <a href="?page=<?= $currentPage - 1 ?>">◀ Назад</a>
+        <?php endif; ?>
+
+        <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+            <?php if ($i == $currentPage): ?>
+                <strong style="margin: 0 5px; color: red;"><?= $i ?></strong>
+            <?php else: ?>
+                <a href="?page=<?= $i ?>" style="margin: 0 5px;"><?= $i ?></a>
+            <?php endif; ?>
+        <?php endfor; ?>
+
+        <?php if ($currentPage < $totalPages): ?>
+            <a href="?page=<?= $currentPage + 1 ?>">Вперёд ▶</a>
+        <?php endif; ?>
+    </div>
+<?php endif;?>
+
 <?php include __DIR__ . '/../../views/layouts/footer.php'; ?>

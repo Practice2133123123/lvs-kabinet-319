@@ -26,7 +26,7 @@ function getAllMaterialsUsage($pdo) {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-function getAllPointsForSelect($pdo) {
+function getAllMaterialPointsForSelect($pdo) {
     $stmt = $pdo->query("SELECT id, label FROM network_points ORDER BY label");
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }

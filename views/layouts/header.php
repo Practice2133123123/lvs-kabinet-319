@@ -10,9 +10,9 @@
 <nav>
     <div class="nav-container">
         <div class="nav-brand">
-            <a href="/public/index.php"> ЛВС 319Б</a>
+            <a href="../../public/index.php"> ЛВС 319Б</a>
         </div>
-            <a href="/public/index.php"> Дашборд</a>
+            <a href="../../public/index.php"> Дашборд</a>
             <a href="/public/inventory/inventory.php"> Сетевые точки</a>
             <a href="/public/report/report.php"> Экспорт отчета</a>
 <a href="/public/defects/defects.php">️ Дефекты</a>

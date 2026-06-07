@@ -70,3 +70,20 @@ function getFilteredLogs($pdo, $user_id = null, $action = null, $date_from = nul
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function countAllLogs($pdo) {
+    return $pdo->query("SELECT COUNT(*) FROM logs")->fetchColumn();
+}
+
+function getlogsWithPagination($pdo, $limit, $offset) {
+    $stmt = $pdo->prepare("
+        SELECT l.*, u.login as user_login 
+        FROM logs l
+        LEFT JOIN users u ON l.user_id = u.id
+        ORDER BY l.created_at DESC
+        LIMIT :limit OFFSET :offset
+    ");
+    $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}

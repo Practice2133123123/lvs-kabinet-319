@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../../models/auth/UserModel.php';
 require_once __DIR__ . '/../../models/logs/LogModel.php';
+require_once __DIR__ . '/../../includes/pagination.php';
 
 $error = '';
 $success = '';
@@ -33,5 +34,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $error = 'Нельзя удалить последнего администратора';
         }
     }
+}
+
+$limit = 5;
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+
+$type = $_GET['type'] ?? '';
+$status = $_GET['status'] ?? '';
+
+if (!empty($type) || !empty($status)) {
+    $totalPages = 1;
+    $currentPage = 1;
+} else {
+    $total = countUsers($pdo);
+    $pagination = getPaginationInfo($total, $limit, $page);
+    
+    $users = getUsersWithPagination($pdo, $pagination['limit'], $pagination['offset']);
+    $currentPage = $pagination['current_page'];
+    $totalPages = $pagination['total_pages'];
 }
 ?>

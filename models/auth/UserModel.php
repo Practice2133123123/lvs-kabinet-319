@@ -42,4 +42,19 @@ function getUserById($pdo, $user_id) {
     $stmt->execute([$user_id]);
     return $stmt->fetch();
 }
+
+function countUsers($pdo) {
+    return $pdo->query("SELECT COUNT(*) FROM users")->fetchColumn();
+}
+
+function getUsersWithPagination($pdo, $limit, $offset) {
+    $stmt = $pdo->prepare("
+        SELECT id, login, role, created_at FROM users ORDER BY id
+        LIMIT :limit OFFSET :offset
+    ");
+    $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 ?>
