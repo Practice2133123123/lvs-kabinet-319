@@ -102,4 +102,9 @@ function deletePoint($pdo, $id) {
     $stmt = $pdo->prepare("DELETE FROM network_points WHERE id = ?");
     return $stmt->execute([$id]);
 }
+
+function getAllPointsForSelect($pdo) {
+    $stmt = $pdo->query("SELECT id, label FROM network_points ORDER BY label");
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
 ?>
