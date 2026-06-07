@@ -62,12 +62,6 @@ function deleteDefect($pdo, $id) {
     return $stmt->execute([$id]);
 }
 
-// Удалить дефект
-function deleteDefect($pdo, $id) {
-    $stmt = $pdo->prepare("DELETE FROM defects WHERE id = ?");
-    return $stmt->execute([$id]);
-}
-
 // Проверить, есть ли расходники у дефекта
 function hasMaterialUsage($pdo, $defect_id) {
     $stmt = $pdo->prepare("SELECT COUNT(*) FROM material_usage WHERE defect_id = ?");
