@@ -1,4 +1,5 @@
 </main>
-<script src="/assets/js/main.js"></script>
+<footer></footer>
+<script src="http://localhost/lvs/assets/js/main.js"></script>
 </body>
 </html>
