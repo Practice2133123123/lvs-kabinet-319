@@ -1,4 +1,4 @@
-<?php include '../views/layouts/header.php'; ?>
+<?php include __DIR__ . '/../../views/layouts/header.php'; ?>
 
     <div class="container mt-4">
         <h1 class="mb-4">Журнал расходов материалов</h1>
@@ -67,4 +67,4 @@
         <?php endif; ?>
     </div>
 <?php endif; ?>
-<?php include '../views/layouts/footer.php'; ?>
+<?php include __DIR__ . '/../../views/layouts/footer.php'; ?>

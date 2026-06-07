@@ -1,5 +1,5 @@
 <?php 
-include '../views/layouts/header.php'; 
+include __DIR__ . '/../../views/layouts/header.php'; 
 ?>
 
         <h1 class="mb-4">Сетевые точки</h1>
@@ -122,4 +122,4 @@ include '../views/layouts/header.php';
     </div>
 <?php endif; ?>
 
-<?php include '../views/layouts/footer.php'; ?>
+<?php include __DIR__ . '/../../views/layouts/footer.php'; ?>

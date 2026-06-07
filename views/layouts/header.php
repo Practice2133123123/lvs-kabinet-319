@@ -9,25 +9,25 @@
 <nav>
     <div class="nav-container">
         <div class="nav-brand">
-            <a href="http://lvs-kabinet-319/public/index.php"> ЛВС 319Б</a>
+            <a href="/public/index.php"> ЛВС 319Б</a>
         </div>
-        <div class="nav-links">
-            <a href="http://lvs-kabinet-319/public/index.php"> Дашборд</a>
-            <a href="http://lvs-kabinet-319/public/inventory.php"> Сетевые точки</a>
-            <a href="http://lvs-kabinet-319/public/defects.php">️ Дефекты</a>
-            <a href="http://lvs-kabinet-319/public/materials.php"> Материалы</a>
-            <a href="http://lvs-kabinet-319/public/report.php"> Экспорт отчета</a>
-            <a href="http://lvs-kabinet-319/public/logout.php"> Выйти</a>
+        <!-- <div class="nav-links">
+            <a href="/public/index.php"> Дашборд</a>
+            <a href="/public/inventoryinventory.php"> Сетевые точки</a>
+            <a href="/public/defects/defects.php">️ Дефекты</a>
+            <a href="/public/materials/materials.php"> Материалы</a>
+            <a href="/public/report/report.php"> Экспорт отчета</a>
+            <a href="/public/auth/logout.php"> Выйти</a> -->
 
-            <a href="http://localhost/lvs/public/index.php"> Дашборд</a>
-            <a href="http://localhost/lvs/public/inventory.php"> Сетевые точки</a>
-            <a href="http://localhost/lvs/public/defects.php">️ Дефекты</a>
-            <a href="http://localhost/lvs/public/materials.php"> Материалы</a>
+            <a href="/public/index.php"> Дашборд</a>
+            <a href="/public/inventory/inventory.php"> Сетевые точки</a>
+            <a href="/public/defects/defects.php">️ Дефекты</a>
+            <a href="/public/materials/materials.php"> Материалы</a>
             <?php if (function_exists('isAdmin') && isAdmin()): ?>
-                <a href="http://localhost/lvs/public/users.php"> Пользователи</a>
-                <a href="http://localhost/lvs/public/logs.php"> Логи</a>
+                <a href="/public/users/users.php"> Пользователи</a>
+                <a href="/public/logs/logs.php"> Логи</a>
             <?php endif; ?>
-            <a href="http://localhost/lvs/public/logout.php"> Выйти</a>
+            <a href="/public/auth/logout.php"> Выйти</a>
         </div>
     </div>
 </nav>
