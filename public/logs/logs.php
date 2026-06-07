@@ -11,4 +11,3 @@ if (!isAdmin()) {
 
 require_once '../../controllers/logs/logs_controller.php';
 include '../../views/logs/index.php';
-?>
