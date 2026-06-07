@@ -1,4 +1,4 @@
-<?php include '../views/layouts/header.php'; ?>
+<?php include __DIR__ . '/../layouts/header.php'; ?>
 
 <div class="container mt-4" style="max-width: 600px;">
     <h2>Редактирование дефекта #<?= htmlspecialchars($defect['id']) ?></h2>
@@ -58,4 +58,4 @@
     </form>
 </div>
 
-<?php include '../views/layouts/footer.php'; ?>
+<?php include __DIR__ . '/../layouts/footer.php'; ?>

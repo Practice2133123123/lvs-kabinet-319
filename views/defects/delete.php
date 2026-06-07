@@ -1,4 +1,4 @@
-<?php include '../views/layouts/header.php'; ?>
+<?php include __DIR__ . '/../layouts/header.php'; ?>
 
 <div class="container mt-4" style="max-width: 600px;">
     <h2>Удаление дефекта</h2>
@@ -24,4 +24,4 @@
     <?php endif; ?>
 </div>
 
-<?php include '../views/layouts/footer.php'; ?>
+<?php include __DIR__ . '/../layouts/footer.php'; ?>
