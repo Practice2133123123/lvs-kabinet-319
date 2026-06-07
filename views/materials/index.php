@@ -23,6 +23,7 @@
                         <th>Кто использовал</th>
                         <th>Дата</th>
                         <th>Комментарий</th>
+                        <th>Действия</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -36,6 +37,10 @@
                             <td><?= htmlspecialchars($item['user_name'] ?? '—') ?></td>
                             <td><?= htmlspecialchars($item['used_at']) ?></td>
                             <td><?= htmlspecialchars($item['comment'] ?? '—') ?></td>
+                            <td>
+                                <a href="material_edit.php?id=<?= $item['id'] ?>">✏️ Ред.</a>
+                                <a href="material_delete.php?id=<?= $item['id'] ?>" onclick="return confirm('Удалить запись о расходе?')">🗑 Удалить</a>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                     </tbody>
