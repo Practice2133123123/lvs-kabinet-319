@@ -1,4 +1,4 @@
-<?php include '../views/layouts/header.php'; ?>
+<?php include __DIR__ . '/../layouts/header.php'; ?>
 
     <h2>Добавить расход материала</h2>
 
@@ -37,6 +37,16 @@
         </div>
 
         <div class="form-group">
+            <label>Привязка к дефекту</label>
+            <select name="defect_id">
+                <option value="">— Не выбрано —</option>
+                <?php foreach ($defects as $d): ?>
+                    <option value="<?= $d['id'] ?>"><?= htmlspecialchars($d['description']) ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+
+        <div class="form-group">
             <label>Комментарий</label>
             <textarea name="comment" rows="3"></textarea>
         </div>
@@ -45,4 +55,4 @@
         <a href="materials.php">Отмена</a>
     </form>
 
-<?php include '../views/layouts/footer.php'; ?>
+<?php include __DIR__ . '/../layouts/footer.php'; ?>

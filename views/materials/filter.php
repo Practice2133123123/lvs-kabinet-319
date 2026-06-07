@@ -1,5 +1,5 @@
 <div class="filter-dropdown">
-    <button class="filter-btn" onclick="toggleFilter()">Фильтры</button>
+    <button class="filter-btn" onclick="toggleFilter()">🔽 Фильтры</button>
     <div id="filterMenu" class="filter-menu" style="display: none;">
         <form method="GET" action="">
             <div class="filter-group">
