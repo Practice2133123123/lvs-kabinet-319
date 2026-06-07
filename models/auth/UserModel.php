@@ -38,7 +38,7 @@ function deleteUser($pdo, $user_id) {
 }
 
 function getUserById($pdo, $user_id) {
-    $stmt = $pdo->prepare("SELECT id, login, role FROM users WHERE id = ?");
+    $stmt = $pdo->prepare("SELECT id, login, role, created_at FROM users WHERE id = ?");
     $stmt->execute([$user_id]);
     return $stmt->fetch();
 }

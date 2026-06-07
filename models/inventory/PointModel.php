@@ -10,9 +10,7 @@ function getPointById($pdo, $id) {
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
-// function createPoint($pdo, $data) {
-function createPoint($pdo, $data)
-{
+function createPoint($pdo, $data) {
     $sql = "INSERT INTO network_points (label, type, location, status, last_check) 
             VALUES (:label, :type, :location, :status, :last_check)";
     $stmt = $pdo->prepare($sql);
@@ -33,7 +31,6 @@ function updatePoint($pdo, $id, $data) {
             location = :location, 
             status = :status, 
             last_check = :last_check
-        SET label = :label, type = :type, location = :location, status = :status 
         WHERE id = :id
     ");
     return $stmt->execute([
@@ -46,21 +43,16 @@ function updatePoint($pdo, $id, $data) {
     ]);
 }
 
-// Проверить, есть ли у точки связанные дефекты
 function hasDefects($pdo, $point_id) {
     $stmt = $pdo->prepare("SELECT COUNT(*) FROM defects WHERE point_id = ?");
     $stmt->execute([$point_id]);
     return $stmt->fetchColumn() > 0;
 }
 
-// Удалить точку
 function deletePoint($pdo, $point_id) {
     $stmt = $pdo->prepare("DELETE FROM network_points WHERE id = ?");
     return $stmt->execute([$point_id]);
 }
-        // ':status' => $data['status']
-    
-// }
 
 function getPointStatusCounts($pdo) {
     $stmt = $pdo->query("
@@ -68,11 +60,16 @@ function getPointStatusCounts($pdo) {
         FROM network_points 
         GROUP BY status
     ");
-    return $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $counts = [];
+    foreach ($result as $row) {
+        $counts[$row['status']] = $row['count'];
+    }
+    return $counts;
 }
 
 function filterPoints($pdo, $type = '', $status = '') {
-    $sql = "SELECT id, label, type, status FROM network_points WHERE 1=1";
+    $sql = "SELECT * FROM network_points WHERE 1=1";
     $params = [];
 
     if (!empty($type)) {
@@ -85,7 +82,7 @@ function filterPoints($pdo, $type = '', $status = '') {
         $params[':status'] = $status;
     }
 
-    $sql .= " ORDER BY id DESC";
+    $sql .= " ORDER BY label";
 
     $stmt = $pdo->prepare($sql);
     $stmt->execute($params);
@@ -98,8 +95,8 @@ function countAllPoints($pdo) {
 
 function getPointsWithPagination($pdo, $limit, $offset) {
     $stmt = $pdo->prepare("
-        SELECT id, label, type, status
-        FROM network_points 
+        SELECT * FROM network_points 
+        ORDER BY label
         LIMIT :limit OFFSET :offset
     ");
     $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
@@ -107,3 +104,4 @@ function getPointsWithPagination($pdo, $limit, $offset) {
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+?>

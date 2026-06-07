@@ -1,73 +1,104 @@
-<?php 
-include __DIR__ . '/../../views/layouts/header.php'; 
-?>
+<?php include __DIR__ . '/../../views/layouts/header.php'; ?>
 
-        <!-- Собщение об успешном обновлении для пользователя -->
 <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
-    <p style="color: green;">Точка успешно обновлена!</p>
+    <div style="background: #d4edda; color: #155724; padding: 10px; margin-bottom: 20px;">Точка успешно обновлена!</div>
 <?php endif; ?>
-    <h2>Сетевые точки</h2>
-<?php include 'summary.php'; ?>
-<?php include 'filter.php'; ?>
 
-        <!-- Таблица -->
+<?php if (isset($_GET['deleted']) && $_GET['deleted'] == 1): ?>
+    <div style="background: #d4edda; color: #155724; padding: 10px; margin-bottom: 20px;">Точка успешно удалена!</div>
+<?php endif; ?>
+
+    <h1>Сетевые точки</h1>
+
+    <p><a href="point_add.php">+ Добавить точку</a></p>
+
+<?php include __DIR__ . '/summary.php'; ?>
+
+    <div style="margin-bottom: 20px;">
+        <button onclick="toggleFilters()" style="padding: 8px 16px; cursor: pointer;">Фильтры</button>
+    </div>
+
+    <div id="filterPanel" style="display: none; margin-bottom: 20px; padding: 20px; border: 1px solid #ddd; background: #f9f9f9; border-radius: 8px;">
+        <form method="GET">
+            <div style="margin-bottom: 15px;">
+                <label style="display: inline-block; width: 100px;">Тип точки:</label>
+                <select name="type" style="padding: 6px 12px; width: 200px;">
+                    <option value="">Все</option>
+                    <option value="розетка" <?= isset($_GET['type']) && $_GET['type'] == 'розетка' ? 'selected' : '' ?>>Розетка</option>
+                    <option value="коммутатор" <?= isset($_GET['type']) && $_GET['type'] == 'коммутатор' ? 'selected' : '' ?>>Коммутатор</option>
+                    <option value="кабель" <?= isset($_GET['type']) && $_GET['type'] == 'кабель' ? 'selected' : '' ?>>Кабель</option>
+                    <option value="патч-корд" <?= isset($_GET['type']) && $_GET['type'] == 'патч-корд' ? 'selected' : '' ?>>Патч-корд</option>
+                </select>
+            </div>
+            <div style="margin-bottom: 15px;">
+                <label style="display: inline-block; width: 100px;">Статус:</label>
+                <select name="status" style="padding: 6px 12px; width: 200px;">
+                    <option value="">Все</option>
+                    <option value="активна" <?= isset($_GET['status']) && $_GET['status'] == 'активна' ? 'selected' : '' ?>>Активна</option>
+                    <option value="дефект" <?= isset($_GET['status']) && $_GET['status'] == 'дефект' ? 'selected' : '' ?>>Дефект</option>
+                    <option value="списана" <?= isset($_GET['status']) && $_GET['status'] == 'списана' ? 'selected' : '' ?>>Списана</option>
+                </select>
+            </div>
+            <div>
+                <button type="submit" style="padding: 6px 16px; cursor: pointer;">Применить</button>
+                <a href="inventory.php" style="margin-left: 10px;">Сбросить</a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function toggleFilters() {
+            var panel = document.getElementById('filterPanel');
+            if (panel.style.display === 'none') {
+                panel.style.display = 'block';
+            } else {
+                panel.style.display = 'none';
+            }
+        }
+    </script>
 
 <?php if (empty($points)): ?>
-    <div class="alert alert-info">Нет точек. <a href="point_add.php">Добавить →</a></div>
+    <p>Нет точек.</p>
 <?php else: ?>
-    <table>
-        <thead>
-        <tr>
+    <table border="1" cellpadding="10" width="100%" style="border-collapse: collapse;">
+        <tr style="background: #f0f0f0;">
             <th>Метка</th>
             <th>Тип</th>
             <th>Расположение</th>
             <th>Статус</th>
             <th>Действия</th>
         </tr>
-        </thead>
-        <tbody>
         <?php foreach ($points as $point): ?>
             <tr>
-                <td><strong><?= htmlspecialchars($point['label']) ?></strong></td>
+                <td><?= htmlspecialchars($point['label']) ?></td>
                 <td><?= htmlspecialchars($point['type']) ?></td>
-                <td><small><?= htmlspecialchars($point['location'] ?? '—') ?></small></td>
+                <td><?= htmlspecialchars($point['location'] ?? '—') ?></td>
+                <td><?= htmlspecialchars($point['status']) ?></td>
                 <td>
-                    <?php 
-                        $status = htmlspecialchars($point['status']);
-                        $statusClass = strtolower($status);
-                    ?>
-                    <span class="status-badge status-<?= $statusClass ?>"><?= $status ?></span>
-                </td>
-                <td>
-                    <a href="point_edit.php?id=<?= $point['id'] ?>" class="btn btn-secondary" style="padding: 5px 10px; font-size: 12px;">Ред.</a>
-                    <a href="point_delete.php?id=<?= $point['id'] ?>" class="btn btn-danger" style="padding: 5px 10px; font-size: 12px;" onclick="return confirm('Вы уверены?')">Удал.</a>
+                    <a href="point_edit.php?id=<?= $point['id'] ?>">Ред.</a> |
+                    <a href="point_delete.php?id=<?= $point['id'] ?>" onclick="return confirm('Удалить точку?')">Удал.</a>
                 </td>
             </tr>
         <?php endforeach; ?>
-        </tbody>
     </table>
 <?php endif; ?>
 
-    <!-- Пагинация -->
 <?php if ($totalPages > 1): ?>
-    <div class="pagination">
+    <div style="margin-top: 20px; text-align: center;">
         <?php if ($currentPage > 1): ?>
-            <a href="?page=<?= $currentPage - 1 ?>">Назад</a>
+            <a href="?page=<?= $currentPage - 1 ?>">← Назад</a>
         <?php endif; ?>
-
         <?php for ($i = 1; $i <= $totalPages; $i++): ?>
             <?php if ($i == $currentPage): ?>
-                <span class="active"><?= $i ?></span>
+                <strong style="margin: 0 5px;"><?= $i ?></strong>
             <?php else: ?>
-                <a href="?page=<?= $i ?>"><?= $i ?></a>
+                <a href="?page=<?= $i ?>" style="margin: 0 5px;"><?= $i ?></a>
             <?php endif; ?>
         <?php endfor; ?>
-
         <?php if ($currentPage < $totalPages): ?>
-            <a href="?page=<?= $currentPage + 1 ?>">Вперёд</a>
+            <a href="?page=<?= $currentPage + 1 ?>">Вперёд →</a>
         <?php endif; ?>
     </div>
 <?php endif; ?>
-
 
 <?php include __DIR__ . '/../../views/layouts/footer.php'; ?>

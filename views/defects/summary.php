@@ -1,16 +1,14 @@
-<div class="summary-card" style="margin-bottom: 20px;">
-    <table border="1" cellpadding="8" style="width:100%; border-collapse: collapse; background: #f8f9fa;">
-        <thead style="background: #e9ecef;">
-        <tr>
-            <th colspan="3">Сводка по дефектам</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td style="text-align: center;"><strong>Oткрыто</strong><br><?= $totalOpen ?></td>
-            <td style="text-align: center;"><strong>В работе</strong><br><?= $totalInProgress ?></td>
-            <td style="text-align: center;"><strong>Закрыто</strong><br><?= $totalClosed ?></td>
-        </tr>
-        </tbody>
-    </table>
+<div style="display: flex; gap: 20px; margin-bottom: 20px;">
+    <div style="flex: 1; background: #d4edda; padding: 15px; text-align: center; border-radius: 8px;">
+        <strong>Открыто</strong><br>
+        <span style="font-size: 24px;"><?= $totalOpen ?? 0 ?></span>
+    </div>
+    <div style="flex: 1; background: #fff3cd; padding: 15px; text-align: center; border-radius: 8px;">
+        <strong>В работе</strong><br>
+        <span style="font-size: 24px;"><?= $totalInProgress ?? 0 ?></span>
+    </div>
+    <div style="flex: 1; background: #f8d7da; padding: 15px; text-align: center; border-radius: 8px;">
+        <strong>Закрыто</strong><br>
+        <span style="font-size: 24px;"><?= $totalClosed ?? 0 ?></span>
+    </div>
 </div>
