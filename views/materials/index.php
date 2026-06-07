@@ -1,20 +1,15 @@
-<?php include '../views/layouts/header.php'; ?>
+<?php include '../../views/layouts/header.php'; ?>
 
     <div class="container mt-4">
         <h1 class="mb-4">Журнал расходов материалов</h1>
 
-        <!-- Сводная карточка (теперь сверху) -->
         <?php include __DIR__ . '/summary.php'; ?>
 
-        <!-- Фильтр (под сводкой) -->
         <?php include __DIR__ . '/filter.php'; ?>
 
         <!-- Таблица -->
         <div class="table-responsive">
-
-            <?php if (empty($pagination['items'])): ?>
-
-
+            <?php if (empty($items)): ?>
                 <p>Нет данных</p>
             <?php else: ?>
                 <table border="1" cellpadding="8" style="width:100%; border-collapse: collapse;">
@@ -31,9 +26,7 @@
                     </tr>
                     </thead>
                     <tbody>
-
-                    <?php foreach ($pagination['items'] as $item): ?>
-
+                    <?php foreach ($items as $item): ?>
                         <tr>
                             <td><?= htmlspecialchars($item['id']) ?></td>
                             <td><?= htmlspecialchars($item['material_name']) ?></td>
@@ -54,32 +47,24 @@
             <a href="materials_add.php" class="btn btn-primary">➕ Добавить расход</a>
         </div>
     </div>
+    <!-- Пагинация -->
+<?php if ($totalPages > 1): ?>
+    <div style="margin-top: 20px; text-align: center;">
+        <?php if ($currentPage > 1): ?>
+            <a href="?page=<?= $currentPage - 1 ?>&date_from=<?= htmlspecialchars($date_from) ?>&date_to=<?= htmlspecialchars($date_to) ?>&material_id=<?= htmlspecialchars($material_id) ?>">◀ Назад</a>
+        <?php endif; ?>
 
-    <div style="margin-top: 20px;">
-<?php
-$materials = $pagination['items'];
-$total_pages = $pagination['total_pages'];
-$current_page = $pagination['current_page'];
-if ($current_page > 1) {
-    $prev = $current_page - 1;
-    echo "<a href='?page=$prev' style='margin-right: 10px;'>&laquo; Назад</a>";
-}
+        <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+            <?php if ($i == $currentPage): ?>
+                <strong style="margin: 0 5px; color: red;"><?= $i ?></strong>
+            <?php else: ?>
+                <a href="?page=<?= $i ?>&date_from=<?= htmlspecialchars($date_from) ?>&date_to=<?= htmlspecialchars($date_to) ?>&material_id=<?= htmlspecialchars($material_id) ?>" style="margin: 0 5px;"><?= $i ?></a>
+            <?php endif; ?>
+        <?php endfor; ?>
 
-for ($i = 1; $i <= $total_pages; $i++) {
-    
-    if ($i == $current_page) {
-        echo "<strong style='margin-right: 10px; color: red;'>$i</strong>";
-    } else {
-        echo "<a href='?page=$i' style='margin-right: 10px;'>$i</a>";
-    }
-}
-
-if ($current_page < $total_pages) {
-    $next = $current_page + 1;
-    echo "<a href='?page=$next'>Вперед &raquo;</a>";
-}
-?>
-</div>
-
-<?php include '../views/layouts/footer.php'; ?>
-
+        <?php if ($currentPage < $totalPages): ?>
+            <a href="?page=<?= $currentPage + 1 ?>&date_from=<?= htmlspecialchars($date_from) ?>&date_to=<?= htmlspecialchars($date_to) ?>&material_id=<?= htmlspecialchars($material_id) ?>">Вперёд ▶</a>
+        <?php endif; ?>
+    </div>
+<?php endif; ?>
+<?php include '../../views/layouts/footer.php'; ?>
