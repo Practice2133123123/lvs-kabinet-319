@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <title>ЛВС 319Б</title>
     <link rel="stylesheet" href="/assets/main.css">
+        <link rel="stylesheet" href="/assets/print.css" media="print">
+
 </head>
 <body>
 
-<nav>
+<nav class="no-print">
     <a href="/public/dashboard/index.php">Дашборд</a>
     <a href="/public/inventory/inventory.php">Сетевые точки</a>
     <a href="/public/defects/defects.php">Дефекты</a>

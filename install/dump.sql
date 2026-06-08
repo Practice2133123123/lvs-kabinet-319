@@ -9,6 +9,7 @@ CREATE TABLE `users` (
     `login` varchar(50) NOT NULL UNIQUE,
     `password_hash` varchar(255) NOT NULL,
     `role` enum('admin','operator') DEFAULT 'operator',
+    `created_at` timestamp default CURRENT_TIMESTAMP, 
     PRIMARY KEY (`id`)
 );
 

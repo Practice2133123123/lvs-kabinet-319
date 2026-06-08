@@ -1,12 +1,14 @@
 <?php include __DIR__ . '/../layouts/header.php'; ?>
-
+        <div class="no-print">
     <h1>Отчёты по расходу материалов</h1>
+        </div>
 
     <div style="margin-bottom: 20px;">
         <button onclick="toggleFilters()" style="padding: 8px 16px; cursor: pointer;">Фильтры</button>
     </div>
 
     <div id="filterPanel" style="display: none; margin-bottom: 20px; padding: 20px; border: 1px solid #ddd; background: #f9f9f9; border-radius: 8px;">
+        
         <form method="GET">
             <div style="margin-bottom: 15px;">
                 <label style="display: inline-block; width: 120px;">Дата с:</label>
@@ -136,5 +138,4 @@
         <?php endif; ?>
     </div>
 <?php endif; ?>
-
 <?php include __DIR__ . '/../layouts/footer.php'; ?>
