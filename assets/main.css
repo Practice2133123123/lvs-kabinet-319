@@ -9,8 +9,8 @@
     --primary: #020250;
     --secondary: #020250;
     --success: #ffffff;
-    --warning: #f39c12;
-    --danger: #e74c3c;
+    --warning: #020250;
+    --danger: #020250;
     --text: #000000;
     --text-light: #7f8c8d;
 }
@@ -470,4 +470,75 @@ p[style*="text-align: center"] {
     margin: 15px 0 0;
     letter-spacing: 1px;
     font-size: 1.1rem;
+}
+
+table {
+    border: 2px solid #020250;
+}
+
+table th,
+table td {
+    border: 2px solid #020250;
+    border-bottom: 2px solid #020250;
+}
+
+
+table th {
+    border-bottom: 2px solid #020250;
+}
+table td:last-child {
+    white-space: nowrap;
+}
+
+table td:last-child a,
+table td:last-child button {
+    display: inline-block;
+    padding: 4px 12px;
+    margin: 0 4px;
+    font-size: 12px;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+table td:last-child a:first-child,
+.btn-edit {
+    background-color: #020250;
+    color: white;
+    border: none;
+}
+
+table td:last-child a:first-child:hover,
+.btn-edit:hover {
+    background-color: #020250;
+    transform: translateY(-1px);
+}
+
+table td:last-child a:last-child,
+.btn-delete {
+    background-color: #020250;
+    color: white;
+    border: none;
+}
+
+table td:last-child a:last-child:hover,
+.btn-delete:hover {
+    background-color: #020250;
+    transform: translateY(-1px);
+}
+
+table td:last-child {
+    letter-spacing: normal;
+}
+table td:last-child a:not(:first-child) {
+    margin-left: 0;
+}
+
+table td:last-child {
+    font-size: 0;
+}
+table td:last-child a {
+    font-size: 12px;
 }

@@ -15,7 +15,7 @@
     </div>
 </div>
 <br><br><div class="card mb-3">
-    <img src="..." class="card-img-top" alt="...">
+    <img src="/assets/src/plan.png" class="card-img-top" alt="...">
     <div class="card-body">
 
     </div>
