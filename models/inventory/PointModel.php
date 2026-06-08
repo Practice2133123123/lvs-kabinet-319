@@ -93,6 +93,7 @@ function countAllPoints($pdo) {
     return $pdo->query("SELECT COUNT(*) FROM network_points")->fetchColumn();
 }
 
+
 function getPointsWithPagination($pdo, $limit, $offset) {
     $stmt = $pdo->prepare("
         SELECT * FROM network_points 
