@@ -1,16 +1,14 @@
-<div class="summary-card" style="margin-bottom: 20px;">
-    <table border="1" cellpadding="8" style="width:100%; border-collapse: collapse; background: #f8f9fa;">
-        <thead style="background: #e9ecef;">
-        <tr>
-            <th colspan="3">Сводка расхода материалов</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td style="text-align: center;"><strong> Кабель (м)</strong><br><?= number_format($total_cable, 2) ?></td>
-            <td style="text-align: center;"><strong> Коннекторы (шт)</strong><br><?= number_format($total_connectors) ?></td>
-            <td style="text-align: center;"><strong> Розетки (шт)</strong><br><?= number_format($total_sockets) ?></td>
-        </tr>
-        </tbody>
-    </table>
+<div style="display: flex; gap: 20px; margin-bottom: 20px;">
+    <div style="flex: 1; background: #d4edda; padding: 15px; text-align: center; border-radius: 8px;">
+        <strong>Кабель</strong><br>
+        <span style="font-size: 24px;"><?= number_format($total_cable, 2) ?> м</span>
+    </div>
+    <div style="flex: 1; background: #fff3cd; padding: 15px; text-align: center; border-radius: 8px;">
+        <strong>Коннекторы</strong><br>
+        <span style="font-size: 24px;"><?= number_format($total_connectors) ?> шт</span>
+    </div>
+    <div style="flex: 1; background: #f8d7da; padding: 15px; text-align: center; border-radius: 8px;">
+        <strong>Розетки</strong><br>
+        <span style="font-size: 24px;"><?= number_format($total_sockets) ?> шт</span>
+    </div>
 </div>

@@ -23,8 +23,19 @@
             </div>
             <div class="filter-group">
                 <button type="submit">Применить</button>
-                <a href="/public/inventory.php">Сбросить</a>
+                <a href="inventory.php">Сбросить</a>
             </div>
         </form>
     </div>
 </div>
+
+<script>
+    function toggleFilter() {
+        var menu = document.getElementById('filterMenu');
+        if (menu.style.display === 'none') {
+            menu.style.display = 'block';
+        } else {
+            menu.style.display = 'none';
+        }
+    }
+</script>
