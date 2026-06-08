@@ -58,8 +58,10 @@
                             <td><?= htmlspecialchars($point['location'] ?? '—') ?></td>
                             <td><?= htmlspecialchars($point['status']) ?></td>
                             <td>
-                                <a href="point_edit.php?id=<?= $point['id'] ?>">️ Ред.</a>
-                                <a href="point_delete.php?id=<?= $point['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Удалить точку?')">🗑Удалить</a>
+                                <a href="point_edit.php?id=<?= $point['id'] ?>">️ Редактировать
+                                    
+                                </a>
+                                <a href="point_delete.php?id=<?= $point['id'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('Удалить точку?')">Удалить</a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

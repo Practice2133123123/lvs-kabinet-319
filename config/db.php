@@ -1,8 +1,9 @@
 <?php
+define('ROOT_PATH', realpath(__DIR__ . '/..'));
 $host = 'localhost';
 $dbname = 'lvs_kabinet_319b';
 $user = 'root';
-$pass = '1234';
+$pass = '';
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $user, $pass, [
