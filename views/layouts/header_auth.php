@@ -12,7 +12,7 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background: #f0f2f5;
+            background: #ecece5;
         }
         main {
             width: 100%;

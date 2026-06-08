@@ -14,3 +14,9 @@
         <div style="margin-top: 10px;">Кабель (м)</div>
     </div>
 </div>
+<br><br><div class="card mb-3">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+
+    </div>
+</div>

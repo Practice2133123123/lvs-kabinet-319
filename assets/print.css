@@ -20,27 +20,27 @@
     .no-print * {
         display: none !important;
     }
-    
+
     /* Показываем таблицу */
     table {
         display: block;
         width: 100%;
         border-collapse: collapse;
     }
-    
+
     /* Стили для таблицы при печати */
     th, td {
         border: 1px solid #000;
         padding: 8px;
         text-align: left;
     }
-    
+
     /* Убираем отступы */
     body {
         margin: 0;
         padding: 0;
     }
-    
+
     .container {
         margin: 0;
         padding: 0;

@@ -1,4 +1,3 @@
-/* Minimal Professional UI */
 
 * {
     margin: 0;
@@ -7,27 +6,27 @@
 }
 
 :root {
-    --primary: #2c3e50;
-    --secondary: #3498db;
-    --success: #27ae60;
+    --primary: #020250;
+    --secondary: #020250;
+    --success: #ffffff;
     --warning: #f39c12;
     --danger: #e74c3c;
-    --text: #2c3e50;
+    --text: #000000;
     --text-light: #7f8c8d;
 }
 
 html, body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Georgia', Georgia, sans-serif;
     color: var(--text);
-    background-color: #f5f5f5;
-    font-size: 14px;
+    background-color: #ecece5;
+    font-size: 18px;
     line-height: 1.6;
 }
 
 /* Navigation */
 nav {
     background-color: var(--primary);
-    color: white;
+    color: #ecece5;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: sticky;
     top: 0;
@@ -99,14 +98,14 @@ h2 {
 table {
     width: 100%;
     border-collapse: collapse;
-    background-color: white;
+    background-color: #ffffff;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
 }
 
 table th {
     background-color: var(--primary);
-    color: white;
+    color: #ecece5;
     padding: 12px;
     text-align: left;
     font-weight: 600;
@@ -167,7 +166,7 @@ textarea:focus,
 select:focus {
     outline: none;
     border-color: var(--secondary);
-    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+    box-shadow: 0 0 0 3px rgb(2, 2, 80);
 }
 
 textarea {
@@ -415,4 +414,60 @@ small {
     form {
         max-width: 100%;
     }
+}
+.nav {
+    background-color: var(--primary);
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+
+.justify-content-center {
+    justify-content: center !important;
+}
+
+.nav-item {
+
+}
+
+.nav-link {
+    display: block;
+    padding: 0.75rem 1.25rem;
+    color: #ecece5;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    text-decoration: none;
+}
+
+.nav-link.active {
+    background-color: var(--secondary);
+    color: white;
+    position: relative;
+}
+
+@media (max-width: 768px) {
+    .nav {
+        flex-direction: column;
+    }
+    .nav-link {
+        text-align: center;
+    }
+}
+
+p[style*="text-align: center"] {
+    font-family: 'Mandatory Variable 2', 'Mandatory Variable 2', serif;
+    font-weight: 340;
+    color: var(--primary);
+    margin: 15px 0 0;
+    letter-spacing: 1px;
+    font-size: 1.1rem;
 }
