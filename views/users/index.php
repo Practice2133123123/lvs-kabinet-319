@@ -56,7 +56,6 @@
         </div>
 
         <div style="margin-top: 20px;">
-            <a href="register.php">+ Добавить пользователя</a>
         </div>
     </div>
 
