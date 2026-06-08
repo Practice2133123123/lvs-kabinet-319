@@ -1,19 +1,13 @@
 <?php
-<<<<<<< HEAD:controllers/material_add_controller.php
-require_once __DIR__ . '/../models/MaterialModel.php';
-require_once __DIR__ . '/../models/PointModel.php'; // Для getAllPointsForSelect()
-require_once __DIR__ . '/../models/LogModel.php';
-=======
 require_once __DIR__ . '/../../config/db.php';
 require_once __DIR__ . '/../../models/materials/MaterialModel.php';
 require_once __DIR__ . '/../../includes/helpers.php';
->>>>>>> a28f4b63bf104c8e4efbd284294f809a526dc7f0:controllers/materials/material_add_controller.php
 
 $error = '';
 $success = '';
 
 $materials = getMaterialsList($pdo);
-$points = getAllPointsForSelect($pdo);
+$points = getPointsList($pdo);
 $defects = getDefectsList($pdo);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -34,8 +28,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ];
 
         if (addMaterialUsage($pdo, $data)) {
-            $usage_id = $pdo->lastInsertId();
-            addLog($pdo, $_SESSION['user_id'], 'CREATE', 'material_usage', $usage_id);
             $success = 'Расход успешно добавлен!';
             $_POST = [];
         } else {

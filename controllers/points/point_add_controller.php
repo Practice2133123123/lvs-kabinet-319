@@ -1,14 +1,8 @@
 <?php
-<<<<<<< HEAD:controllers/point_add_controller.php
-require_once __DIR__ . '/../models/PointModel.php';
-require_once __DIR__ . '/../models/LogModel.php';
-=======
 require_once __DIR__ . '/../../models/inventory/PointModel.php';
 require_once __DIR__ . '/../../includes/helpers.php';
->>>>>>> a28f4b63bf104c8e4efbd284294f809a526dc7f0:controllers/points/point_add_controller.php
 
 $errors = [];
-$data = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = [
@@ -19,13 +13,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'last_check' => getPostParam('last_check'),
         'created_by' => $_SESSION['user_id'] ?? 1
     ];
-
-    // Валидация метки
-    if (empty($data['label'])) {
-        $errors[] = "Метка обязательна для заполнения.";
-    } elseif (isLabelExists($pdo, $data['label'])) {
-        $errors[] = "Точка с меткой '{$data['label']}' уже существует. Используйте другую метку.";
-    }
 
     $allowedTypes = ['socket', 'switch', 'cable_run', 'patch_cord'];
     if (!in_array($data['type'], $allowedTypes)) {
@@ -39,30 +26,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($errors)) {
         try {
-<<<<<<< HEAD:controllers/point_add_controller.php
-            $result = createPoint($pdo, $data, $_SESSION['user_id']);
-            if ($result) {
-                addLog($pdo, $_SESSION['user_id'], 'CREATE', 'network_points', $pdo->lastInsertId());
-                header("Location: inventory.php?created=1");
-=======
-            if (addPoint($pdo, $data)) {
+            if (createPoint($pdo, $data)) {
                 header("Location: ../inventory/inventory.php");
->>>>>>> a28f4b63bf104c8e4efbd284294f809a526dc7f0:controllers/points/point_add_controller.php
                 exit;
             } else {
-                $errors[] = "Точка с такой меткой уже существует или ошибка при сохранении.";
+                $errors[] = "Ошибка при сохранении в базу данных.";
             }
         } catch (PDOException $e) {
-            if ($e->getCode() == 23000 && strpos($e->getMessage(), 'Duplicate entry') !== false) {
-                $errors[] = "Точка с меткой '{$data['label']}' уже существует. Используйте другую метку.";
-            } else {
-                $errors[] = "Ошибка базы данных: " . $e->getMessage();
-            }
+            $errors[] = "Ошибка базы данных: " . $e->getMessage();
         }
     }
 }
-<<<<<<< HEAD:controllers/point_add_controller.php
 ?>
-=======
-?>
->>>>>>> a28f4b63bf104c8e4efbd284294f809a526dc7f0:controllers/points/point_add_controller.php

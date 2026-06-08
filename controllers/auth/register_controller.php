@@ -30,9 +30,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
-<<<<<<< HEAD:public/register.php
-
-include __DIR__ . '/../views/auth/register.php';
-=======
->>>>>>> a28f4b63bf104c8e4efbd284294f809a526dc7f0:controllers/auth/register_controller.php
 ?>

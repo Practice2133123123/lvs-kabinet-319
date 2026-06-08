@@ -1,7 +1,7 @@
 <?php
-require_once __DIR__ . '/../models/DefectModel.php';
-require_once __DIR__ . '/../models/PointModel.php'; // Для getAllPointsForSelect()
-require_once __DIR__ . '/../models/LogModel.php';
+require_once __DIR__ . '/../../models/defects/DefectModel.php';
+require_once __DIR__ . '/../../models/inventory/PointModel.php'; // Для getAllPointsForSelect()
+require_once __DIR__ . '/../../models/logs/LogModel.php';
 
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 $defect = getDefectById($pdo, $id);
@@ -39,4 +39,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
-?>

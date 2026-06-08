@@ -1,11 +1,11 @@
-<?php include '../views/layouts/header.php'; ?>
+<?php include __DIR__ . '/../../views/layouts/header.php'; ?>
 
 <div class="container mt-4" style="max-width: 600px;">
     <h2>Удаление дефекта</h2>
     
-    <?php if ($error): ?>
+    <?php if (!empty($error)): ?>
         <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
-        <a href="defects.php" class="btn btn-secondary">Назад к списку</a>
+        <a href="../defects/defects.php" class="btn btn-secondary">Назад к списку</a>
     <?php else: ?>
         <div class="card">
             <div class="card-body">
@@ -24,4 +24,4 @@
     <?php endif; ?>
 </div>
 
-<?php include '../views/layouts/footer.php'; ?>
+<?php include __DIR__ . '/../../views/layouts/footer.php'; ?>

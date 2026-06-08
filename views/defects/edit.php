@@ -1,13 +1,13 @@
-<?php include '../views/layouts/header.php'; ?>
+<?php include __DIR__ . '/../../views/layouts/header.php'; ?>
 
 <div class="container mt-4" style="max-width: 600px;">
     <h2>Редактирование дефекта #<?= htmlspecialchars($defect['id']) ?></h2>
     
-    <?php if ($error): ?>
+    <?php if (!empty($error)): ?>
         <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
     <?php endif; ?>
     
-    <?php if ($success): ?>
+    <?php if (!empty($success)): ?>
         <div class="alert alert-success"><?= htmlspecialchars($success) ?></div>
     <?php endif; ?>
     
@@ -58,4 +58,4 @@
     </form>
 </div>
 
-<?php include '../views/layouts/footer.php'; ?>
+<?php include __DIR__ . '/../../views/layouts/footer.php'; ?>

@@ -1,4 +1,5 @@
 <?php
+// Получить все расходы с JOIN (для общего списка или отчетов)
 function getAllMaterialsUsage($pdo) {
     $stmt = $pdo->query("
         SELECT 
@@ -25,6 +26,19 @@ function getAllMaterialsUsage($pdo) {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+
+
+function getAllMaterialPointsForSelect($pdo) {
+    $stmt = $pdo->query("SELECT id, label FROM network_points ORDER BY label");
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function getPointsList($pdo) {
+    $stmt = $pdo->query("SELECT id, label FROM network_points ORDER BY label");
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
+// Получить конкретную запись расхода для редактирования
 function getMaterialUsageById($pdo, $id) {
     $stmt = $pdo->prepare("
         SELECT mu.*, m.name as material_name, m.unit, u.login as user_name
@@ -37,6 +51,7 @@ function getMaterialUsageById($pdo, $id) {
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
 
+// Добавить расход
 function addMaterialUsage($pdo, $data) {
     $stmt = $pdo->prepare("
         INSERT INTO material_usage (material_id, quantity, point_id, defect_id, used_by, comment, used_at)
@@ -52,6 +67,7 @@ function addMaterialUsage($pdo, $data) {
     ]);
 }
 
+// Обновить расход
 function updateMaterialUsage($pdo, $id, $data) {
     $stmt = $pdo->prepare("
         UPDATE material_usage 
@@ -69,14 +85,23 @@ function updateMaterialUsage($pdo, $id, $data) {
     ]);
 }
 
+// Удалить расход
 function deleteMaterialUsage($pdo, $id) {
     $stmt = $pdo->prepare("DELETE FROM material_usage WHERE id = ?");
     return $stmt->execute([$id]);
 }
+
+// Вспомогательные списки для выпадающих меню
 function getMaterialsList($pdo) {
     $stmt = $pdo->query("SELECT id, name, unit FROM materials ORDER BY name");
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+
+function getAllUsersList($pdo) {
+    $stmt = $pdo->query("SELECT id, login FROM users ORDER BY login");
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
 function getDefectsList($pdo) {
     $stmt = $pdo->query("
         SELECT d.id, d.description, np.label as point_label
@@ -88,30 +113,8 @@ function getDefectsList($pdo) {
     ");
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-function getAllUsersList($pdo) {
-    $stmt = $pdo->query("SELECT id, login FROM users ORDER BY login");
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
-<<<<<<< HEAD:models/MaterialModel.php
-=======
 
-// Список точек для выпадающего списка
-function getPointsList($pdo) {
-    $stmt = $pdo->query("SELECT id, label FROM network_points ORDER BY label");
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
-
-// Список дефектов для выпадающего списка
-function getDefectsList($pdo) {
-    $stmt = $pdo->query("
-        SELECT id, description 
-        FROM defects 
-        WHERE status != 'closed'
-        ORDER BY id DESC
-        LIMIT 20
-    ");
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
+// Пагинация и фильтры (из develop)
 function getMaterialsUsageWithPagination($pdo, $limit, $offset, $date_from = '', $date_to = '', $material_id = '') {
     $sql = "SELECT 
                 material_usage.id,
@@ -180,4 +183,4 @@ function countAllMaterialsUsage($pdo, $date_from = '', $date_to = '', $material_
     $stmt->execute($params);
     return $stmt->fetchColumn();
 }
->>>>>>> a28f4b63bf104c8e4efbd284294f809a526dc7f0:models/materials/MaterialModel.php
+?>

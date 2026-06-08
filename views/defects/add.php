@@ -1,15 +1,15 @@
-<?php include '../views/layouts/header.php'; ?>
+<?php include __DIR__ . '/../../views/layouts/header.php'; ?>
 
 <div class="container mt-4" style="max-width: 600px;">
     <h2>Добавление дефекта</h2>
     
-    <?php if ($error): ?>
+    <?php if (!empty($error)): ?>
         <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
     <?php endif; ?>
     
-    <?php if ($success): ?>
+    <?php if (!empty($success)): ?>
         <div class="alert alert-success"><?= htmlspecialchars($success) ?></div>
-        <a href="defects.php" class="btn btn-primary">Вернуться к списку</a>
+        <a href="../defects/defects.php" class="btn btn-primary">Вернуться к списку</a>
     <?php else: ?>
         <form method="POST">
             <div class="mb-3">
@@ -52,9 +52,9 @@
             </div>
             
             <button type="submit" class="btn btn-primary">Сохранить</button>
-            <a href="defects.php" class="btn btn-secondary">Отмена</a>
+            <a href="../defects/defects.php" class="btn btn-secondary">Отмена</a>
         </form>
     <?php endif; ?>
 </div>
 
-<?php include '../views/layouts/footer.php'; ?>
+<?php include __DIR__ . '/../../views/layouts/footer.php'; ?>
