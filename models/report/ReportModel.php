@@ -98,12 +98,55 @@ function getDefectStatuses($pdo) {
     ];
 }
 
-function countAllReport($pdo) {
-    return $pdo->query("SELECT COUNT(*) FROM material_usage")->fetchColumn();
+function countAllReport($pdo, $filters) {
+    $sql = "SELECT COUNT(*)  FROM material_usage mu
+        LEFT JOIN materials m ON mu.material_id = m.id
+        LEFT JOIN network_points np ON mu.point_id = np.id
+        LEFT JOIN defects d ON mu.defect_id = d.id
+        LEFT JOIN users u ON mu.used_by = u.id WHERE 1=1";
+
+$params = [];
+    
+    if (!empty($filters['date_from'])) {
+        $sql .= " AND DATE(mu.used_at) >= :date_from";
+        $params[':date_from'] = $filters['date_from'];
+    }
+    
+    if (!empty($filters['date_to'])) {
+        $sql .= " AND DATE(mu.used_at) <= :date_to";
+        $params[':date_to'] = $filters['date_to'];
+    }
+    
+    if (!empty($filters['section'])) {
+        if ($filters['section'] == 'point') {
+            $sql .= " AND mu.point_id IS NOT NULL";
+        } elseif ($filters['section'] == 'defect') {
+            $sql .= " AND mu.defect_id IS NOT NULL";
+        }
+    }
+    
+    if (!empty($filters['type'])) {
+        $sql .= " AND m.type = :type";
+        $params[':type'] = $filters['type'];
+    }
+     
+    if (!empty($filters['point_status'])) {
+        $sql .= " AND np.status = :point_status";
+        $params[':point_status'] = $filters['point_status'];
+    }
+    
+    if (!empty($filters['defect_status'])) {
+        $sql .= " AND d.status = :defect_status";
+        $params[':defect_status'] = $filters['defect_status'];
+    }
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute($params);
+    return $stmt->fetchColumn();
 }
 
-function getReportWithPagination($pdo, $limit, $offset) {
-    $stmt = $pdo->prepare("
+function getReportWithPagination($pdo, $limit, $offset, $filters) {
+    $sql = "
         SELECT 
             mu.id,
             m.name as material_name,
@@ -128,10 +171,52 @@ function getReportWithPagination($pdo, $limit, $offset) {
         LEFT JOIN network_points np ON mu.point_id = np.id
         LEFT JOIN defects d ON mu.defect_id = d.id
         LEFT JOIN users u ON mu.used_by = u.id
-        LIMIT :limit OFFSET :offset
-    ");
-    $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
-    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        WHERE 1=1
+    ";
+
+    $params = [];
+    
+    if (!empty($filters['date_from'])) {
+        $sql .= " AND DATE(mu.used_at) >= :date_from";
+        $params[':date_from'] = $filters['date_from'];
+    }
+    
+    if (!empty($filters['date_to'])) {
+        $sql .= " AND DATE(mu.used_at) <= :date_to";
+        $params[':date_to'] = $filters['date_to'];
+    }
+    
+    if (!empty($filters['section'])) {
+        if ($filters['section'] == 'point') {
+            $sql .= " AND mu.point_id IS NOT NULL";
+        } elseif ($filters['section'] == 'defect') {
+            $sql .= " AND mu.defect_id IS NOT NULL";
+        }
+    }
+    
+    if (!empty($filters['type'])) {
+        $sql .= " AND m.type = :type";
+        $params[':type'] = $filters['type'];
+    }
+    
+    if (!empty($filters['point_status'])) {
+        $sql .= " AND np.status = :point_status";
+        $params[':point_status'] = $filters['point_status'];
+    }
+    
+    if (!empty($filters['defect_status'])) {
+        $sql .= " AND d.status = :defect_status";
+        $params[':defect_status'] = $filters['defect_status'];
+    }
+    
+    $sql .= " LIMIT :limit OFFSET :offset";
+    
+    $stmt = $pdo->prepare($sql);
+    foreach ($params as $key => $value) {
+        $stmt->bindValue($key, $value);
+    }
+    $stmt->bindValue(':limit', (int)$limit, PDO::PARAM_INT);
+    $stmt->bindValue(':offset', (int)$offset, PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }

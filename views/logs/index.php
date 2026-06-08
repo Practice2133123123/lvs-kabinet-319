@@ -77,19 +77,29 @@
 <?php if ($totalPages > 1): ?>
     <div style="margin-top: 20px; text-align: center;">
         <?php if ($currentPage > 1): ?>
-            <a href="?page=<?= $currentPage - 1 ?>&user_id=<?= htmlspecialchars($user_id ?? '') ?>&action=<?= htmlspecialchars($action ?? '') ?>&date_from=<?= htmlspecialchars($date_from ?? '') ?>&date_to=<?= htmlspecialchars($date_to ?? '') ?>">← Назад</a>
+            <?php 
+                $params = $_GET;
+                $params['page'] = $currentPage - 1;
+                $linkBack = "?" . http_build_query($params); ?>
+            <a href="<?= $linkBack ?>">← Назад</a>
         <?php endif; ?>
-
         <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                <?php 
+                $params = $_GET;
+                $params['page'] = $i;
+                $linkPage = "?" . http_build_query($params); ?>
             <?php if ($i == $currentPage): ?>
                 <strong style="margin: 0 5px;"><?= $i ?></strong>
             <?php else: ?>
-                <a href="?page=<?= $i ?>&user_id=<?= htmlspecialchars($user_id ?? '') ?>&action=<?= htmlspecialchars($action ?? '') ?>&date_from=<?= htmlspecialchars($date_from ?? '') ?>&date_to=<?= htmlspecialchars($date_to ?? '') ?>" style="margin: 0 5px;"><?= $i ?></a>
+                <a href="<?= $linkPage?>" style="margin: 0 5px;"><?= $i ?></a>
             <?php endif; ?>
         <?php endfor; ?>
-
         <?php if ($currentPage < $totalPages): ?>
-            <a href="?page=<?= $currentPage + 1 ?>&user_id=<?= htmlspecialchars($user_id ?? '') ?>&action=<?= htmlspecialchars($action ?? '') ?>&date_from=<?= htmlspecialchars($date_from ?? '') ?>&date_to=<?= htmlspecialchars($date_to ?? '') ?>">Вперёд →</a>
+                <?php 
+                $params = $_GET;
+                $params['page'] = $currentPage + 1;
+                $linkNext = "?" . http_build_query($params); ?>
+            <a href="<?= $linkNext ?>">Вперёд →</a>
         <?php endif; ?>
     </div>
 <?php endif; ?>
