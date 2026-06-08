@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($errors)) {
         try {
-            if (addPoint($pdo, $data)) {
+            if (createPoint($pdo, $data)) {
                 header("Location: ../inventory/inventory.php");
                 exit;
             } else {

@@ -4,6 +4,11 @@ function getAllPoints($pdo) {
     return $stmt->fetchAll();
 }
 
+function getAllPointsForSelect($pdo) {
+    $stmt = $pdo->query("SELECT id, label FROM network_points ORDER BY label");
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
 function getPointById($pdo, $id) {
     $stmt = $pdo->prepare("SELECT * FROM network_points WHERE id = :id");
     $stmt->execute([':id' => $id]);

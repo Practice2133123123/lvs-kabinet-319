@@ -1,4 +1,4 @@
-<?php include __DIR__ . '/../layouts/header.php'; ?>
+<?php include __DIR__ . '/../../views/layouts/header.php'; ?>
 
     <h2>Добавить расход материала</h2>
 
