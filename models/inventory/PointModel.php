@@ -89,19 +89,50 @@ function filterPoints($pdo, $type = '', $status = '') {
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-function countAllPoints($pdo) {
-    return $pdo->query("SELECT COUNT(*) FROM network_points")->fetchColumn();
+function countAllPoints($pdo, $status, $type) {
+    $sql = "SELECT COUNT(*) FROM network_points WHERE 1=1";
+        $params = [];
+
+    if (!empty($type)) {
+        $sql .= " AND type = :type";
+        $params[':type'] = $type;
+    }
+
+    if (!empty($status)) {
+        $sql .= " AND status = :status";
+        $params[':status'] = $status;
+    }
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute($params);
+    return (int)$stmt->fetchColumn();
 }
 
 
-function getPointsWithPagination($pdo, $limit, $offset) {
-    $stmt = $pdo->prepare("
-        SELECT * FROM network_points 
-        ORDER BY label
-        LIMIT :limit OFFSET :offset
-    ");
-    $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
-    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+function getPointsWithPagination($pdo, $limit, $offset, $type, $status) {
+    $sql = "
+        SELECT * FROM network_points WHERE 1=1
+    ";
+
+    $params = [];
+
+    if (!empty($type)) {
+        $sql .= " AND type = :type";
+        $params[':type'] = $type;
+    }
+
+    if (!empty($status)) {
+        $sql .= " AND status = :status";
+        $params[':status'] = $status;
+    }
+
+    $sql .= " LIMIT :limit OFFSET :offset";
+    $stmt = $pdo->prepare($sql);
+    foreach ($params as $key => $value) {
+        $stmt->bindValue($key, $value);
+    }
+    $stmt->bindValue(':limit', (int)$limit, PDO::PARAM_INT);
+    $stmt->bindValue(':offset', (int)$offset, PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }

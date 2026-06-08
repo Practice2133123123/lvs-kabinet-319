@@ -39,15 +39,15 @@ function filterMaterials($pdo, $date_from = '', $date_to = '', $material_id = ''
 }
 
 // Получить список материалов для выпадающего списка
-function getMaterialsList($pdo)
-{
-    $stmt = $pdo->query("SELECT id, name, type, unit FROM materials ORDER BY name");
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
+// function getMaterialsList($pdo)
+// {
+//     $stmt = $pdo->query("SELECT id, name, type, unit FROM materials ORDER BY name");
+//     return $stmt->fetchAll(PDO::FETCH_ASSOC);
+// }
 
 // Фильтр для отчетности всех таблиц
 
-function getFilteredData($pdo, $filters) {
+function getFilteredData($pdo, $date_from = '', $date_to = '', $material_id = '') {
     $sql = "
         SELECT 
             mu.id,
@@ -70,36 +70,21 @@ function getFilteredData($pdo, $filters) {
     $params = [];
     
     // Фильтр по дате с
-    if (!empty($filters['date_from'])) {
-        $sql .= " AND DATE(mu.used_at) >= :date_from";
-        $params[':date_from'] = $filters['date_from'];
+    if (!empty($date_from)) {
+        $sql .= " AND DATE(mu.used_at) >= :date_from ";
+        $params[':date_from'] = $date_from . "00:00:00";
     }
     
     // Фильтр по дате по
-    if (!empty($filters['date_to'])) {
-        $sql .= " AND DATE(mu.used_at) <= :date_to";
-        $params[':date_to'] = $filters['date_to'];
+    if (!empty($date_to)) {
+        $sql .= " AND DATE(mu.used_at) <= DATE(:date_to)";
+        $params[':date_to'] = $date_to . "23:59:59";
     }
     
     // Фильтр по типу материала
-    if (!empty($filters['material_type'])) {
-        $sql .= " AND m.type = :material_type";
-        $params[':material_type'] = $filters['material_type'];
-    }
-    
-    // Фильтр по статусу
-    if (!empty($filters['status'])) {
-        $sql .= " AND mu.status = :status";
-        $params[':status'] = $filters['status'];
-    }
-    
-    // Фильтр по разделу (точка или дефект)
-    if (!empty($filters['section'])) {
-        if ($filters['section'] == 'point') {
-            $sql .= " AND mu.point_id IS NOT NULL";
-        } elseif ($filters['section'] == 'defect') {
-            $sql .= " AND mu.defect_id IS NOT NULL";
-        }
+    if (!empty($material_id)) {
+        $sql .= " AND m.type = :material_id";
+        $params[':material_id'] = $material_id;
     }
     
     $sql .= " ORDER BY mu.used_at DESC";

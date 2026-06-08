@@ -1,13 +1,40 @@
 <?php
 // Получить все дефекты
-function getAllDefects($pdo) {
-    $stmt = $pdo->query("
-        SELECT d.*, np.label as point_label, u.login as created_by_name
-        FROM defects d
-        LEFT JOIN network_points np ON d.point_id = np.id
-        LEFT JOIN users u ON d.created_by = u.id
-        ORDER BY d.created_at DESC
-    ");
+// function getAllDefects($pdo) {
+//     $stmt = $pdo->query("
+//         SELECT d.*, np.label as point_label, u.login as created_by_name
+//         FROM defects d
+//         LEFT JOIN network_points np ON d.point_id = np.id
+//         LEFT JOIN users u ON d.created_by = u.id
+//         ORDER BY d.created_at DESC
+//     ");
+//     return $stmt->fetchAll(PDO::FETCH_ASSOC);
+// }
+
+function getAllDefects($pdo, $severity = '', $status = '') {
+    $sql = "
+        SELECT defects.id, network_points.label AS point_label,
+        defects.category, defects.severity, defects.status
+        FROM network_points
+        JOIN defects ON defects.point_id = network_points.id
+        WHERE 1=1
+    ";
+    $params = [];
+
+    if (!empty($severity)) {
+        $sql .= " AND defects.severity = :severity";
+        $params[':severity'] = $severity;
+    }
+
+    if (!empty($status)) {
+        $sql .= " AND defects.status = :status";
+        $params[':status'] = $status;
+    }
+
+    $sql .= " ORDER BY defects.id DESC";
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute($params);
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
@@ -74,21 +101,53 @@ function getDefectStatusCounts($pdo) {
     return $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
 }
 
-function countAllDefects($pdo) {
-    return $pdo->query("SELECT COUNT(*) FROM defects")->fetchColumn();
+function countAllDefects($pdo, $severity, $status) {
+    $sql="SELECT COUNT(*) FROM defects WHERE 1=1";
+    $params = [];
+if (!empty($severity)) {
+        $sql .= " AND defects.severity = :severity";
+        $params[':severity'] = $severity;
+    }
+
+    if (!empty($status)) {
+        $sql .= " AND defects.status = :status";
+        $params[':status'] = $status;
+    }
+
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute($params);
+    return (int)$stmt->fetchColumn();
 }
 
-function getDefectsWithPagination($pdo, $limit, $offset) {
-    $stmt = $pdo->prepare("
-        SELECT d.*, np.label as point_label, u.login as created_by_name
-        FROM defects d
-        LEFT JOIN network_points np ON d.point_id = np.id
-        LEFT JOIN users u ON d.created_by = u.id
-        ORDER BY d.created_at DESC
-        LIMIT :limit OFFSET :offset
-    ");
-    $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
-    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+function getDefectsWithPagination($pdo, $limit, $offset, $status, $severity) {
+    $sql = "
+        SELECT defects.id, network_points.label AS point_label,
+        defects.category, defects.severity, defects.status
+        FROM network_points
+        JOIN defects ON defects.point_id = network_points.id
+        WHERE 1=1
+    ";
+    $params = [];
+
+    if (!empty($severity)) {
+        $sql .= " AND defects.severity = :severity";
+        $params[':severity'] = $severity;
+    }
+
+    if (!empty($status)) {
+        $sql .= " AND defects.status = :status";
+        $params[':status'] = $status;
+    }
+
+    $sql .= " LIMIT :limit OFFSET :offset";
+
+    $stmt = $pdo->prepare($sql);
+    foreach ($params as $key => $value) {
+        $stmt->bindValue($key, $value);
+    }
+
+    $stmt->bindValue(':limit', (int)$limit, PDO::PARAM_INT);
+    $stmt->bindValue(':offset', (int)$offset, PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }

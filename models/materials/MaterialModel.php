@@ -143,14 +143,14 @@ function getMaterialsUsageWithPagination($pdo, $limit, $offset, $date_from = '',
         $params[':material_id'] = $material_id;
     }
 
-    $sql .= " ORDER BY material_usage.used_at DESC LIMIT :limit OFFSET :offset";
+    $sql .= " LIMIT :limit OFFSET :offset";
 
     $stmt = $pdo->prepare($sql);
     foreach ($params as $key => $value) {
         $stmt->bindValue($key, $value);
     }
-    $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
-    $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+    $stmt->bindValue(':limit', (int)$limit, PDO::PARAM_INT);
+    $stmt->bindValue(':offset', (int)$offset, PDO::PARAM_INT);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }

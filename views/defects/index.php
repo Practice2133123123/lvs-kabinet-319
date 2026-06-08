@@ -5,37 +5,8 @@
     <p><a href="defect_add.php">+ Добавить дефект</a></p>
 
 <?php include __DIR__ . '/summary.php'; ?>
+<?php include __DIR__ . '/filter.php'; ?>
 
-    <div style="margin-bottom: 20px;">
-        <button onclick="toggleFilters()" style="padding: 8px 16px; cursor: pointer;">Фильтры</button>
-    </div>
-
-    <div id="filterPanel" style="display: none; margin-bottom: 20px; padding: 20px; border: 1px solid #ddd; background: #f9f9f9; border-radius: 8px;">
-        <form method="GET">
-            <div style="margin-bottom: 15px;">
-                <label style="display: inline-block; width: 100px;">Критичность:</label>
-                <select name="severity" style="padding: 6px 12px; width: 200px;">
-                    <option value="">Все</option>
-                    <option value="высокая" <?= isset($_GET['severity']) && $_GET['severity'] == 'высокая' ? 'selected' : '' ?>>Высокая</option>
-                    <option value="средняя" <?= isset($_GET['severity']) && $_GET['severity'] == 'средняя' ? 'selected' : '' ?>>Средняя</option>
-                    <option value="низкая" <?= isset($_GET['severity']) && $_GET['severity'] == 'низкая' ? 'selected' : '' ?>>Низкая</option>
-                </select>
-            </div>
-            <div style="margin-bottom: 15px;">
-                <label style="display: inline-block; width: 100px;">Статус:</label>
-                <select name="status" style="padding: 6px 12px; width: 200px;">
-                    <option value="">Все</option>
-                    <option value="открыт" <?= isset($_GET['status']) && $_GET['status'] == 'открыт' ? 'selected' : '' ?>>Открыт</option>
-                    <option value="в_работе" <?= isset($_GET['status']) && $_GET['status'] == 'в_работе' ? 'selected' : '' ?>>В работе</option>
-                    <option value="закрыт" <?= isset($_GET['status']) && $_GET['status'] == 'закрыт' ? 'selected' : '' ?>>Закрыт</option>
-                </select>
-            </div>
-            <div>
-                <button type="submit" style="padding: 6px 16px; cursor: pointer;">Применить</button>
-                <a href="defects.php" style="margin-left: 10px;">Сбросить</a>
-            </div>
-        </form>
-    </div>
 
     <script>
         function toggleFilters() {
@@ -79,17 +50,29 @@
 <?php if ($totalPages > 1): ?>
     <div style="margin-top: 20px; text-align: center;">
         <?php if ($currentPage > 1): ?>
-            <a href="?page=<?= $currentPage - 1 ?>">← Назад</a>
+            <?php 
+                $params = $_GET;
+                $params['page'] = $currentPage - 1;
+                $linkBack = "?" . http_build_query($params); ?>
+            <a href="?page=<?= $linkBack ?>">← Назад</a>
         <?php endif; ?>
         <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                <?php 
+                $params = $_GET;
+                $params['page'] = $i;
+                $linkPage = "?" . http_build_query($params); ?>
             <?php if ($i == $currentPage): ?>
                 <strong style="margin: 0 5px;"><?= $i ?></strong>
             <?php else: ?>
-                <a href="?page=<?= $i ?>" style="margin: 0 5px;"><?= $i ?></a>
+                <a href="<?= $linkPage?>" style="margin: 0 5px;"><?= $i ?></a>
             <?php endif; ?>
         <?php endfor; ?>
         <?php if ($currentPage < $totalPages): ?>
-            <a href="?page=<?= $currentPage + 1 ?>">Вперёд →</a>
+                <?php 
+                $params = $_GET;
+                $params['page'] = $currentPage + 1;
+                $linkNext = "?" . http_build_query($params); ?>
+            <a href="<?= $linkNext ?>">Вперёд →</a>
         <?php endif; ?>
     </div>
 <?php endif; ?>

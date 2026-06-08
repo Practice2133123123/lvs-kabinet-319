@@ -5,8 +5,9 @@
     <p><a href="materials_add.php">+ Добавить расход</a></p>
 
 <?php include __DIR__ . '/summary.php'; ?>
+<?php include __DIR__ . '/filter.php'; ?>
 
-    <div style="margin-bottom: 20px;">
+    <!-- <div style="margin-bottom: 20px;">
         <button onclick="toggleFilters()" style="padding: 8px 16px; cursor: pointer;">Фильтры</button>
     </div>
 
@@ -36,9 +37,9 @@
                 <a href="materials.php" style="margin-left: 10px;">Сбросить</a>
             </div>
         </form>
-    </div>
+    </div> -->
 
-    <script>
+    <!-- <script>
         function toggleFilters() {
             var panel = document.getElementById('filterPanel');
             if (panel.style.display === 'none') {
@@ -47,7 +48,7 @@
                 panel.style.display = 'none';
             }
         }
-    </script>
+    </script> -->
 
 <?php if (empty($items)): ?>
     <p>Нет записей.</p>
@@ -65,6 +66,7 @@
             <th>Действия</th>
         </tr>
         <?php foreach ($items as $item): ?>
+
             <tr>
                 <td><?= htmlspecialchars($item['id']) ?></td>
                 <td><?= htmlspecialchars($item['material_name']) ?></td>
@@ -79,6 +81,7 @@
                     <a href="material_delete.php?id=<?= $item['id'] ?>" onclick="return confirm('Удалить запись?')">Удал.</a>
                 </td>
             </tr>
+
         <?php endforeach; ?>
     </table>
 <?php endif; ?>
@@ -86,17 +89,29 @@
 <?php if ($totalPages > 1): ?>
     <div style="margin-top: 20px; text-align: center;">
         <?php if ($currentPage > 1): ?>
-            <a href="?page=<?= $currentPage - 1 ?>">← Назад</a>
+            <?php 
+                $params = $_GET;
+                $params['page'] = $currentPage - 1;
+                $linkBack = "?" . http_build_query($params); ?>
+            <a href="?page=<?= $linkBack ?>">← Назад</a>
         <?php endif; ?>
         <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                <?php 
+                $params = $_GET;
+                $params['page'] = $i;
+                $linkPage = "?" . http_build_query($params); ?>
             <?php if ($i == $currentPage): ?>
                 <strong style="margin: 0 5px;"><?= $i ?></strong>
             <?php else: ?>
-                <a href="?page=<?= $i ?>" style="margin: 0 5px;"><?= $i ?></a>
+                <a href="<?= $linkPage?>" style="margin: 0 5px;"><?= $i ?></a>
             <?php endif; ?>
         <?php endfor; ?>
         <?php if ($currentPage < $totalPages): ?>
-            <a href="?page=<?= $currentPage + 1 ?>">Вперёд →</a>
+                <?php 
+                $params = $_GET;
+                $params['page'] = $currentPage + 1;
+                $linkNext = "?" . http_build_query($params); ?>
+            <a href="<?= $linkNext ?>">Вперёд →</a>
         <?php endif; ?>
     </div>
 <?php endif; ?>

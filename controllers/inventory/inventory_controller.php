@@ -15,18 +15,18 @@ $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $type = $_GET['type'] ?? '';
 $status = $_GET['status'] ?? '';
 
-if (!empty($type) || !empty($status)) {
-    // Если есть фильтры, получаем отфильтрованные точки
-    $points = filterPoints($pdo, $type, $status);
-    $totalPages = 1;
-    $currentPage = 1;
-} else {
+// if (!empty($type) || !empty($status)) {
+//     // Если есть фильтры, получаем отфильтрованные точки
+//     $points = filterPoints($pdo, $type, $status);
+//     $totalPages = 1;
+//     $currentPage = 1;
+// } else {
     // Если фильтров нет, получаем все точки с пагинацией
-    $total = countAllPoints($pdo);
+    $total = countAllPoints($pdo, $status, $type);
     $pagination = getPaginationInfo($total, $limit, $page);
 
-    $points = getPointsWithPagination($pdo, $pagination['limit'], $pagination['offset']);
+    $points = getPointsWithPagination($pdo, $pagination['limit'], $pagination['offset'], $type, $status);
     $currentPage = $pagination['current_page'];
     $totalPages = $pagination['total_pages'];
-}
+// }
 ?>

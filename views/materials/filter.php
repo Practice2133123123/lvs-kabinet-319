@@ -1,4 +1,5 @@
-<div class="filter-dropdown">
+
+    <div class="filter-dropdown">
     <button class="filter-btn" onclick="toggleFilter()">Фильтры</button>
     <div id="filterMenu" class="filter-menu" style="display: none;">
         <form method="GET" action="">
@@ -28,6 +29,8 @@
         </form>
     </div>
 </div>
+
+
 
 <script>
     function toggleFilter() {
