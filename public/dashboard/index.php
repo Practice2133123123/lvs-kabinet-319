@@ -1,8 +1,8 @@
 <?php
-require_once '../../config/db.php';
-require_once '../../includes/auth.php';
-require_once '../../controllers/dashboard/index_controller.php';
-include '../../views/layouts/header.php';
-include '../../views/dashboard/index.php';
-include '../../views/layouts/footer.php';
+require_once __DIR__ . '/../../config/db.php';
+require_once __DIR__ . '/../../includes/auth.php';
+require_once __DIR__ . '/../../controllers/dashboard/index_controller.php';
+include __DIR__ . '/../../views/layouts/header.php';
+include __DIR__ . '/../../views/dashboard/index.php';
+include __DIR__ . '/../../views/layouts/footer.php';
 ?>

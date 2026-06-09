@@ -9,9 +9,9 @@
 <?php endif; ?>
 
     <h1>Сетевые точки</h1>
-
+<?php if (isLoggedIn()):?>
     <p><a href="point_add.php">+ Добавить точку</a></p>
-
+<?php endif;?>
 <?php include __DIR__ . '/summary.php'; ?>
 <?php include __DIR__ . '/filter.php'; ?>
 
@@ -38,7 +38,9 @@
             <th>Тип</th>
             <th>Расположение</th>
             <th>Статус</th>
+            <?php if (isLoggedIn()):?>
             <th>Действия</th>
+            <?php endif;?>
         </tr>
         <?php foreach ($points as $point): ?>
             <tr>
@@ -46,10 +48,12 @@
                 <td><?= htmlspecialchars($point['type']) ?></td>
                 <td><?= htmlspecialchars($point['location'] ?? '—') ?></td>
                 <td><?= htmlspecialchars($point['status']) ?></td>
+                <?php if (isLoggedIn()):?>
                 <td>
                     <a href="point_edit.php?id=<?= $point['id'] ?>">Ред.</a> |
                     <a href="point_delete.php?id=<?= $point['id'] ?>" onclick="return confirm('Удалить точку?')">Удал.</a>
                 </td>
+                <?php endif;?>
             </tr>
         <?php endforeach; ?>
     </table>

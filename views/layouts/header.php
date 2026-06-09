@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . "/../../includes/auth.php";?>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -17,6 +18,8 @@
     <li class="nav-item">
         <a class="nav-link" href="/public/inventory/inventory.php">Сетевые точки</a>
     </li>
+
+    <?php if (isLoggedIn()):?>
     <li class="nav-item">
         <a class="nav-link" href="/public/defects/defects.php">Дефекты</a>
     </li>
@@ -29,6 +32,10 @@
     <li class="nav-item">
         <a class="nav-link" href="/public/auth/logout.php">Выйти</a>
     </li>
+    <?php else:?>
+        <a href="/public/auth/login.php">Войти</a>
+        <?php endif;?>
+
     <?php if (function_exists('isAdmin') && isAdmin()): ?>
     <li class="nav-item">
         <a class="nav-link" href="/public/users/users.php">Пользователи</a>

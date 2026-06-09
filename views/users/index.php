@@ -46,8 +46,7 @@
                                     <button type="submit">Удалить</button>
                                 </form>
                             <?php else: ?>
-                                <span>Текущий пользователь</span>
-                            <?php endif; ?>
+<span style="display: inline-block; padding: 5px 10px; background: #28a745; color: white; border-radius: 4px;">Текущий пользователь</span>                            <?php endif; ?>
                         </td>
                     </tr>
                 <?php endforeach; ?>
