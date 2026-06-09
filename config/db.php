@@ -2,7 +2,7 @@
 $host = 'localhost';
 $dbname = 'lvs_kabinet_319b';
 $user = 'root';
-$pass = '';
+$pass = '1234';
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $user, $pass, [
@@ -13,4 +13,4 @@ try {
 } catch (PDOException $e) {
     die("Ошибка подключения: " . $e->getMessage());
 }
-?>
+

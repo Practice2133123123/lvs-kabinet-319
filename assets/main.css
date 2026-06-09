@@ -416,3 +416,41 @@ small {
         max-width: 100%;
     }
 }
+nav {
+    background: #2c3e50;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px 20px;
+}
+.nav-brand a {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+}
+.nav-links {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+}
+/*.nav-links a:hover {*/
+/*    background: #1abc9c;*/
+/*}*/
+body {
+    margin: 0;
+    padding: 0;
+}
