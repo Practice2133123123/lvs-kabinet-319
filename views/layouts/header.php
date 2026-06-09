@@ -30,13 +30,11 @@
         <a class="nav-link" href="/public/report/report.php">Отчеты</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="/public/auth/logout.php">Выйти</a>
-    </li>
     <?php else:?>
         <a href="/public/auth/login.php">Войти</a>
         <?php endif;?>
-
     <?php if (function_exists('isAdmin') && isAdmin()): ?>
+        </li>
     <li class="nav-item">
         <a class="nav-link" href="/public/users/users.php">Пользователи</a>
         </li>
@@ -44,6 +42,9 @@
             <a class="nav-link" href="/public/logs/logs.php">Логи</a>
         </li>
     <?php endif; ?>
+    <li class="nav-item">
+            <a class="nav-link" href="/public/auth/logout.php">Выйти</a>
+    </li>
 </ul>
 <p style="text-align: center;">ЛВС 319Б</p>
 

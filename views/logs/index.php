@@ -48,6 +48,7 @@
         }
     </script>
 
+<!-- Таблица с логами -->
 <?php if (empty($logs)): ?>
     <p>Нет записей.</p>
 <?php else: ?>
@@ -58,7 +59,7 @@
             <th>Действие</th>
             <th>Таблица</th>
             <th>ID записи</th>
-            <th>Дата</th>
+            <th>Дата и время</th>
         </tr>
         <?php foreach ($logs as $log): ?>
             <tr>
@@ -67,7 +68,9 @@
                 <td><?= htmlspecialchars($log['action']) ?></td>
                 <td><?= htmlspecialchars($log['target_table']) ?></td>
                 <td><?= htmlspecialchars($log['target_id'] ?? '—') ?></td>
-                <td><?= htmlspecialchars($log['created_at']) ?></td>
+                <td style="font-size: 18px;">
+                <?= htmlspecialchars($log['created_at']) ?>
+            </td>
             </tr>
         <?php endforeach; ?>
     </table>

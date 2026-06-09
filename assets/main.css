@@ -1047,7 +1047,7 @@ table td:last-child button {
     display: inline-block;
     padding: 4px 12px;
     margin: 0 4px;
-    font-size: 12px;
+    font-size: 12px; /* Явно задаем размер шрифта для кнопок */
     font-weight: 500;
     text-decoration: none;
     border-radius: 4px;

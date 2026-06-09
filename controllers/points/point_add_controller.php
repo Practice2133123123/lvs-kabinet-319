@@ -4,6 +4,12 @@ require_once __DIR__ . '/../../includes/helpers.php';
 
 $errors = [];
 
+$label = trim($_POST['label'] ?? '');
+
+if (countPointsByLabel($pdo, $label) > 0) {
+    $errors[] = "Точка с таким названием уже существует.";
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = [
         'label' => getPostParam('label', 'string'),

@@ -141,4 +141,9 @@ function getPointsWithPagination($pdo, $limit, $offset, $type, $status) {
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+function countPointsByLabel($pdo, $label) {
+    $stmt = $pdo->prepare("SELECT COUNT(*) FROM network_points WHERE label = ?");
+    $stmt->execute([$label]);
+    return (int)$stmt->fetchColumn();
+}
 ?>
