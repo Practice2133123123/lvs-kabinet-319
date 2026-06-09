@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/../../models/defects/DefectModel.php';
-require_once __DIR__ . '/../../models/inventory/PointModel.php'; // Для getAllPointsForSelect()
+require_once __DIR__ . '/../../models/inventory/PointModel.php';
 require_once __DIR__ . '/../../models/logs/LogModel.php';
 
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
