@@ -9,28 +9,22 @@
             </div>
         <?php endif; ?>
 
-        <table border="1" cellpadding="8" style="border-collapse: collapse; margin-bottom: 20px;">
-            <tr>
-                <th style="text-align: left;">ID</th>
-                <td><?= htmlspecialchars($point['id']) ?></td>
-            </tr>
-            <tr>
-                <th style="text-align: left;">Метка</th>
-                <td><?= htmlspecialchars($point['label']) ?></td>
-            </tr>
-            <tr>
-                <th style="text-align: left;">Тип</th>
-                <td><?= htmlspecialchars($point['type']) ?></td>
-            </tr>
-            <tr>
-                <th style="text-align: left;">Расположение</th>
-                <td><?= htmlspecialchars($point['location'] ?? '—') ?></td>
-            </tr>
-            <tr>
-                <th style="text-align: left;">Статус</th>
-                <td><?= htmlspecialchars($point['status']) ?></td>
-            </tr>
-        </table>
+        <div class="card">
+            <div class="card-body">
+                <p><strong>ID:</strong> <?= htmlspecialchars($point['id']) ?></p>
+                <p><strong>Метка:</strong> <?= htmlspecialchars($point['label']) ?></p>
+                <p><strong>Тип:</strong> <?= htmlspecialchars($point['type']) ?></p>
+                <p><strong>Расположение:</strong> <?= htmlspecialchars($point['location'] ?? '—') ?></p>
+                <p><strong>Статус:</strong> <?= htmlspecialchars($point['status']) ?></p>
+            </div>
+        </div>
+            <!-- <div>
+                <td><th>ID</th> <?= htmlspecialchars() ?></td>
+                <td><th>Метка</th> <?= htmlspecialchars() ?></td>
+                <td><th>Тип</th> <?= htmlspecialchars() ?></td>
+                <td><th>Расположение</th><?= htmlspecialchars() ?></td>
+                <td><th>Статус</th><?= htmlspecialchars() ?></td>
+        </div> -->
 
         <?php if ($error): ?>
             <a href="inventory.php">Назад к списку</a>
