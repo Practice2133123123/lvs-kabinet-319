@@ -1,4 +1,11 @@
 
+/*@font-face {*/
+/*    font-family: 'Spectrum Sans';*/
+/*    src: url('https://cdn.spectrumflow.net/kite/fonts/spectrum-sans/SpectrumSansVF_W_Wght.woff2') format('woff2');*/
+/*    font-weight: 100 900;*/
+/*    font-display: swap;*/
+/*}*/
+
 /** {*/
 /*    margin: 0;*/
 /*    padding: 0;*/
@@ -8,7 +15,7 @@
 /*:root {*/
 /*    --primary: #020250;*/
 /*    --secondary: #020250;*/
-/*    --success: #ffffff;*/
+/*    --success: #ecece5;*/
 /*    --warning: #020250;*/
 /*    --danger: #020250;*/
 /*    --text: #000000;*/
@@ -16,7 +23,7 @@
 /*}*/
 
 /*html, body {*/
-/*    font-family: -apple-system, BlinkMacSystemFont, 'Spectrum Sans',Spectrum Sans , sans-serif;*/
+/*    font-family: 'Spectrum Sans', -apple-system, Spectrum Sans, sans-serif;*/
 /*    color: var(--text);*/
 /*    background-color: #ecece5;*/
 /*    font-size: 18px;*/
@@ -62,7 +69,7 @@
 /*}*/
 
 /*.nav-links a {*/
-/*    color: white;*/
+/*    color: #ffffff;*/
 /*    text-decoration: none;*/
 /*    font-size: 14px;*/
 /*    transition: color 0.3s;*/
@@ -152,9 +159,9 @@
 /*select {*/
 /*    width: 100%;*/
 /*    padding: 10px 12px;*/
-/*    border: 1px solid #bdc3c7;*/
+/*    border: 1px solid #dcdfe6;*/
 /*    font-size: 14px;*/
-/*    font-family: inherit;*/
+/*    font-family: 'Spectrum Sans', sans-serif;*/
 /*}*/
 
 /*input[type="text"]:focus,*/
@@ -186,6 +193,7 @@
 /*    text-decoration: none;*/
 /*    display: inline-block;*/
 /*    transition: all 0.3s;*/
+/*    font-family: 'Spectrum Sans', sans-serif;*/
 /*}*/
 
 /*button:disabled,*/
@@ -202,7 +210,7 @@
 
 /*button[type="submit"]:hover:not(:disabled),*/
 /*.btn-primary:hover {*/
-/*    background-color: #2980b9;*/
+/*    background-color: #020250;*/
 /*}*/
 
 /*.btn-success {*/
@@ -211,7 +219,7 @@
 /*}*/
 
 /*.btn-success:hover {*/
-/*    background-color: #229954;*/
+/*    background-color: #020250;*/
 /*}*/
 
 /*.btn-danger {*/
@@ -220,7 +228,7 @@
 /*}*/
 
 /*.btn-danger:hover {*/
-/*    background-color: #c0392b;*/
+/*    background-color: #020250;*/
 /*}*/
 
 /*.btn-secondary {*/
@@ -246,21 +254,21 @@
 /*}*/
 
 /*.alert-success {*/
-/*    background-color: #d4edda;*/
-/*    border: 1px solid #c3e6cb;*/
-/*    color: #155724;*/
+/*    background-color: #020250;*/
+/*    border: 1px solid #020250;*/
+/*    color: #020250;*/
 /*}*/
 
 /*.alert-danger {*/
-/*    background-color: #f8d7da;*/
-/*    border: 1px solid #f5c6cb;*/
-/*    color: #721c24;*/
+/*    background-color: #020250;*/
+/*    border: 1px solid #020250;*/
+/*    color: #020250;*/
 /*}*/
 
 /*.alert-warning {*/
-/*    background-color: #fff3cd;*/
-/*    border: 1px solid #ffeeba;*/
-/*    color: #856404;*/
+/*    background-color: #020250;*/
+/*    border: 1px solid #020250;*/
+/*    color: #020250;*/
 /*}*/
 
 /*.alert-info {*/
@@ -440,6 +448,7 @@
 /*    font-weight: 500;*/
 /*    text-decoration: none;*/
 /*    transition: all 0.3s;*/
+/*    font-family: 'Spectrum Sans', sans-serif;*/
 /*}*/
 
 /*.nav-link:hover {*/
@@ -464,7 +473,7 @@
 /*}*/
 
 /*p[style*="text-align: center"] {*/
-/*    font-family: 'Mandatory Variable 2', 'Mandatory Variable 2', serif;*/
+/*    font-family: 'Spectrum Sans', serif;*/
 /*    font-weight: 340;*/
 /*    color: var(--primary);*/
 /*    margin: 15px 0 0;*/
@@ -495,13 +504,14 @@
 /*    display: inline-block;*/
 /*    padding: 4px 12px;*/
 /*    margin: 0 4px;*/
-/*    font-size: 12px;*/
+/*    font-size: 12px; !* Явно задаем размер шрифта для кнопок *!*/
 /*    font-weight: 500;*/
 /*    text-decoration: none;*/
 /*    border-radius: 4px;*/
 /*    transition: all 0.2s ease;*/
 /*    cursor: pointer;*/
 /*}*/
+
 
 /*table td:last-child a:first-child,*/
 /*.btn-edit {*/
@@ -542,6 +552,45 @@
 /*table td:last-child a {*/
 /*    font-size: 12px;*/
 /*}*/
+
+/*table {*/
+/*    border-collapse: separate;*/
+/*    border-spacing: 0;*/
+/*    border-radius: 5px;*/
+/*    overflow: hidden;*/
+/*    border: none;*/
+/*}*/
+
+
+/*table th,*/
+/*table td {*/
+/*    border: 2px solid #020250;*/
+/*}*/
+
+/*table th:not(:last-child),*/
+/*table td:not(:last-child) {*/
+/*    border-right: none;*/
+/*}*/
+/*table tr:not(:last-child) th,*/
+/*table tr:not(:last-child) td {*/
+/*    border-bottom: none;*/
+/*}*/
+
+
+/*table th {*/
+/*    background-color: var(--primary);*/
+/*    color: #ecece5;*/
+/*}*/
+/*table tbody tr:nth-child(even) {*/
+/*    background-color: #fafafa;*/
+/*}*/
+/*table tbody tr:hover {*/
+/*    background-color: #fafafa;*/
+/*}*/
+
+/*table {*/
+/*    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);*/
+/*}*/
 @font-face {
     font-family: 'Spectrum Sans';
     src: url('https://cdn.spectrumflow.net/kite/fonts/spectrum-sans/SpectrumSansVF_W_Wght.woff2') format('woff2');
@@ -558,7 +607,7 @@
 :root {
     --primary: #020250;
     --secondary: #020250;
-    --success: #ffffff;
+    --success: #dcdfe6;
     --warning: #020250;
     --danger: #020250;
     --text: #000000;
@@ -568,13 +617,13 @@
 html, body {
     font-family: 'Spectrum Sans', -apple-system, Spectrum Sans, sans-serif;
     color: var(--text);
-    background-color: #ecece5;
+    background-color: #DCDFE6;
     font-size: 18px;
     line-height: 1.6;
 }
 
-/* Navigation */
-nav {
+
+header {
     background-color: var(--primary);
     color: #ecece5;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -583,7 +632,7 @@ nav {
     z-index: 100;
 }
 
-.nav-container {
+.header-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -592,7 +641,7 @@ nav {
     padding: 0 20px;
 }
 
-.nav-brand a {
+.header-brand a {
     font-size: 18px;
     font-weight: 600;
     color: white;
@@ -601,17 +650,17 @@ nav {
     display: block;
 }
 
-.nav-brand a:hover {
+.header-brand a:hover {
     color: var(--secondary);
 }
 
-.nav-links {
+.header-links {
     display: flex;
     gap: 30px;
     align-items: center;
 }
 
-.nav-links a {
+.header-links a {
     color: white;
     text-decoration: none;
     font-size: 14px;
@@ -619,11 +668,11 @@ nav {
     white-space: nowrap;
 }
 
-.nav-links a:hover {
+.header-links a:hover {
     color: var(--secondary);
 }
 
-/* Main Layout */
+
 body > main {
     max-width: 1200px;
     margin: 0 auto;
@@ -631,7 +680,6 @@ body > main {
     min-height: calc(100vh - 160px);
 }
 
-/* Headings */
 h1 {
     margin-bottom: 25px;
     padding-bottom: 15px;
@@ -644,7 +692,7 @@ h2 {
     font-size: 20px;
 }
 
-/* Tables */
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -702,7 +750,7 @@ textarea,
 select {
     width: 100%;
     padding: 10px 12px;
-    border: 1px solid #bdc3c7;
+    border: 1px solid #dcdfe6;
     font-size: 14px;
     font-family: 'Spectrum Sans', sans-serif;
 }
@@ -753,7 +801,7 @@ button[type="submit"],
 
 button[type="submit"]:hover:not(:disabled),
 .btn-primary:hover {
-    background-color: #2980b9;
+    background-color: #020250;
 }
 
 .btn-success {
@@ -762,7 +810,7 @@ button[type="submit"]:hover:not(:disabled),
 }
 
 .btn-success:hover {
-    background-color: #229954;
+    background-color: #020250;
 }
 
 .btn-danger {
@@ -771,7 +819,7 @@ button[type="submit"]:hover:not(:disabled),
 }
 
 .btn-danger:hover {
-    background-color: #c0392b;
+    background-color: #020250;
 }
 
 .btn-secondary {
@@ -797,21 +845,21 @@ button[type="submit"]:hover:not(:disabled),
 }
 
 .alert-success {
-    background-color: #d4edda;
-    border: 1px solid #c3e6cb;
-    color: #155724;
+    background-color: #020250;
+    border: 1px solid #020250;
+    color: #020250;
 }
 
 .alert-danger {
-    background-color: #f8d7da;
-    border: 1px solid #f5c6cb;
-    color: #721c24;
+    background-color: #020250;
+    border: 1px solid #020250;
+    color: #020250;
 }
 
 .alert-warning {
-    background-color: #fff3cd;
-    border: 1px solid #ffeeba;
-    color: #856404;
+    background-color: #020250;
+    border: 1px solid #020250;
+    color: #020250;
 }
 
 .alert-info {
@@ -945,7 +993,7 @@ small {
 
 /* Responsive */
 @media (max-width: 768px) {
-    .nav-links {
+    .header-links {
         gap: 15px;
         font-size: 12px;
     }
@@ -966,64 +1014,8 @@ small {
         max-width: 100%;
     }
 }
-.nav {
-    background-color: var(--primary);
-    display: flex;
-    flex-wrap: wrap;
-    padding-left: 0;
-    margin-bottom: 0;
-    list-style: none;
-}
 
-.justify-content-center {
-    justify-content: center !important;
-}
-
-.nav-item {
-
-}
-
-.nav-link {
-    display: block;
-    padding: 0.75rem 1.25rem;
-    color: #ecece5;
-    font-size: 16px;
-    font-weight: 500;
-    text-decoration: none;
-    transition: all 0.3s;
-    font-family: 'Spectrum Sans', sans-serif;
-}
-
-.nav-link:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: white;
-    text-decoration: none;
-}
-
-.nav-link.active {
-    background-color: var(--secondary);
-    color: white;
-    position: relative;
-}
-
-@media (max-width: 768px) {
-    .nav {
-        flex-direction: column;
-    }
-    .nav-link {
-        text-align: center;
-    }
-}
-
-p[style*="text-align: center"] {
-    font-family: 'Spectrum Sans', serif;
-    font-weight: 340;
-    color: var(--primary);
-    margin: 15px 0 0;
-    letter-spacing: 1px;
-    font-size: 1.1rem;
-}
-
+/* Стили для таблиц (закругление, границы) — они не удалялись */
 table {
     border: 2px solid #020250;
 }
@@ -1034,10 +1026,10 @@ table td {
     border-bottom: 2px solid #020250;
 }
 
-
 table th {
     border-bottom: 2px solid #020250;
 }
+
 table td:last-child {
     white-space: nowrap;
 }
@@ -1047,14 +1039,13 @@ table td:last-child button {
     display: inline-block;
     padding: 4px 12px;
     margin: 0 4px;
-    font-size: 12px; /* Явно задаем размер шрифта для кнопок */
+    font-size: 12px;
     font-weight: 500;
     text-decoration: none;
     border-radius: 4px;
     transition: all 0.2s ease;
     cursor: pointer;
 }
-
 
 table td:last-child a:first-child,
 .btn-edit {
@@ -1085,6 +1076,7 @@ table td:last-child a:last-child:hover,
 table td:last-child {
     letter-spacing: normal;
 }
+
 table td:last-child a:not(:first-child) {
     margin-left: 0;
 }
@@ -1092,6 +1084,48 @@ table td:last-child a:not(:first-child) {
 table td:last-child {
     font-size: 0;
 }
+
 table td:last-child a {
     font-size: 12px;
+}
+
+/* закругление таблиц (совместимо с отдельным border-collapse) */
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 5px;
+    overflow: hidden;
+    border: none;
+}
+
+table th,
+table td {
+    border: 2px solid #020250;
+}
+
+table th:not(:last-child),
+table td:not(:last-child) {
+    border-right: none;
+}
+
+table tr:not(:last-child) th,
+table tr:not(:last-child) td {
+    border-bottom: none;
+}
+
+table th {
+    background-color: var(--primary);
+    color: #ecece5;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+table tbody tr:hover {
+    background-color: #fafafa;
+}
+
+table {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }

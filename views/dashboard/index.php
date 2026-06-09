@@ -116,69 +116,36 @@
 
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
-    <!-- Header -->
     <div class="mb-8">
         <h1 class="text-3xl font-bold text-slate-800 tracking-tight">Дашборд</h1>
         <p class="text-slate-500 mt-2 text-sm">Обзор состояния объекта и инфраструктуры</p>
     </div>
-
-    <!-- Stats Cards -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
         <div class="stat-card bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
-            <div class="flex items-center justify-between mb-3">
-                <div class="w-10 h-10 rounded-lg bg-slate-100 flex items-center justify-center">
-                    <svg class="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                    </svg>
-                </div>
-            </div>
             <div class="text-4xl font-bold text-slate-800 tracking-tight"><?= number_format($totalPoints) ?></div>
             <div class="mt-2 text-sm font-medium text-slate-500 uppercase tracking-wide">Всего точек</div>
         </div>
 
         <div class="stat-card bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
-            <div class="flex items-center justify-between mb-3">
-                <div class="w-10 h-10 rounded-lg bg-red-50 flex items-center justify-center">
-                    <svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
-                    </svg>
-                </div>
-            </div>
             <div class="text-4xl font-bold text-red-500 tracking-tight"><?= number_format($openDefects) ?></div>
             <div class="mt-2 text-sm font-medium text-slate-500 uppercase tracking-wide">Открытых дефектов</div>
         </div>
 
         <div class="stat-card bg-white rounded-xl border border-slate-200 p-6 shadow-sm">
-            <div class="flex items-center justify-between mb-3">
-                <div class="w-10 h-10 rounded-lg bg-emerald-50 flex items-center justify-center">
-                    <svg class="w-5 h-5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                    </svg>
-                </div>
-            </div>
             <div class="text-4xl font-bold text-emerald-500 tracking-tight"><?= number_format($totalCable, 2) ?></div>
             <div class="mt-2 text-sm font-medium text-slate-500 uppercase tracking-wide">Кабель (м)</div>
         </div>
     </div>
 
-    <!-- Plan Viewer -->
+
     <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
         <div class="border-b border-slate-200 px-6 py-4 flex items-center justify-between">
             <div>
                 <h2 class="text-lg font-semibold text-slate-800">План объекта</h2>
-                <p class="text-xs text-slate-500 mt-0.5">Используйте колесо мыши для масштабирования и перетаскивание для навигации</p>
-            </div>
-            <div class="flex items-center gap-2">
-                    <span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-emerald-50 text-emerald-700 border border-emerald-200">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-1.5 animate-pulse"></span>
-                        Актуально
-                    </span>
             </div>
         </div>
 
         <div class="relative w-full" style="height: 650px;">
-            <!-- Map Container -->
             <div id="mapContainer" class="map-container w-full h-full">
                 <img
                         id="mapImage"
@@ -188,17 +155,15 @@
                         draggable="false"
                 >
 
-                <!-- Hint -->
+
                 <div id="mapHint" class="map-hint">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"/>
                     </svg>
                 </div>
 
-                <!-- Zoom Indicator -->
                 <div id="zoomIndicator" class="zoom-indicator">100%</div>
 
-                <!-- Controls -->
                 <div class="map-controls">
                     <button id="btnZoomIn" class="map-control-btn" title="Приблизить">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -218,13 +183,6 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- Footer info -->
-    <div class="mt-6 text-center text-xs text-slate-400">
-        Последнее обновление: 09 июня 2026, 14:32
-    </div>
-
 </div>
 
 <script>
