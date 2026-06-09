@@ -66,7 +66,7 @@
                 $params = $_GET;
                 $params['page'] = $currentPage - 1;
                 $linkBack = "?" . http_build_query($params); ?>
-            <a href="?page=<?= $linkBack ?>">← Назад</a>
+            <a href="<?= $linkBack ?>">← Назад</a>
         <?php endif; ?>
         <?php for ($i = 1; $i <= $totalPages; $i++): ?>
                 <?php 
