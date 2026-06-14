@@ -2,8 +2,16 @@
 require_once __DIR__ . '/../../config/db.php';
 require_once __DIR__ . '/../../models/report/ReportModel.php';
 require_once __DIR__ . '/../../includes/pagination.php';
+require_once __DIR__ . '/../../includes/helpers.php';
 
-
+$filters = [
+    'date_from' => $_GET['date_from'] ?? '',
+    'date_to' => $_GET['date_to'] ?? '',
+    'section' => $_GET['section'] ?? '',
+    'type' => $_GET['type'] ?? '',
+    'point_status' => $_GET['point_status'] ?? '',
+    'defect_status' => $_GET['defect_status'] ?? ''
+];
 
 // Экспорт CSV
 if (isset($_GET['export']) && $_GET['export'] == 'csv') {
@@ -46,15 +54,6 @@ $defectStatuses = getDefectStatuses($pdo);
 
 $limit = 5;
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-
-$filters = [
-    'date_from' => $_GET['date_from'] ?? '',
-    'date_to' => $_GET['date_to'] ?? '',
-    'section' => $_GET['section'] ?? '',
-    'type' => $_GET['type'] ?? '',
-    'point_status' => $_GET['point_status'] ?? '',
-    'defect_status' => $_GET['defect_status'] ?? ''
-];
 
 // if (!empty($type) || !empty($status)) {
 //     $logs = getFilteredReportData($pdo, $filters);

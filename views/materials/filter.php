@@ -1,7 +1,6 @@
-
-    <div class="filter-dropdown">
-    <button class="filter-btn" onclick="toggleFilter()">Фильтры</button>
-    <div id="filterMenu" class="filter-menu" style="display: none;">
+<div class="filter-dropdown">
+    <button class="btn btn-secondary" onclick="toggleFilter('matFilter')">Фильтры</button>
+    <div id="matFilter" class="filter-menu hidden">
         <form method="GET" action="">
             <div class="filter-group">
                 <label>Дата с:</label>
@@ -23,22 +22,9 @@
                 </select>
             </div>
             <div class="filter-group">
-                <button type="submit">Применить</button>
-                <a href="materials.php">Сбросить</a>
+                <button type="submit" class="btn btn-primary">Применить</button>
+                <a href="materials.php" class="btn btn-secondary" style="margin-left: 8px;">Сбросить</a>
             </div>
         </form>
     </div>
 </div>
-
-
-
-<script>
-    function toggleFilter() {
-        var menu = document.getElementById('filterMenu');
-        if (menu.style.display === 'none' || menu.style.display === '') {
-            menu.style.display = 'block';
-        } else {
-            menu.style.display = 'none';
-        }
-    }
-</script>

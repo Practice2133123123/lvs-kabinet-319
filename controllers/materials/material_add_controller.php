@@ -11,6 +11,7 @@ $points = getPointsList($pdo);
 $defects = getDefectsList($pdo);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    validateCsrfToken();
     $material_id = getPostParam('material_id', 'int', 0);
     $quantity = getPostParam('quantity', 'int', 0);
     $point_id = getPostParam('point_id', 'int');

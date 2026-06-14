@@ -4,13 +4,13 @@ require_once __DIR__ . '/../../includes/helpers.php';
 
 $errors = [];
 
-$label = trim($_POST['label'] ?? '');
-
-if (countPointsByLabel($pdo, $label) > 0) {
-    $errors[] = "Точка с таким названием уже существует.";
-}
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    validateCsrfToken();
+
+    $label = getPostParam('label', 'string');
+    if (countPointsByLabel($pdo, $label) > 0) {
+        $errors[] = "Точка с таким названием уже существует.";
+    }
     $data = [
         'label' => getPostParam('label', 'string'),
         'type' => getPostParam('type', 'string'),
@@ -39,7 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $errors[] = "Ошибка при сохранении в базу данных.";
             }
         } catch (PDOException $e) {
-            $errors[] = "Ошибка базы данных: " . $e->getMessage();
+            error_log("DB error in point_add: " . $e->getMessage());
+            $errors[] = "Ошибка базы данных";
         }
     }
 }

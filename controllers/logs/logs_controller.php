@@ -5,7 +5,7 @@ require_once __DIR__ . '/../../includes/helpers.php';
 require_once __DIR__ . '/../../includes/pagination.php';
 
 $limit = 5;
-$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$page = getGetParam('page', 'int', 1);
 
 $user = getGetParam('user_id', 'int');
 $action = getGetParam('action', 'string');

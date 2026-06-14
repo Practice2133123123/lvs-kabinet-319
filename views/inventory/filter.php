@@ -1,6 +1,6 @@
 <div class="filter-dropdown">
-    <button class="filter-btn" onclick="toggleFilter()"> Фильтры</button>
-    <div id="filterMenu" class="filter-menu" style="display: none;">
+    <button class="btn btn-secondary" onclick="toggleFilter('invFilter')">Фильтры</button>
+    <div id="invFilter" class="filter-menu hidden">
         <form method="GET" action="">
             <div class="filter-group">
                 <label>Тип точки:</label>
@@ -22,20 +22,9 @@
                 </select>
             </div>
             <div class="filter-group">
-                <button type="submit">Применить</button>
-                <a href="inventory.php">Сбросить</a>
+                <button type="submit" class="btn btn-primary">Применить</button>
+                <a href="inventory.php" class="btn btn-secondary" style="margin-left: 8px;">Сбросить</a>
             </div>
         </form>
     </div>
 </div>
-
-<script>
-    function toggleFilter() {
-        var menu = document.getElementById('filterMenu');
-        if (menu.style.display === 'none') {
-            menu.style.display = 'block';
-        } else {
-            menu.style.display = 'none';
-        }
-    }
-</script>

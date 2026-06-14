@@ -2,28 +2,17 @@
 
     <h1>Дефекты</h1>
 
-    <p><a href="defect_add.php">+ Добавить дефект</a></p>
+    <p><a href="defect_add.php" class="btn btn-primary">+ Добавить дефект</a></p>
 
 <?php include __DIR__ . '/summary.php'; ?>
 <?php include __DIR__ . '/filter.php'; ?>
 
-
-    <script>
-        function toggleFilters() {
-            var panel = document.getElementById('filterPanel');
-            if (panel.style.display === 'none') {
-                panel.style.display = 'block';
-            } else {
-                panel.style.display = 'none';
-            }
-        }
-    </script>
-
 <?php if (empty($defects)): ?>
-    <p>Нет дефектов.</p>
+    <div class="empty-state">Нет дефектов.</div>
 <?php else: ?>
-    <table border="1" cellpadding="10" width="100%" style="border-collapse: collapse;">
-        <tr style="background: #f0f0f0;">
+    <table>
+        <thead>
+        <tr>
             <th>ID</th>
             <th>Точка</th>
             <th>Категория</th>
@@ -31,6 +20,8 @@
             <th>Статус</th>
             <th>Действия</th>
         </tr>
+        </thead>
+        <tbody>
         <?php foreach ($defects as $defect): ?>
             <tr>
                 <td><?= htmlspecialchars($defect['id']) ?></td>
@@ -39,16 +30,17 @@
                 <td><?= htmlspecialchars($defect['severity'] ?? '—') ?></td>
                 <td><?= htmlspecialchars($defect['status'] ?? '—') ?></td>
                 <td>
-                    <a href="defect_edit.php?id=<?= $defect['id'] ?>">Ред.</a> |
-                    <a href="defect_delete.php?id=<?= $defect['id'] ?>" onclick="return confirm('Удалить дефект?')">Удал.</a>
+                    <a href="defect_edit.php?id=<?= $defect['id'] ?>" class="btn-action btn-action-edit">Ред.</a>
+                    <a href="defect_delete.php?id=<?= $defect['id'] ?>" class="btn-action btn-action-delete" onclick="return confirm('Удалить дефект?')">Удал.</a>
                 </td>
             </tr>
         <?php endforeach; ?>
+        </tbody>
     </table>
 <?php endif; ?>
 
 <?php if ($totalPages > 1): ?>
-    <div style="margin-top: 20px; text-align: center;">
+    <div class="pagination-links">
         <?php if ($currentPage > 1): ?>
             <?php 
                 $params = $_GET;
@@ -62,9 +54,9 @@
                 $params['page'] = $i;
                 $linkPage = "?" . http_build_query($params); ?>
             <?php if ($i == $currentPage): ?>
-                <strong style="margin: 0 5px;"><?= $i ?></strong>
+                <strong><?= $i ?></strong>
             <?php else: ?>
-                <a href="<?= $linkPage?>" style="margin: 0 5px;"><?= $i ?></a>
+                <a href="<?= $linkPage?>"><?= $i ?></a>
             <?php endif; ?>
         <?php endfor; ?>
         <?php if ($currentPage < $totalPages): ?>

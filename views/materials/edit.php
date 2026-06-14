@@ -12,6 +12,7 @@
     <?php endif; ?>
     
     <form method="POST">
+        <?= csrfField() ?>
         <div class="mb-3">
             <label class="form-label">Материал *</label>
             <select name="material_id" class="form-control" required>

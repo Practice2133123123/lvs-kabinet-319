@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../../models/materials/MaterialModel.php';
 require_once __DIR__ . '/../../models/inventory/PointModel.php'; 
 require_once __DIR__ . '/../../models/logs/LogModel.php';
+require_once __DIR__ . '/../../includes/helpers.php';
 
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 $item = getMaterialUsageById($pdo, $id);
@@ -18,13 +19,15 @@ $error = '';
 $success = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    validateCsrfToken();
+
     $data = [
-        'material_id' => $_POST['material_id'] ?? 0,
-        'quantity' => $_POST['quantity'] ?? 0,
-        'point_id' => $_POST['point_id'] ?? null,
-        'defect_id' => $_POST['defect_id'] ?? null,
-        'used_by' => $_POST['used_by'] ?? $_SESSION['user_id'],
-        'comment' => trim($_POST['comment'] ?? '')
+        'material_id' => getPostParam('material_id', 'int'),
+        'quantity' => getPostParam('quantity', 'int'),
+        'point_id' => getPostParam('point_id', 'int', null),
+        'defect_id' => getPostParam('defect_id', 'int', null),
+        'used_by' => getPostParam('used_by', 'int', $_SESSION['user_id']),
+        'comment' => getPostParam('comment', 'string')
     ];
     
     if ($data['material_id'] <= 0) {

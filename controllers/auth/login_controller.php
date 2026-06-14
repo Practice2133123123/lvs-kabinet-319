@@ -8,12 +8,15 @@ session_start();
 $error = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    validateCsrfToken();
+
     $login = getPostParam('login', 'string');
     $password = getPostParam('password', 'string');
 
     if (!empty($login) && !empty($password)) {
         $user = getUserByLogin($pdo, $login);
         if ($user && password_verify($password, $user['password_hash'])) {
+            session_regenerate_id(true);
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['user_role'] = $user['role'];
             header('Location: ../../public/dashboard/index.php');

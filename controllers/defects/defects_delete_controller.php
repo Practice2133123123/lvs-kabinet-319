@@ -11,6 +11,7 @@ if (!$defect) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    validateCsrfToken();
     if (hasMaterialUsage($pdo, $id)) {
         $error = 'Нельзя удалить дефект! Сначала удалите все связанные расходы материалов.';
     } else {

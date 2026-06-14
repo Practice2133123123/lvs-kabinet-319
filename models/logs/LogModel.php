@@ -70,7 +70,7 @@ function getFilteredLogs($pdo, $user_id = null, $action = null, $date_from = nul
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-function countAllLogs($pdo, $date_from, $date_to, $action, $user) {
+function countAllLogs($pdo, $user, $action, $date_from, $date_to) {
     $sql = "SELECT COUNT(*)         FROM logs l
         LEFT JOIN users u ON l.user_id = u.id
         WHERE 1=1";

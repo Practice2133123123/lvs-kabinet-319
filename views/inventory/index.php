@@ -1,39 +1,26 @@
 <?php include __DIR__ . '/../../views/layouts/header.php'; ?>
 
 <?php if (isset($_GET['success']) && $_GET['success'] == 1): ?>
-    <div style="background: #d4edda; color: #155724; padding: 10px; margin-bottom: 20px;">Точка успешно обновлена!</div>
+    <div class="alert alert-success">Точка успешно обновлена!</div>
 <?php endif; ?>
 
 <?php if (isset($_GET['deleted']) && $_GET['deleted'] == 1): ?>
-    <div style="background: #d4edda; color: #155724; padding: 10px; margin-bottom: 20px;">Точка успешно удалена!</div>
+    <div class="alert alert-success">Точка успешно удалена!</div>
 <?php endif; ?>
 
     <h1>Сетевые точки</h1>
 <?php if (isLoggedIn()):?>
-    <p><a href="point_add.php">+ Добавить точку</a></p>
+    <p><a href="point_add.php" class="btn btn-primary">+ Добавить точку</a></p>
 <?php endif;?>
 <?php include __DIR__ . '/summary.php'; ?>
 <?php include __DIR__ . '/filter.php'; ?>
 
-
-
-
-    <script>
-        function toggleFilters() {
-            var panel = document.getElementById('filterPanel');
-            if (panel.style.display === 'none') {
-                panel.style.display = 'block';
-            } else {
-                panel.style.display = 'none';
-            }
-        }
-    </script>
-
 <?php if (empty($points)): ?>
-    <p>Нет точек.</p>
+    <div class="empty-state">Нет точек.</div>
 <?php else: ?>
-    <table border="1" cellpadding="10" width="100%" style="border-collapse: collapse;">
-        <tr style="background: #f0f0f0;">
+    <table>
+        <thead>
+        <tr>
             <th>Метка</th>
             <th>Тип</th>
             <th>Расположение</th>
@@ -42,6 +29,8 @@
             <th>Действия</th>
             <?php endif;?>
         </tr>
+        </thead>
+        <tbody>
         <?php foreach ($points as $point): ?>
             <tr>
                 <td><?= htmlspecialchars($point['label']) ?></td>
@@ -50,17 +39,18 @@
                 <td><?= htmlspecialchars($point['status']) ?></td>
                 <?php if (isLoggedIn()):?>
                 <td>
-                    <a href="point_edit.php?id=<?= $point['id'] ?>">Ред.</a> |
-                    <a href="point_delete.php?id=<?= $point['id'] ?>" onclick="return confirm('Удалить точку?')">Удал.</a>
+                    <a href="point_edit.php?id=<?= $point['id'] ?>" class="btn-action btn-action-edit">Ред.</a>
+                    <a href="point_delete.php?id=<?= $point['id'] ?>" class="btn-action btn-action-delete" onclick="return confirm('Удалить точку?')">Удал.</a>
                 </td>
                 <?php endif;?>
             </tr>
         <?php endforeach; ?>
+        </tbody>
     </table>
 <?php endif; ?>
 
 <?php if ($totalPages > 1): ?>
-    <div style="margin-top: 20px; text-align: center;">
+    <div class="pagination-links">
         <?php if ($currentPage > 1): ?>
             <?php 
                 $params = $_GET;
@@ -74,9 +64,9 @@
                 $params['page'] = $i;
                 $linkPage = "?" . http_build_query($params); ?>
             <?php if ($i == $currentPage): ?>
-                <strong style="margin: 0 5px;"><?= $i ?></strong>
+                <strong><?= $i ?></strong>
             <?php else: ?>
-                <a href="<?= $linkPage?>" style="margin: 0 5px;"><?= $i ?></a>
+                <a href="<?= $linkPage?>"><?= $i ?></a>
             <?php endif; ?>
         <?php endfor; ?>
         <?php if ($currentPage < $totalPages): ?>

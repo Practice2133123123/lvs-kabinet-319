@@ -22,19 +22,30 @@ function updateUserRole($pdo, $user_id, $role) {
 }
 
 function deleteUser($pdo, $user_id) {
-    $stmt = $pdo->query("SELECT COUNT(*) FROM users WHERE role = 'admin'");
-    $adminCount = $stmt->fetchColumn();
+    try {
+        $pdo->beginTransaction();
 
-    $stmt = $pdo->prepare("SELECT role FROM users WHERE id = ?");
-    $stmt->execute([$user_id]);
-    $user = $stmt->fetch();
+        $stmt = $pdo->query("SELECT COUNT(*) FROM users WHERE role = 'admin'");
+        $adminCount = $stmt->fetchColumn();
 
-    if ($user['role'] === 'admin' && $adminCount <= 1) {
+        $stmt = $pdo->prepare("SELECT role FROM users WHERE id = ?");
+        $stmt->execute([$user_id]);
+        $user = $stmt->fetch();
+
+        if (!$user || ($user['role'] === 'admin' && $adminCount <= 1)) {
+            $pdo->rollBack();
+            return false;
+        }
+
+        $stmt = $pdo->prepare("DELETE FROM users WHERE id = ?");
+        $result = $stmt->execute([$user_id]);
+
+        $pdo->commit();
+        return $result;
+    } catch (Exception $e) {
+        $pdo->rollBack();
         return false;
     }
-
-    $stmt = $pdo->prepare("DELETE FROM users WHERE id = ?");
-    return $stmt->execute([$user_id]);
 }
 
 function getUserById($pdo, $user_id) {

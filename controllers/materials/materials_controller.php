@@ -2,25 +2,17 @@
 require_once __DIR__ . '/../../models/materials/MaterialModel.php';
 require_once __DIR__ . '/../../includes/pagination.php';
 require_once __DIR__ . '/../../models/materials/FilterModel.php';
+require_once __DIR__ . '/../../includes/helpers.php';
 
 $limit = 5;
-$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$page = getGetParam('page', 'int', 1);
 
-$date_from = $_GET['date_from'] ?? '';
-$date_to = $_GET['date_to'] ?? '';
-$material_id = $_GET['material_id'] ?? '';
+$date_from = getGetParam('date_from', 'date');
+$date_to = getGetParam('date_to', 'date');
+$material_id = getGetParam('material_id', 'string');
 
 // Получаем список материалов для фильтра
 $materialsList = getMaterialsList($pdo);
-
-// Обработка пагинации
-$limit = 5;
-$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-
-
-$date_from = $_GET['date_from'] ?? '';
-$date_to = $_GET['date_to'] ?? '';
-$material_id = $_GET['material_id'] ?? '';
 
 // if (!empty($material_id) || !empty($date_from) || !empty($date_to)) {
     // $items=filterMaterials($pdo, $date_from, $date_to, $material_id);

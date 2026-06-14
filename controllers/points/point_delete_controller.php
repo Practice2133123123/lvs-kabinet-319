@@ -12,6 +12,7 @@ if (!$point) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    validateCsrfToken();
     if (hasDefects($pdo, $id)) {
         $error = 'Нельзя удалить точку! Сначала удалите все дефекты, связанные с этой точкой.';
     } else {

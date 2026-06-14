@@ -12,6 +12,7 @@
         <a href="../defects/defects.php" class="btn btn-primary">Вернуться к списку</a>
     <?php else: ?>
         <form method="POST">
+            <?= csrfField() ?>
             <div class="mb-3">
                 <label class="form-label">Сетевая точка *</label>
                 <select name="point_id" class="form-control" required>

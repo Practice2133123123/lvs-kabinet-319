@@ -2,6 +2,7 @@
 require_once __DIR__ . '/../../models/defects/DefectModel.php';
 require_once __DIR__ . '/../../models/inventory/PointModel.php';
 require_once __DIR__ . '/../../models/logs/LogModel.php';
+require_once __DIR__ . '/../../includes/helpers.php';
 
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 $defect = getDefectById($pdo, $id);
@@ -15,12 +16,14 @@ $error = '';
 $success = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    validateCsrfToken();
+
     $data = [
-        'point_id' => $_POST['point_id'] ?? 0,
-        'category' => trim($_POST['category'] ?? ''),
-        'severity' => $_POST['severity'] ?? 'medium',
-        'description' => trim($_POST['description'] ?? ''),
-        'status' => $_POST['status'] ?? 'open'
+        'point_id' => getPostParam('point_id', 'int'),
+        'category' => getPostParam('category', 'string'),
+        'severity' => getPostParam('severity', 'string', 'medium'),
+        'description' => getPostParam('description', 'string'),
+        'status' => getPostParam('status', 'string', 'open')
     ];
     
     if ($data['point_id'] <= 0) {

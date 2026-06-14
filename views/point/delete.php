@@ -30,6 +30,7 @@
             <a href="inventory.php">Назад к списку</a>
         <?php else: ?>
             <form method="POST" onsubmit="return confirm('Точно удалить точку «<?= htmlspecialchars($point['label']) ?>»?');" style="display: inline;">
+                <?= csrfField() ?>
                 <button type="submit">Удалить точку</button>
             </form>
             <a href="inventory.php" style="margin-left: 10px;">Отмена</a>

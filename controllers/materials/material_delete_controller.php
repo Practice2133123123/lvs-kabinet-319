@@ -12,6 +12,7 @@ if (!$item) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    validateCsrfToken();
     if (deleteMaterialUsage($pdo, $id)) {
         addLog($pdo, $_SESSION['user_id'], 'DELETE', 'material_usage', $id);
         header('Location: materials.php?deleted=1');

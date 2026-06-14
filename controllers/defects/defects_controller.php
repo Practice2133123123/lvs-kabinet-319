@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../../models/defects/DefectModel.php';
 require_once __DIR__ . '/../../includes/pagination.php';
+require_once __DIR__ . '/../../includes/helpers.php';
 
 // Получаем подсчёты по статусам
 $statusCounts = getDefectStatusCounts($pdo);
@@ -10,11 +11,10 @@ $totalClosed = $statusCounts['closed'] ?? 0;
 
 // Обработка пагинации
 $limit = 5;
-$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$page = getGetParam('page', 'int', 1);
 
-
-$severity = $_GET['severity'] ?? '';
-$status = $_GET['status'] ?? '';
+$severity = getGetParam('severity', 'string');
+$status = getGetParam('status', 'string');
 
 // if (!empty($severity) || !empty($status)) {
 //     $defects= getAllDefects($pdo, $severity, $status);

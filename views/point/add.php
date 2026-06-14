@@ -14,6 +14,7 @@
         <?php endif; ?>
 
         <form action="point_add.php" method="POST">
+            <?= csrfField() ?>
             <div class="form-group">
                 <label for="label">Метка *</label>
                 <input type="text" id="label" name="label" required class="form-control" value="<?= htmlspecialchars($data['label'] ?? '') ?>">

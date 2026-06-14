@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../../models/inventory/PointModel.php';
 require_once __DIR__ . '/../../includes/pagination.php';
+require_once __DIR__ . '/../../includes/helpers.php';
 
 // Получаем подсчёты по статусам
 $statusCounts = getPointStatusCounts($pdo);
@@ -10,10 +11,10 @@ $totalDecommissioned = $statusCounts['decommissioned'] ?? 0;
 
 // Пагинация
 $limit = 5;
-$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$page = getGetParam('page', 'int', 1);
 
-$type = $_GET['type'] ?? '';
-$status = $_GET['status'] ?? '';
+$type = getGetParam('type', 'string');
+$status = getGetParam('status', 'string');
 
 // if (!empty($type) || !empty($status)) {
 //     // Если есть фильтры, получаем отфильтрованные точки

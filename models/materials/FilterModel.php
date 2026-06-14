@@ -72,13 +72,13 @@ function getFilteredData($pdo, $date_from = '', $date_to = '', $material_id = ''
     // Фильтр по дате с
     if (!empty($date_from)) {
         $sql .= " AND DATE(mu.used_at) >= :date_from ";
-        $params[':date_from'] = $date_from . "00:00:00";
+        $params[':date_from'] = $date_from;
     }
     
     // Фильтр по дате по
     if (!empty($date_to)) {
-        $sql .= " AND DATE(mu.used_at) <= DATE(:date_to)";
-        $params[':date_to'] = $date_to . "23:59:59";
+        $sql .= " AND DATE(mu.used_at) <= :date_to";
+        $params[':date_to'] = $date_to;
     }
     
     // Фильтр по типу материала

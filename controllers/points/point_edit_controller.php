@@ -12,6 +12,8 @@ if (!$point) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    validateCsrfToken();
+
     $label = getPostParam('label', 'string');
     $type = getPostParam('type', 'string');
     $location = getPostParam('location', 'string');

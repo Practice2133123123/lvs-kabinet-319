@@ -19,6 +19,7 @@
         </div>
         
         <form method="POST" class="mt-3">
+            <?= csrfField() ?>
             <button type="submit" class="btn btn-danger">удалить</button>
             <a href="../materials/materials.php" class="btn btn-secondary">Отмена</a>
         </form>

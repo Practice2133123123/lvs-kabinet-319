@@ -2,15 +2,18 @@
 require_once __DIR__ . '/../../models/auth/UserModel.php';
 require_once __DIR__ . '/../../models/logs/LogModel.php';
 require_once __DIR__ . '/../../includes/pagination.php';
+require_once __DIR__ . '/../../includes/helpers.php';
 
 $error = '';
 $success = '';
 $users = getAllUsers($pdo);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    validateCsrfToken();
+
     if (isset($_POST['update_role'])) {
-        $user_id = (int)$_POST['user_id'];
-        $role = $_POST['role'];
+        $user_id = getPostParam('user_id', 'int');
+        $role = getPostParam('role', 'string');
 
         if (updateUserRole($pdo, $user_id, $role)) {
             $success = 'Роль пользователя обновлена';
@@ -22,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (isset($_POST['delete_user'])) {
-        $user_id = (int)$_POST['user_id'];
+        $user_id = getPostParam('user_id', 'int');
 
         if ($user_id == $_SESSION['user_id']) {
             $error = 'Нельзя удалить самого себя';
@@ -37,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $limit = 5;
-$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$page = getGetParam('page', 'int', 1);
 
 
     $total = countUsers($pdo);
